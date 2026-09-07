@@ -1,0 +1,684 @@
+/* ============================================================
+   CONSID · CLOUD DELIBERATE — shared chrome.
+
+   Tokens, reset, nav/footer, card system, CTA card,
+   reveal-on-scroll, plus the Ydelse and homepage components.
+
+   Loaded by EVERY page, the homepage included. The sibling site
+   (Directed Agentic Delivery) keeps a duplicate of this file
+   inline in its index.html and asks for hand-syncing; that has
+   already drifted twice (.stack padding, .chip height). One copy
+   here instead.
+
+   Token block below is copied verbatim from that site — the two
+   are deliberately the same house.
+   ============================================================ */
+:root{
+  --ink-900:#141416;
+  --ink-800:#1B1B1D;
+  --ink-700:#2C2C31;
+  --ink-600:#414147;
+  --graphite:#636166;
+  --stone:#726C66;
+
+  --air:#F5F3F1;
+  --surface:#FDFCFB;
+  --sand:#EDE8E3;
+  --blush:#FDF0ED;
+
+  --crimson:#90263B;
+  --crimson-700:#75182C;
+  --plum:#492A34;
+  --plum-tint:color-mix(in srgb, var(--plum), white 22%);
+  --wine:#701132;
+  --coral:#F49E88;
+  --hairline:rgba(27,27,29,.08);
+
+  --font-display:"Onest","Helvetica Neue",Helvetica,Arial,sans-serif;
+  --font-body:"Onest","Helvetica Neue",Helvetica,Arial,sans-serif;
+  --font-mono:"IBM Plex Mono",ui-monospace,"SF Mono",Menlo,monospace;
+  --font-wordmark:"EB Garamond","Times New Roman",serif;
+
+  --t-display:clamp(2.57rem,6.66vw,5.85rem);
+  --t-h2:clamp(2rem,4.2vw,3.6rem);
+  --t-h3:clamp(1.2rem,1.7vw,1.5rem);
+  --t-lead:clamp(1.0625rem,1.4vw,1.3rem);
+  --t-body:1.0625rem;
+  --t-small:.9375rem;
+  --t-micro:.75rem;
+
+  --s-1:.25rem;--s-2:.5rem;--s-3:.75rem;--s-4:1rem;--s-5:1.5rem;
+  --s-6:2rem;--s-7:3rem;--s-8:4rem;--s-9:6rem;--s-10:8rem;
+
+  --r-xs:10px; --r-sm:16px; --r-md:24px; --r-lg:36px; --r-xl:48px; --r-pill:999px;
+
+  --lift-1:0 1px 2px rgba(20,20,22,.03), 0 6px 18px -10px rgba(20,20,22,.10);
+  --lift-2:0 2px 5px rgba(20,20,22,.04), 0 22px 48px -22px rgba(20,20,22,.20);
+
+  --ease-out:cubic-bezier(.19,.72,.28,1);
+  --ease-spring:cubic-bezier(.34,1.32,.48,1);
+  --d-fast:150ms;--d-base:260ms;--d-slow:520ms;
+
+  --measure:64ch;
+  --gutter:clamp(1.1rem,4.5vw,4rem);
+  --maxw:1300px;
+}
+
+*,*::before,*::after{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%;scroll-behavior:smooth}
+body{
+  margin:0;background:var(--air);color:var(--ink-800);
+  font-family:var(--font-body);font-size:var(--t-body);line-height:1.6;
+  -webkit-font-smoothing:antialiased;font-synthesis-weight:none;overflow-x:hidden;
+}
+h1,h2,h3,h4{font-family:var(--font-display);margin:0;font-weight:600;letter-spacing:-.026em}
+h1{font-size:var(--t-display);line-height:.99;letter-spacing:-.042em;font-weight:500}
+h2{font-size:var(--t-h2);line-height:1.04;letter-spacing:-.034em;font-weight:700}
+h3{font-size:var(--t-h3);line-height:1.25;font-weight:500}
+p{margin:0}
+a{color:inherit}
+img,svg{display:block;max-width:100%}
+button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
+:focus-visible{outline:2px solid var(--crimson);outline-offset:3px;border-radius:6px}
+
+/* Visually hidden but still announced — used for the hours badge's
+   unit word and the hours table's caption. clip-path (not the old
+   clip) and white-space:nowrap so the text isn't re-wrapped into a
+   1px column before it's read. */
+.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;
+  overflow:hidden;clip-path:inset(50%);white-space:nowrap;border:0}
+
+/* Off-screen until focused, rather than display:none — a display:none
+   skip link can't ever receive keyboard focus in the first place. */
+.skip-link{
+  position:absolute;top:var(--s-4);left:var(--s-4);z-index:1000;
+  transform:translateY(-150%);
+  background:var(--ink-800);color:#fff;padding:.85rem 1.4rem;
+  border-radius:var(--r-md);text-decoration:none;white-space:nowrap;
+  font-size:var(--t-small);font-weight:600;
+  transition:transform var(--d-fast) var(--ease-out);
+}
+.skip-link:focus{transform:translateY(0)}
+
+.wrap{max-width:var(--maxw);margin-inline:auto;padding-inline:var(--gutter)}
+.stack{padding-top:clamp(3.5rem,8vw,7rem);padding-bottom:clamp(1rem,2vw,1.5rem)}
+/* A section continuing the one above it, rather than opening the page. */
+.stack--cont{padding-top:clamp(2.25rem,4.5vw,3.75rem)}
+.lead{font-size:var(--t-lead);line-height:1.5;color:var(--graphite);max-width:var(--measure)}
+.mono{font-family:var(--font-mono);font-size:var(--t-micro);letter-spacing:.13em;text-transform:uppercase}
+
+/* Every mono label on this site is written mixed-case in the HTML and
+   uppercased here. Typing the caps into the source makes VoiceOver
+   spell short Danish words out letter by letter. */
+
+/* Buttons ------------------------------------------------ */
+.btn{
+  display:inline-flex;align-items:center;gap:var(--s-3);
+  padding:.95rem 1.6rem;border-radius:var(--r-pill);
+  font-size:var(--t-small);font-weight:600;text-decoration:none;white-space:nowrap;
+  transition:background-color var(--d-fast) var(--ease-out),
+             color var(--d-fast) var(--ease-out),
+             box-shadow var(--d-base) var(--ease-out),
+             transform var(--d-base) var(--ease-spring);
+}
+/* The halftone arrow: a radial-gradient dot field clipped to the glyph,
+   so the site's dither texture shows up even in a text arrow. */
+.arw{
+  font-size:1.5em;
+  background-image:radial-gradient(var(--ink-800) 65%, transparent 70%);
+  background-size:2px 2px;background-position:center;
+  -webkit-background-clip:text;background-clip:text;color:transparent;
+}
+/* Anywhere the arrow sits on a dark ground it has to re-dither in white
+   — the default --ink-800 dots are invisible on plum. */
+.btn--primary .arw,
+.ydelse__head .arw,
+.nextup .arw{background-image:radial-gradient(#fff 65%, transparent 70%)}
+.btn .arw{transition:transform var(--d-base) var(--ease-spring)}
+.btn:hover{transform:translateY(-2px)}
+.btn:hover .arw{transform:translateX(5px)}
+.btn:active{transform:translateY(0)}
+.btn--primary{background:var(--crimson);color:#fff;box-shadow:var(--lift-1)}
+.btn--primary:hover{background:var(--crimson-700);box-shadow:var(--lift-2)}
+.btn--soft{background:var(--surface);color:var(--ink-800);box-shadow:var(--lift-1)}
+.btn--soft:hover{box-shadow:var(--lift-2)}
+.btn--onDark{background:rgba(255,255,255,.1);color:#fff}
+.btn--onDark:hover{background:rgba(255,255,255,.18)}
+.btn:disabled,.btn[aria-disabled="true"]{opacity:.5;cursor:default;pointer-events:none}
+
+/* NAV ---------------------------------------------------- */
+.nav{position:sticky;top:0;z-index:50}
+.nav::before{
+  content:"";position:absolute;inset:-1px 0 0;
+  backdrop-filter:blur(16px) saturate(1.4);-webkit-backdrop-filter:blur(16px) saturate(1.4);
+  background-image:linear-gradient(to bottom, rgba(245,243,241,.8) 0%, rgba(245,243,241,0) 100%);
+  mask-image:linear-gradient(to bottom, #000 0%, #000 45%, transparent 100%);
+  -webkit-mask-image:linear-gradient(to bottom, #000 0%, #000 45%, transparent 100%);
+  pointer-events:none;opacity:0;transition:opacity var(--d-base) var(--ease-out);
+}
+.nav[data-stuck="true"]::before{opacity:1}
+.nav__in{
+  position:relative;z-index:1;
+  display:flex;align-items:center;gap:var(--s-5);
+  padding:1.15rem var(--gutter);
+}
+.brand{display:flex;align-items:center;gap:var(--s-3);text-decoration:none;flex:none}
+.brand__mark{height:22px;width:auto;display:block;transition:filter var(--d-fast) var(--ease-out)}
+.brand__sub{font-family:var(--font-mono);font-size:var(--t-micro);color:var(--stone);letter-spacing:.03em;padding-left:var(--s-3);border-left:1px solid var(--hairline);transition:color var(--d-fast) var(--ease-out),border-color var(--d-fast) var(--ease-out)}
+.nav__links{display:flex;gap:var(--s-5);margin-left:auto;align-items:center}
+.nav__link{text-decoration:none;font-size:var(--t-small);color:var(--graphite);transition:color var(--d-fast) var(--ease-out)}
+.nav__link:hover{color:var(--ink-800)}
+.nav .btn{padding:.7rem 1.2rem}
+@media (max-width:900px){.nav__links .nav__link{display:none} .brand__sub{display:none}}
+
+/* Nav-on-dark variant — for pages whose top section is a plum band
+   (the Ydelse pages): the nav overlays that band as a transparent bar
+   with a white logo/label, then reverts to the standard in-flow blurred
+   nav the moment the page scrolls past it. site.js drives the toggle by
+   measuring .ydelse__head, so that class name must not be renamed. */
+.nav--onDark{position:fixed;top:0;left:0;right:0}
+.nav--onDark:not([data-stuck="true"]) .brand__mark{filter:brightness(0) invert(1)}
+.nav--onDark:not([data-stuck="true"]) .brand__sub{color:rgba(255,255,255,.65);border-left-color:rgba(255,255,255,.3)}
+.nav--onDark:not([data-stuck="true"]) .nav__link{color:rgba(255,255,255,.85)}
+.nav--onDark:not([data-stuck="true"]) .nav__link:hover{color:#fff}
+
+/* CARD system -------------------------------------------- */
+/* No horizontal rail here: three offerings and no article archive means
+   the scroll-snap rail, its edge mask, the filter chips and initRail's
+   FLIP reflow are all machinery with nothing to do. Cards live in a
+   plain grid. */
+.ocard{
+  background:var(--surface);border-radius:var(--r-lg);padding:clamp(1.4rem,2.6vw,1.9rem);
+  display:flex;flex-direction:column;gap:var(--s-3);text-decoration:none;min-height:260px;
+  box-shadow:var(--lift-1);
+  transition:transform var(--d-base) var(--ease-out),box-shadow var(--d-base) var(--ease-out);
+}
+.ocard:hover{transform:translateY(-6px);box-shadow:var(--lift-2)}
+.ocard:active{transform:scale(.97)}
+.ocard:nth-child(3n+2){background:var(--sand)}
+.ocard:nth-child(5n+4){background:var(--blush)}
+.ocard__tag{display:flex;align-items:center;gap:.4em;font-family:var(--font-mono);font-size:var(--t-micro);letter-spacing:.09em;text-transform:uppercase;color:var(--graphite)}
+.oicon{width:15px;height:15px;flex:none;stroke:currentColor}
+.ocard :is(h2,h3){font-size:1.25rem;letter-spacing:-.028em;font-weight:700;line-height:1.25;transition:color var(--d-fast) var(--ease-out)}
+.ocard:hover :is(h2,h3){color:var(--wine)}
+.ocard p{font-size:var(--t-small);color:var(--graphite);line-height:1.6}
+.ocard__foot{margin-top:auto;display:flex;align-items:center;gap:var(--s-3);font-size:var(--t-small);font-weight:600;padding-top:var(--s-4)}
+.ocard__foot .arw{transition:transform var(--d-base) var(--ease-spring)}
+.ocard:hover .ocard__foot .arw{transform:translateX(5px)}
+
+/* Offering cards — where the sibling site puts a 0/1/2/3 niveau meter,
+   this site puts an effort figure and an audience line. Those are the
+   two things a reader uses to decide "is this the one for us?".
+
+   These small mono labels are --graphite, not --stone. --stone on
+   --sand measures 4.26:1, under the 4.5:1 AA minimum for text this
+   size, and every card row that lands on sand would fail — as the
+   same pairing does on the sibling site. --graphite clears it on
+   sand (5.03), air, blush and surface alike. */
+.ocard__top{display:flex;align-items:center;gap:var(--s-3);justify-content:space-between}
+/* Plum on white (12.3:1) so it reads as a hard fact, not a soft label. */
+.hours{flex:none;font-family:var(--font-mono);font-size:var(--t-micro);font-weight:500;
+  letter-spacing:.08em;line-height:1;padding:.42rem .62rem;border-radius:var(--r-pill);
+  background:var(--plum);color:#fff;font-variant-numeric:tabular-nums}
+.ocard--y .ocard__foot{flex-direction:column;align-items:stretch;gap:var(--s-3)}
+.ocard__aud{font-family:var(--font-mono);font-size:var(--t-micro);letter-spacing:.09em;
+  text-transform:uppercase;color:var(--graphite);line-height:1.5;font-weight:400;overflow-wrap:anywhere}
+.ocard__phases{font-family:var(--font-mono);font-size:var(--t-micro);letter-spacing:.09em;
+  text-transform:uppercase;color:var(--graphite);line-height:1.5;font-weight:400;overflow-wrap:anywhere}
+.ocard__more{display:flex;align-items:center;justify-content:flex-end;gap:var(--s-3);
+  font-weight:600;margin-top:var(--s-2)}
+
+.vgrid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:var(--s-4);margin-top:var(--s-6)}
+@media (max-width:880px){.vgrid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:640px){.vgrid{grid-template-columns:1fr}}
+
+/* CTA + FOOTER -------------------------------------------- */
+.ctacard{
+  background:var(--plum);color:#fff;border-radius:var(--r-xl);padding:clamp(1.9rem,5vw,4.5rem);
+  box-shadow:var(--lift-1);text-align:center;position:relative;overflow:hidden;
+}
+.ctacard__noise{position:absolute;inset:0;width:100%;height:100%;display:block;pointer-events:none}
+@media (prefers-reduced-motion:reduce){.ctacard__noise{display:none}}
+.ctacard__content{position:relative;z-index:1}
+.ctacard h2{max-width:18ch;margin-inline:auto;margin-top:var(--s-5)}
+.ctacard .lead{margin-inline:auto;margin-top:var(--s-5);text-align:center;color:rgba(255,255,255,.72)}
+.ctacard__actions{display:flex;gap:var(--s-3);flex-wrap:wrap;justify-content:center;margin-top:var(--s-7)}
+.footer{padding-block:var(--s-7)}
+.footer__in{display:flex;flex-wrap:wrap;gap:var(--s-5);justify-content:space-between;align-items:center;font-size:var(--t-small);color:var(--stone)}
+.footer__links{display:flex;gap:var(--s-5)}
+.footer__links a{text-decoration:none;transition:color var(--d-fast) var(--ease-out)}
+.footer__links a:hover{color:var(--ink-800)}
+
+/* REVEAL --------------------------------------------------- */
+/* Transition lives on .is-in, not on .reveal — so the hidden state is
+   applied at first paint without animating into it. */
+.reveal{opacity:0;transform:translateY(16px)}
+.reveal.is-in{opacity:1;transform:none;transition:opacity var(--d-slow) var(--ease-out),transform var(--d-slow) var(--ease-out)}
+.word{display:inline-block;opacity:0;transform:translateY(.5em)}
+.word.is-in{opacity:1;transform:none;transition:opacity 460ms var(--ease-out),transform 460ms var(--ease-out)}
+
+/* ============================================================
+   YDELSE DETAIL PAGES
+   ============================================================ */
+
+/* The plum band the nav overlays. site.js measures THIS element to flip
+   .nav--onDark back to the light nav, so the class name is load-bearing. */
+.ydelse__head{position:relative;z-index:0;overflow:hidden;background:var(--plum);
+  border-radius:0 0 var(--r-xl) var(--r-xl);
+  padding-top:clamp(6.5rem,12vw,8.5rem);padding-bottom:clamp(2.5rem,6vw,4rem)}
+.ydelse__head h1{color:#fff}
+.ydelse__head .lead{color:rgba(255,255,255,.78)}
+.backlink{display:inline-flex;align-items:center;gap:var(--s-2);text-decoration:none;
+  font-family:var(--font-mono);font-size:var(--t-micro);letter-spacing:.13em;
+  text-transform:uppercase;color:rgba(255,255,255,.7);margin-bottom:var(--s-6);
+  transition:color var(--d-fast) var(--ease-out)}
+.backlink:hover{color:#fff}
+.backlink .arw{transition:transform var(--d-base) var(--ease-spring)}
+.backlink:hover .arw{transform:translateX(-5px)}
+.ydelse__meta{display:flex;gap:var(--s-6);flex-wrap:wrap;align-items:center;
+  justify-content:space-between;margin-top:var(--s-7)}
+.ydelse__kicker{display:flex;align-items:center;gap:.5em;font-family:var(--font-mono);
+  font-size:var(--t-micro);letter-spacing:.09em;text-transform:uppercase;color:rgba(255,255,255,.7)}
+/* .55 is the floor for small text on --plum: the sibling site measured
+   rgba(255,255,255,.4) at 3.37:1 (fails AA) and .55 at 4.98:1 (passes).
+   .62 sits comfortably above it. overflow-wrap because
+   "PLATFORM-ANSVARLIGE" is one unbreakable token. */
+.ydelse__aud{font-family:var(--font-mono);font-size:var(--t-micro);letter-spacing:.09em;
+  text-transform:uppercase;color:rgba(255,255,255,.62);overflow-wrap:anywhere;max-width:38ch}
+
+/* Sized off the viewport, not the header's own box, so it overflows on
+   every side and reads as running behind the H1 rather than beside it.
+   z-index:-1 keeps the header text above; the header's overflow:hidden
+   crops the bleed. Hidden below 900px rather than fighting the H1. */
+.ydelse__illus{
+  position:absolute;z-index:-1;top:50%;left:50%;
+  transform:translate(-42%,-50%);
+  width:clamp(900px,95vw,1900px);
+  height:clamp(900px,95vw,1900px);
+  pointer-events:none;
+}
+.ydelse__illus canvas{display:block;width:100%;height:100%}
+@media (max-width:900px){.ydelse__illus{display:none}}
+
+/* A framing sentence that introduces a section, not a section title.
+   Full --t-h2 (up to 3.6rem) on a whole sentence shouts; this sits
+   between h2 and h3 and takes a wider measure. */
+.h2--sub{font-size:clamp(1.35rem,2.5vw,2.05rem);letter-spacing:-.028em;
+  line-height:1.2;font-weight:500;max-width:34ch}
+
+/* Three-up cell block — used twice per detail page, for the "Hvad er
+   målet?" goals and the "Næste skridt" reassurances. Same shape of
+   content both times: a short heading and one sentence. */
+.trio{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:var(--s-4);
+  margin-top:clamp(1.5rem,3vw,2.25rem)}
+@media (max-width:820px){.trio{grid-template-columns:1fr}}
+.trio__cell{background:var(--surface);border-radius:var(--r-md);
+  padding:clamp(1.25rem,2.4vw,1.75rem);min-width:0;box-shadow:var(--lift-1)}
+.trio__cell:nth-child(3){background:var(--blush)}
+.trio__cell h3{font-family:var(--font-mono);font-size:var(--t-micro);font-weight:500;
+  letter-spacing:.11em;text-transform:uppercase;color:var(--wine)}
+.trio__cell p{margin-top:var(--s-3);font-size:var(--t-small);line-height:1.6;color:var(--graphite)}
+
+/* Phase timeline ----------------------------------------- */
+/* .phases and .verbs carry an explicit role="list", and their items
+   role="listitem", because display:grid / display:flex on an <li>
+   replaces list-item — which drops both the marker and the implicit
+   listitem role. With list-style:none on top of that, Safari and
+   VoiceOver stop announcing the group as a list at all. */
+/* Deliberately NOT the sticky .pstack: that hardcodes five nth-child
+   offsets, and these pages carry 3, 4 and 5 phases. A sticky stack of
+   tall cards carrying bullet lists occludes the page anyway.
+   No connecting rule between phases — space and the tabular numerals do
+   the dividing, per the house rule against structural hairlines. */
+.phases{list-style:none;margin:clamp(2rem,4vw,3rem) 0 0;padding:0;
+  display:flex;flex-direction:column;gap:var(--s-4)}
+.phase{display:grid;grid-template-columns:clamp(4.5rem,9vw,6.5rem) minmax(0,1fr);
+  gap:var(--s-5);align-items:start;
+  background:var(--surface);border-radius:var(--r-lg);
+  padding:clamp(1.6rem,3.4vw,2.75rem);box-shadow:var(--lift-1)}
+.phase:nth-child(even){background:var(--sand)}
+.phase__n{font-family:var(--font-display);font-weight:900;
+  font-size:clamp(2.4rem,4.4vw,3.4rem);line-height:.9;letter-spacing:-.02em;
+  color:var(--crimson);font-variant-numeric:tabular-nums}
+.phase__body{min-width:0}
+.phase__meta{font-family:var(--font-mono);font-size:var(--t-micro);letter-spacing:.09em;
+  text-transform:uppercase;color:var(--graphite);overflow-wrap:anywhere}
+.phase h3{font-size:clamp(1.3rem,2.3vw,1.9rem);letter-spacing:-.03em;font-weight:500;margin-top:var(--s-2)}
+.phase__points{margin-top:var(--s-4);padding-left:1.1em;display:flex;flex-direction:column;gap:var(--s-2)}
+.phase__points li{color:var(--graphite);font-size:var(--t-small);line-height:1.6;max-width:56ch}
+@media (max-width:640px){.phase{grid-template-columns:1fr;gap:var(--s-3)}}
+
+/* Hours table -------------------------------------------- */
+/* table-layout:fixed + <colgroup> is this component's min-width:0. Under
+   the default auto layout a table's min-content width is a hard floor no
+   cell property can lower — which is exactly how tables overflow narrow
+   screens. Fixed tracks plus overflow-wrap on the cells means a long
+   Danish compound breaks instead of widening the table, so this never
+   needs a horizontal scroll region. */
+.htable{background:var(--surface);border-radius:var(--r-lg);box-shadow:var(--lift-1);
+  padding:clamp(1rem,2.4vw,1.75rem);margin-top:clamp(2rem,4vw,3rem)}
+.htable table{width:100%;table-layout:fixed;border-collapse:separate;border-spacing:0}
+.htable__c1{width:34%}
+.htable__c3{width:5.5rem}
+.htable th,.htable td{text-align:left;vertical-align:baseline;
+  padding:var(--s-3);overflow-wrap:anywhere;hyphens:auto}
+.htable thead th{font-family:var(--font-mono);font-size:var(--t-micro);font-weight:500;
+  letter-spacing:.11em;text-transform:uppercase;color:var(--wine)}
+.htable tbody th{font-family:var(--font-display);font-weight:600;font-size:var(--t-small);
+  letter-spacing:-.02em;color:var(--ink-900)}
+.htable__no{display:block;font-family:var(--font-mono);font-size:var(--t-micro);
+  font-weight:400;letter-spacing:.09em;color:var(--stone);font-variant-numeric:tabular-nums}
+.htable tbody td{font-size:var(--t-small);line-height:1.6;color:var(--graphite)}
+.htable tbody tr:nth-child(even) th,
+.htable tbody tr:nth-child(even) td{background:var(--air)}
+.htable tbody tr:nth-child(even) th{border-radius:var(--r-xs) 0 0 var(--r-xs)}
+.htable tbody tr:nth-child(even) td:last-child{border-radius:0 var(--r-xs) var(--r-xs) 0}
+.htable__num{text-align:right;font-variant-numeric:tabular-nums}
+/* Set off with a blush band and extra padding, not a top border. */
+.htable tfoot th,.htable tfoot td{background:var(--blush);font-weight:600;color:var(--ink-900);
+  padding-top:var(--s-4);padding-bottom:var(--s-4)}
+.htable tfoot th{border-radius:var(--r-xs) 0 0 var(--r-xs)}
+.htable tfoot td:last-child{border-radius:0 var(--r-xs) var(--r-xs) 0}
+@media (max-width:560px){
+  .htable__c1{width:38%}
+  .htable__c3{width:3.75rem}
+  .htable th,.htable td{padding:var(--s-2);font-size:.875rem}
+  .htable thead th{font-size:var(--t-micro)}
+}
+
+/* Next-in-ring link -------------------------------------- */
+.nextup{display:flex;flex-wrap:wrap;gap:var(--s-5);align-items:center;justify-content:space-between;
+  padding:clamp(1.25rem,2.4vw,1.75rem) clamp(1.5rem,2.8vw,2rem);
+  background:var(--plum);border-radius:var(--r-lg);text-decoration:none;
+  transition:transform var(--d-base) var(--ease-out),box-shadow var(--d-base) var(--ease-out)}
+.nextup:hover{transform:translateY(-3px);box-shadow:var(--lift-2)}
+.nextup__text{display:flex;flex-direction:column;gap:.3rem;min-width:0}
+.nextup__lab{font-family:var(--font-mono);font-size:var(--t-micro);letter-spacing:.1em;
+  text-transform:uppercase;color:var(--coral)}
+.nextup__text b{font-family:var(--font-display);font-size:clamp(1.05rem,1.9vw,1.4rem);
+  font-weight:600;letter-spacing:-.02em;color:#fff}
+.nextup__go{display:flex;align-items:center;gap:var(--s-3);font-size:var(--t-small);
+  font-weight:600;color:#fff;flex:none}
+.nextup__go .arw{transition:transform var(--d-base) var(--ease-spring)}
+.nextup:hover .arw{transform:translateX(5px)}
+
+/* ============================================================
+   HOMEPAGE
+   ============================================================ */
+
+.railhead{display:flex;flex-wrap:wrap;gap:var(--s-5);align-items:end;justify-content:space-between}
+
+/* HERO --------------------------------------------------- */
+.hero{
+  padding-block:clamp(3rem,8vw,6rem) 0;position:relative;overflow:hidden;
+  min-height:100vh;margin-top:calc(-1 * var(--nav-h, 76px));
+  display:flex;flex-direction:column;gap:var(--s-6);
+}
+/* A heightfield of pillars rippling out from the pointer, crested in
+   --coral. Kept from the sibling site because it earns its place harder
+   here: this site's principles section is literally headed "Pejlemærker
+   i et landskab i bevægelse." */
+#heroGrid{
+  position:absolute;inset:0;width:100%;height:100%;display:block;
+  mask-image:radial-gradient(ellipse 62% 58% at 24% 28%, transparent 0%, rgba(0,0,0,.6) 48%, #000 80%);
+  -webkit-mask-image:radial-gradient(ellipse 62% 58% at 24% 28%, transparent 0%, rgba(0,0,0,.6) 48%, #000 80%);
+}
+@media (prefers-reduced-motion:reduce){#heroGrid{display:none}}
+.hero__fade{
+  position:absolute;inset:0;pointer-events:none;
+  background:linear-gradient(to bottom, var(--air) 0%, transparent 20%, transparent 80%, var(--air) 100%);
+}
+/* Headline centres within whatever space is left above the cards — not
+   an exact 50vh pin, which on ~720-800px laptop viewports pushed a
+   3-line headline down far enough to overlap the card below. */
+.hero__headline{flex:1;display:flex;align-items:center;position:relative;z-index:1;min-height:0}
+.hero h1{max-width:17ch}
+.hero h1 .pill,.hero h1 .soft{
+  display:inline-flex;align-items:center;vertical-align:middle;
+  background:var(--coral);color:var(--ink-800);border-radius:var(--r-pill);
+  padding:.06em .38em .14em;font-size:.86em;letter-spacing:-.03em;
+}
+.hero h1 .pill{transform:rotate(-1.4deg)}
+.hero h1 .soft{transform:rotate(1deg)}
+.hero__cards{position:relative;z-index:1;padding-bottom:10vh}
+.hero__leadcard{display:flex;flex-direction:column;justify-content:center;gap:var(--s-5);
+  max-width:52rem;margin-inline:auto}
+.hero__leadcard .lead{color:rgba(255,255,255,.78);max-width:none;font-size:var(--t-body)}
+.hero__cta{display:flex;flex-wrap:wrap;gap:var(--s-3)}
+
+.statcard{background:var(--plum);color:#fff;border-radius:var(--r-lg);padding:clamp(1.5rem,3vw,2rem);box-shadow:var(--lift-2)}
+.statcard .mono{color:rgba(255,255,255,.45)}
+
+/* Table of contents, dressed as a count strip. The four numbers are not
+   proof-of-scale figures — they're the shape of the argument below, so
+   each cell is a real anchor into its section. Rendered as literal
+   "04"/"05", never counted up: a 1s ramp across seven integers reads as
+   a glitch, and Math.round drops the leading zero. */
+.toc{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:var(--s-4);
+  margin-top:clamp(1.5rem,3vw,2rem)}
+@media (max-width:880px){.toc{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:480px){.toc{grid-template-columns:1fr}}
+.toc__item{display:flex;flex-direction:column;gap:var(--s-2);min-width:0;
+  background:var(--surface);border-radius:var(--r-md);box-shadow:var(--lift-1);
+  padding:clamp(1.1rem,2.2vw,1.5rem);text-decoration:none;
+  transition:transform var(--d-base) var(--ease-out),box-shadow var(--d-base) var(--ease-out)}
+.toc__item:hover{transform:translateY(-4px);box-shadow:var(--lift-2)}
+.toc__n{font-family:var(--font-display);font-size:clamp(1.9rem,3.4vw,2.6rem);font-weight:900;
+  letter-spacing:-.035em;line-height:1;color:var(--crimson);font-variant-numeric:tabular-nums}
+.toc__lab{font-family:var(--font-mono);font-size:var(--t-micro);letter-spacing:.09em;
+  text-transform:uppercase;color:var(--graphite);line-height:1.5;min-width:0;overflow-wrap:anywhere}
+
+/* Section header with a mark — heading and intro on the left, one
+   small dithered shape on the right. Dropped below 760px rather than
+   squeezing a 96px canvas next to a wrapping heading. */
+.sechead{display:grid;grid-template-columns:1fr clamp(96px,12vw,148px);gap:var(--s-6);align-items:center}
+.sechead__text{display:flex;flex-direction:column;gap:var(--s-4);min-width:0}
+.sechead__text h2{max-width:20ch}
+.sechead__illus{width:100%;aspect-ratio:1;border-radius:8px;overflow:hidden}
+.sechead__illus canvas{display:block;width:100%;height:100%}
+@media (max-width:760px){.sechead{grid-template-columns:1fr} .sechead__illus{display:none}}
+
+/* SKIFTET — two offset cards ----------------------------- */
+.thesis{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:clamp(1rem,2.5vw,2rem);margin-top:clamp(2rem,4vw,3rem);align-items:start}
+@media (max-width:880px){.thesis{grid-template-columns:1fr}}
+/* Static, not clickable — no hover lift, box-shadow stays fixed */
+.tcard{
+  border-radius:var(--r-lg);padding:clamp(1.6rem,3.2vw,2.6rem);box-shadow:var(--lift-1);background:var(--surface);
+  display:flex;align-items:center;gap:clamp(1.25rem,3vw,2rem);
+}
+@media (max-width:560px){.tcard{flex-direction:column;align-items:flex-start;text-align:left}}
+.tcard--b{margin-top:clamp(0rem,4vw,3.5rem)}
+.tcard__body{min-width:0}
+.tcard .mono{color:var(--stone)}
+.tcard h3{font-size:clamp(1.5rem,2.4vw,2rem);letter-spacing:-.03em;margin-top:var(--s-3);font-weight:500}
+.tcard--b h3{color:var(--wine)}
+.tcard p{margin-top:var(--s-4);color:var(--graphite);font-size:var(--t-small);line-height:1.6}
+.thesis__intro{max-width:34ch}
+.card-illus{width:clamp(112px,13vw,152px);height:clamp(112px,13vw,152px);flex:none;border-radius:8px;overflow:hidden}
+.card-illus canvas{display:block;width:100%;height:100%}
+
+/* PRINCIPPER — sticky stack ------------------------------ */
+/* Four cards, not five. Sticky stacking here doesn't read as sequence,
+   it reads as accumulation — these all stay true at once, which is what
+   "pejlemærker" means. The plum card is the stack's full stop and the
+   only place --coral touches a numeral, so it moves to :nth-child(4)
+   rather than leaving the stack to end on blush. min-height guarantees
+   the stack has enough travel to visibly stack on a short viewport. */
+.pstack{margin-top:clamp(2rem,4vw,3rem);display:flex;flex-direction:column;gap:var(--s-4)}
+.pcard{
+  position:sticky;border-radius:var(--r-lg);padding:clamp(1.6rem,3.4vw,2.75rem);
+  box-shadow:var(--lift-2);display:grid;grid-template-columns:clamp(4.5rem,9vw,6.5rem) 1fr;
+  gap:var(--s-5);align-items:start;min-height:clamp(12rem,22vw,16rem);
+}
+@media (max-width:640px){.pcard{grid-template-columns:1fr;gap:var(--s-3);min-height:0}}
+.pcard:nth-child(1){top:5.5rem;background:var(--surface)}
+.pcard:nth-child(2){top:6.75rem;background:var(--sand)}
+.pcard:nth-child(3){top:8rem;background:var(--blush)}
+.pcard:nth-child(4){top:9.25rem;background:var(--plum);color:#fff}
+.pcard:nth-child(4) p{color:rgba(255,255,255,.7)}
+.pcard:nth-child(4) .pcard__n{color:var(--coral)}
+/* Keep the numeral out of a <p>: .pcard p is (0,1,1) and would
+   out-specify this (0,1,0), rendering it as body text. Same reason
+   .phase__n is a <div>. */
+.pcard__n{
+  font-family:var(--font-display);font-weight:900;font-size:clamp(2.4rem,4.4vw,3.4rem);
+  line-height:.9;letter-spacing:-.02em;color:var(--crimson);font-variant-numeric:tabular-nums;
+}
+.pcard h3{font-size:clamp(1.3rem,2.3vw,1.9rem);letter-spacing:-.03em;font-weight:500}
+.pcard p{margin-top:var(--s-3);color:var(--graphite);font-size:var(--t-small);line-height:1.6;max-width:56ch}
+
+/* VÆRKTØJSKASSE — five static cards ---------------------- */
+/* .ocard without the link affordance. Five items is the complete list,
+   so a rail (which exists for sets that continue past the edge) would
+   bury two of them under a heading that promises daily practice. */
+.ocard--static{cursor:default}
+.ocard--static:hover{transform:none;box-shadow:var(--lift-1)}
+.ocard--static:hover :is(h2,h3){color:inherit}
+.ocard__tag a{color:var(--wine);text-decoration:none;border-bottom:1px solid currentColor}
+.ocard__tag a:hover{color:var(--crimson)}
+
+/* FRAMEWORK — five decision verbs ------------------------ */
+/* Not a tablist. The sibling site's ladder is a tablist because its four
+   niveauer are mutually exclusive — you are at exactly one. These five
+   verbs are a sequence you do all of, so role="tablist" would actively
+   misdescribe them, and hiding four one-sentence items behind a click
+   buys nothing. The inset trough is the part worth keeping: every cell
+   renders in what was the selected state, because all five are on. */
+.ladderwrap{background:var(--surface);border-radius:var(--r-xl);padding:clamp(1.75rem,4vw,3.5rem);box-shadow:var(--lift-1)}
+.ladder__hint{font-size:var(--t-small);color:var(--graphite);max-width:52ch}
+.verbs{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:clamp(.25rem,.5vw,.4rem);
+  margin:clamp(2.25rem,4.5vw,3.25rem) 0 0;align-items:stretch;list-style:none;
+  padding:clamp(.3rem,.55vw,.45rem);background:var(--air);
+  border-radius:calc(var(--r-md) + .35rem)}
+@media (max-width:900px){.verbs{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:560px){.verbs{grid-template-columns:1fr}}
+.verb{display:flex;flex-direction:column;gap:clamp(.5rem,1vw,.75rem);min-width:0;
+  padding:clamp(.9rem,1.6vw,1.25rem);
+  background:var(--surface);border-radius:var(--r-md);box-shadow:var(--lift-1)}
+.verb__lab{font-family:var(--font-mono);font-size:var(--t-micro);letter-spacing:.1em;
+  text-transform:uppercase;color:var(--stone);display:block}
+.verb__name{font-family:var(--font-display);font-size:clamp(1rem,1.5vw,1.25rem);font-weight:600;
+  letter-spacing:-.028em;display:block;color:var(--crimson)}
+.verb p{font-size:var(--t-small);color:var(--graphite);line-height:1.6}
+.ladder__note{margin-top:var(--s-6);font-size:var(--t-small);color:var(--stone);max-width:58ch}
+
+/* BAGGRUND — scattered cards ----------------------------- */
+/* Small always-open cards in a loose grid, each nudged a couple of
+   degrees off true — reads like a scattered stack of index cards rather
+   than a form. The tilt is a per-card custom property (not an nth-child
+   pattern repeated in one direction) so neighbours lean different ways.
+   Seven tilts here, not five: the sibling site's FAQ has five cards and
+   an unlisted sixth would sit perfectly straight among tilted ones. */
+.scatter{display:grid;grid-template-columns:repeat(auto-fit,minmax(17rem,1fr));
+  gap:clamp(1.5rem,3vw,2.25rem);margin-top:clamp(2.5rem,5vw,3.5rem)}
+.scard{background:var(--surface);border-radius:var(--r-md);box-shadow:var(--lift-1);
+  padding:clamp(1.4rem,2.4vw,1.85rem);min-width:0;
+  transition:transform var(--d-base) var(--ease-spring),box-shadow var(--d-base) var(--ease-out)}
+.scard:hover{box-shadow:var(--lift-2);transform:rotate(var(--tilt,0deg)) translateY(-4px)}
+/* .reveal's end state is a blanket transform:none, shared with every
+   other .reveal on the page, which would otherwise straighten these back
+   out the moment their scroll-in animation finishes. */
+.scard.reveal{transform:translateY(16px) rotate(var(--tilt,0deg))}
+.scard.reveal.is-in{transform:rotate(var(--tilt,0deg))}
+.scard:nth-child(1){--tilt:-1.6deg}
+.scard:nth-child(2){--tilt:1.3deg}
+.scard:nth-child(3){--tilt:-1deg}
+.scard:nth-child(4){--tilt:1.8deg}
+.scard:nth-child(5){--tilt:-1.4deg}
+.scard:nth-child(6){--tilt:1.1deg}
+.scard:nth-child(7){--tilt:-1.9deg}
+.scard__h{font-family:var(--font-display);font-weight:600;font-size:clamp(1rem,1.5vw,1.1rem);
+  letter-spacing:-.02em;line-height:1.3}
+.scard__b{margin-top:var(--s-3);color:var(--graphite);font-size:var(--t-small);line-height:1.6}
+/* --wine is the site's link-on-light colour. Underlined, not coloured
+   alone (WCAG 1.4.1) — and on the Enablement FAQ these cross-links are
+   the whole point of the block. */
+.scard__b a{color:var(--wine);text-decoration:underline;text-underline-offset:3px;
+  text-decoration-thickness:1px;transition:color var(--d-fast) var(--ease-out)}
+.scard__b a:hover{color:var(--crimson)}
+.scard__links{margin-top:var(--s-4);display:flex;flex-direction:column;gap:var(--s-2);
+  font-size:var(--t-small)}
+.scard__links a{display:inline-flex;align-items:baseline;gap:var(--s-2);color:var(--wine);
+  font-weight:600;text-decoration:none;transition:color var(--d-fast) var(--ease-out)}
+.scard__links a:hover{color:var(--crimson)}
+.scard__links .arw{transition:transform var(--d-base) var(--ease-spring)}
+.scard__links a:hover .arw{transform:translateX(4px)}
+
+/* DIN TUR — lead form ------------------------------------ */
+/* Copy on the left, form on the right. Sand rather than the plum CTA
+   card: .ctacard is text-align:center with auto-margined headings,
+   which is wrong for a form, and .leadform's own --surface inputs need
+   no restyling on sand. */
+.leadcard{
+  background:var(--sand);border-radius:var(--r-xl);padding:clamp(1.9rem,4.5vw,3.5rem);
+  display:grid;grid-template-columns:1fr 1fr;gap:clamp(2rem,5vw,4rem);align-items:start;
+}
+@media (max-width:880px){.leadcard{grid-template-columns:1fr}}
+.leadcard__copy{min-width:0}
+.leadcard__form{min-width:0}
+.leadpoints{list-style:none;margin:var(--s-6) 0 0;padding:0;display:flex;
+  flex-direction:column;gap:var(--s-3);font-size:var(--t-small);color:var(--graphite)}
+.leadpoints li{display:flex;gap:var(--s-3);align-items:baseline}
+.leadpoints .arw{font-size:1.1em;flex:none}
+
+/* Step 1 — the four enquiry types, as a real radio group. Styled to
+   look like the pressed/unpressed pill it replaces; the input itself is
+   visually hidden but still focusable, so keyboard and screen readers
+   get a proper named radio group rather than four buttons. */
+.ask{border:0;padding:0;margin:0;min-width:0}
+.ask__legend{font-family:var(--font-mono);font-size:var(--t-micro);letter-spacing:.13em;
+  text-transform:uppercase;color:var(--graphite);padding:0}
+.ask__opts{position:relative;display:flex;flex-wrap:wrap;gap:var(--s-2);margin-top:var(--s-4)}  /* position:relative contains the absolutely-positioned hidden radios,
+     so focusing one scrolls to the pills rather than to wherever the
+     nearest positioned ancestor happened to be. */
+.ask input{position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%);white-space:nowrap}
+.opt{display:inline-flex;align-items:center;padding:.6rem 1.1rem;border-radius:var(--r-pill);
+  font-size:var(--t-small);color:var(--graphite);background:var(--surface);box-shadow:var(--lift-1);
+  cursor:pointer;user-select:none;
+  transition:color var(--d-fast) var(--ease-out),background-color var(--d-fast) var(--ease-out),
+             transform var(--d-fast) var(--ease-spring)}
+.opt:hover{color:var(--ink-800);transform:translateY(-2px)}
+.ask input:checked + .opt{background:var(--ink-800);color:#fff}
+.ask input:focus-visible + .opt{outline:2px solid var(--crimson);outline-offset:3px}
+.ask__hint{margin-top:var(--s-4);font-size:var(--t-small);color:var(--ink-700)}
+
+.leadform{display:flex;flex-direction:column;gap:var(--s-4);margin-top:var(--s-6);
+  transition:opacity var(--d-base) var(--ease-out)}
+.leadform.is-leaving{opacity:0}
+/* display:flex above has equal specificity to the browser's built-in
+   [hidden]{display:none} and wins on source order, so the hidden
+   attribute alone would leave the form's full-height box in place. */
+.leadform[hidden]{display:none}
+.leadform__grid{display:grid;grid-template-columns:1fr 1fr;gap:var(--s-4)}
+@media (max-width:560px){.leadform__grid{grid-template-columns:1fr}}
+.field{display:flex;flex-direction:column;gap:.4rem;min-width:0}
+.field label{font-family:var(--font-mono);font-size:var(--t-micro);letter-spacing:.08em;
+  text-transform:uppercase;color:var(--graphite)}
+.field label abbr{text-decoration:none;color:var(--crimson);margin-left:.15em}
+.field input{
+  padding:.85rem 1rem;border-radius:var(--r-sm);border:1px solid var(--hairline);
+  background:var(--surface);font:inherit;font-size:var(--t-small);color:var(--ink-900);min-width:0
+}
+.field input:focus-visible{outline:2px solid var(--crimson);outline-offset:1px}
+.leadform button{align-self:flex-start}
+.leadform__privacy{font-size:var(--t-micro);color:var(--graphite);max-width:46ch;line-height:1.6}
+#lf-status{
+  margin-top:var(--s-5);font-size:var(--t-small);color:var(--wine);max-width:46ch;line-height:1.6;
+  opacity:0;transform:translateY(6px);
+  transition:opacity var(--d-slow) var(--ease-out),transform var(--d-slow) var(--ease-out);
+}
+#lf-status.is-in{opacity:1;transform:none}
+@media (prefers-reduced-motion:reduce){.leadform,#lf-status{transition:none}}
+
+/* FOOTER wordmark ---------------------------------------- */
+/* Gives --font-wordmark (EB Garamond) its one job on this site. */
+.footer__mark{font-family:var(--font-wordmark);font-size:clamp(1.1rem,2vw,1.5rem);
+  font-weight:600;letter-spacing:.02em;color:var(--ink-800)}
+.footer__brand{display:flex;flex-direction:column;gap:var(--s-1)}
+
+@media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  *,*::before,*::after{animation-duration:.001ms!important;animation-iteration-count:1!important;transition-duration:.001ms!important}
+  .reveal,.word{opacity:1;transform:none}
+  .pcard{position:static}
+}

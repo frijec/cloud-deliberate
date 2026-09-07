@@ -1,0 +1,68 @@
+{
+  "site": "https://frijec.github.io/cloud-deliberate",
+  "brand": "Cloud Deliberate",
+  "footerLine": "Consid Denmark",
+  "pages": [
+    {
+      "file": "index.html",
+      "path": "/",
+      "slug": "home",
+      "headline": "Cloud Deliberate",
+      "kicker": "Infrastrukturstrategi",
+      "title": "Cloud Deliberate — Consid",
+      "description": "At være cloud deliberate handler ikke om at være for eller imod cloud. Det handler om beslutninger workload for workload, der bevarer fordelene ved cloud og giver jer kontrollen tilbage.",
+      "ogImageAlt": "Cloud Deliberate — et Consid Denmark-initiativ",
+      "changefreq": "weekly",
+      "priority": "1.0"
+    },
+    {
+      "file": "ydelser/index.html",
+      "path": "/ydelser/",
+      "slug": "ydelser",
+      "headline": "Fra cloud-first som standard til cloud-deliberate som design.",
+      "kicker": "Ydelser",
+      "title": "Ydelser — Cloud Deliberate — Consid",
+      "description": "Tre forløb, skåret til der hvor I er. Start med et fokuseret assessment, saml jeres arkitekter i en arbejdssession, eller installér driftsmodellen ende-til-ende.",
+      "ogImageAlt": "Ydelser — Cloud Deliberate — Consid",
+      "changefreq": "monthly",
+      "priority": "0.9"
+    },
+    {
+      "file": "ydelser/assessment.html",
+      "path": "/ydelser/assessment.html",
+      "slug": "assessment",
+      "headline": "Cloud Deliberate Assessment",
+      "kicker": "Assessment · 32 timer",
+      "title": "Cloud Deliberate Assessment — Consid",
+      "description": "Et struktureret assessment, der kortlægger jeres nuværende cloud-setup, finder de beslutninger der koster jer kontrol, og giver jer en konkret, prioriteret vej fremad.",
+      "ogImageAlt": "Cloud Deliberate Assessment — Consid",
+      "changefreq": "monthly",
+      "priority": "0.8"
+    },
+    {
+      "file": "ydelser/arkitektur-workshop.html",
+      "path": "/ydelser/arkitektur-workshop.html",
+      "slug": "arkitektur-workshop",
+      "headline": "Cloud Deliberate Arkitektur-workshop",
+      "kicker": "Workshop · 14 timer",
+      "title": "Cloud Deliberate Arkitektur-workshop — Consid",
+      "description": "En fokuseret arbejdssession der samler jeres arkitektur- og platformteams om, hvordan I træffer cloud-beslutninger. I går derfra med et fælles framework og dokumenterede ADRs.",
+      "ogImageAlt": "Cloud Deliberate Arkitektur-workshop — Consid",
+      "changefreq": "monthly",
+      "priority": "0.8"
+    },
+    {
+      "file": "ydelser/enablement.html",
+      "path": "/ydelser/enablement.html",
+      "slug": "enablement",
+      "headline": "Cloud Deliberate Enablement",
+      "kicker": "Enablement · 64 timer",
+      "title": "Cloud Deliberate Enablement — Consid",
+      "description": "Et praktisk forløb der installerer driftsmodellen for bevidst cloud-styring: automatisering, hybride mønstre, en FinOps-rytme og klare standarder, jeres teams faktisk følger.",
+      "ogImageAlt": "Cloud Deliberate Enablement — Consid",
+      "changefreq": "monthly",
+      "priority": "0.8"
+    }
+  ],
+  "noindex": true
+}

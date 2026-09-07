@@ -1,0 +1,11 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "cloud-deliberate",
+      "runtimeExecutable": "python3",
+      "runtimeArgs": ["-m", "http.server", "8000", "--directory", "/Users/frijec/Projects/Consid/Cloud Deliberate"],
+      "port": 8000
+    }
+  ]
+}

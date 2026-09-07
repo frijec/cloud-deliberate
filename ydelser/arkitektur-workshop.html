@@ -1,0 +1,213 @@
+<!doctype html>
+<html lang="da">
+<head>
+<meta charset="utf-8">
+<title>Cloud Deliberate Arkitektur-workshop — Consid</title>
+<meta name="description" content="En fokuseret arbejdssession der samler jeres arkitektur- og platformteams om, hvordan I træffer cloud-beslutninger. I går derfra med et fælles framework og dokumenterede ADRs.">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<link rel="canonical" href="https://frijec.github.io/cloud-deliberate/ydelser/arkitektur-workshop.html">
+<link rel="icon" type="image/png" href="../assets/favicon.png">
+<meta name="theme-color" content="#492A34">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Consid">
+<meta property="og:title" content="Cloud Deliberate Arkitektur-workshop — Consid">
+<meta property="og:description" content="En fokuseret arbejdssession der samler jeres arkitektur- og platformteams om, hvordan I træffer cloud-beslutninger. I går derfra med et fælles framework og dokumenterede ADRs.">
+<meta property="og:url" content="https://frijec.github.io/cloud-deliberate/ydelser/arkitektur-workshop.html">
+<meta property="og:image" content="https://frijec.github.io/cloud-deliberate/assets/og/arkitektur-workshop.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Cloud Deliberate Arkitektur-workshop — Consid">
+<meta property="og:locale" content="da_DK">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Cloud Deliberate Arkitektur-workshop — Consid">
+<meta name="twitter:description" content="En fokuseret arbejdssession der samler jeres arkitektur- og platformteams om, hvordan I træffer cloud-beslutninger. I går derfra med et fælles framework og dokumenterede ADRs.">
+<meta name="twitter:image" content="https://frijec.github.io/cloud-deliberate/assets/og/arkitektur-workshop.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Onest:wght@400;500;600;700;900&family=EB+Garamond:wght@500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/site.css">
+</head>
+<body>
+<a class="skip-link" href="#main">Spring til indhold</a>
+<nav class="nav nav--onDark" id="nav">
+  <div class="nav__in">
+    <a class="brand" href="../#top"><img class="brand__mark" src="../assets/brand-mark.png" alt="Consid" width="88" height="22"><span class="brand__sub">Cloud Deliberate</span></a>
+    <div class="nav__links">
+      <a class="nav__link" href="../#principper">Principper</a>
+      <a class="nav__link" href="../#vaerktoejskasse">Værktøjskasse</a>
+      <a class="nav__link" href="../#framework">Framework</a>
+      <a class="nav__link" href="./">Ydelser</a>
+      <a class="btn btn--primary" href="../?ask=workshop#kontakt">Book en workshop <span class="arw">→</span></a>
+    </div>
+  </div>
+</nav>
+<main id="main">
+
+<article>
+<section class="stack ydelse__head">
+  <div class="ydelse__illus" data-illus="cluster" aria-hidden="true"></div>
+  <div class="wrap">
+    <a class="backlink" href="./"><span class="arw">←</span> Alle ydelser</a>
+    <h1 style="font-size:var(--t-h2);max-width:20ch">Cloud Deliberate Arkitektur-workshop</h1>
+    <p class="lead" style="margin-top:var(--s-5)">En fokuseret arbejdssession der samler jeres arkitektur- og platform&shy;teams om, hvordan I træffer cloud-beslutninger. I går derfra med et fælles framework og dokumenterede beslutninger, I kan bygge videre på med det samme.</p>
+    <div class="ydelse__meta">
+      <span class="ydelse__kicker"><svg class="oicon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="9" cy="8" r="3"/><path d="M3 20c0-3.3 2.7-6 6-6s6 2.7 6 6"/><circle cx="17" cy="9" r="2.5"/><path d="M15.5 14c2.5.3 4.5 2.4 4.5 6"/></svg>Workshop · 14 timer</span>
+      <span class="ydelse__aud">For arkitekter · platform-ingeniører · engineering leads</span>
+    </div>
+  </div>
+</section>
+
+<section class="stack">
+  <div class="wrap">
+    <h2 class="h2--sub reveal">De fleste cloud-beslutninger træffes inkonsistent, i isolation eller pr. automatik. Den her workshop ændrer det.</h2>
+    <div class="trio">
+      <div class="trio__cell reveal">
+        <h3>Byg et fælles mindset</h3>
+        <p>Saml jeres teams om principper, der dæmper støj og understøtter bevidste beslutninger.</p>
+      </div>
+      <div class="trio__cell reveal">
+        <h3>Etablér en beslutningspraksis</h3>
+        <p>Et letvægts framework jeres teams kan bruge fra dag ét, uden at det sinker leverancen.</p>
+      </div>
+      <div class="trio__cell reveal">
+        <h3>Dokumentér hvor I står</h3>
+        <p>Gå derfra med Architecture Decision Records for jeres vigtigste nuværende cloud-beslutninger.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="stack stack--cont" id="forloeb">
+  <div class="wrap">
+    <h2 class="reveal" style="max-width:16ch">Sådan kører forløbet.</h2>
+    <ol class="phases" role="list">
+      <li class="phase reveal" role="listitem">
+        <div class="phase__n">00</div>
+        <div class="phase__body">
+          <p class="phase__meta">4 timer · Inden workshoppen</p>
+          <h3>Forberedelse</h3>
+          <ul class="phase__points">
+            <li>For-workshop-interviews med nøgledeltagere for at forstå nuværende beslutnings&shy;smerter og teamdynamik.</li>
+            <li>Tilpasning af workshop-indhold og eksempler til jeres specifikke kontekst og teknologistack.</li>
+          </ul>
+        </div>
+      </li>
+      <li class="phase reveal" role="listitem">
+        <div class="phase__n">01</div>
+        <div class="phase__body">
+          <p class="phase__meta">6 timer · Halv dag on-site eller remote</p>
+          <h3>Workshop-dag</h3>
+          <ul class="phase__points">
+            <li>Introduktion til cloud deliberate-principperne og hvorfor de er relevante i jeres kontekst.</li>
+            <li>Beslutnings&shy;framework (Bemyndig, Konsultér, Mål, Vejled, Dokumentér) anvendt på reelle beslutninger fra jeres backlog.</li>
+            <li>Hands-on ADR-skrivning for to til fire af jeres mest kritiske aktuelle cloud-beslutninger.</li>
+            <li>Enighed om standarder, paved roads og eskalationsveje fremadrettet.</li>
+          </ul>
+        </div>
+      </li>
+      <li class="phase reveal" role="listitem">
+        <div class="phase__n">02</div>
+        <div class="phase__body">
+          <p class="phase__meta">4 timer · Inden for én uge</p>
+          <h3>Opfølgning</h3>
+          <ul class="phase__points">
+            <li>Skriftligt resumé af workshoppens udfald, aftalte principper og producerede ADRs.</li>
+            <li>Et starter-kit: ADR-skabelon, tjekliste over beslutningskriterier og et forslag til paved roads-katalog for jeres kontekst.</li>
+          </ul>
+        </div>
+      </li>
+    </ol>
+  </div>
+</section>
+
+<section class="stack stack--cont">
+  <div class="wrap">
+    <h2 class="reveal" style="max-width:14ch">Hver fase, gjort op.</h2>
+    <div class="htable reveal">
+      <table>
+        <caption class="sr-only">Faser, indhold og timeforbrug for Cloud Deliberate Arkitektur-workshop</caption>
+        <colgroup><col class="htable__c1"><col><col class="htable__c3"></colgroup>
+        <thead>
+          <tr><th scope="col">Fase</th><th scope="col">Indhold</th><th scope="col" class="htable__num">Timer</th></tr>
+        </thead>
+        <tbody>
+          <tr><th scope="row"><span class="htable__no">00</span>Forberedelse</th><td>Interviews med nøgledeltagere og tilpasning til jeres kontekst</td><td class="htable__num">4</td></tr>
+          <tr><th scope="row"><span class="htable__no">01</span>Workshop-dag</th><td>Principper, beslutningsframework anvendt på jeres backlog og hands-on ADR-skrivning</td><td class="htable__num">6</td></tr>
+          <tr><th scope="row"><span class="htable__no">02</span>Opfølgning</th><td>Skriftligt resumé, producerede ADRs og et starter-kit</td><td class="htable__num">4</td></tr>
+        </tbody>
+        <tfoot>
+          <tr><th scope="row">—</th><td>Alle faser inkluderet</td><td class="htable__num">14</td></tr>
+        </tfoot>
+      </table>
+    </div>
+  </div>
+</section>
+
+<section class="stack stack--cont" id="naeste-skridt">
+  <div class="wrap">
+    <div class="ctacard">
+      <canvas class="ctacard__noise" aria-hidden="true"></canvas>
+      <div class="ctacard__content">
+        <h2 class="reveal">Vil I træffe bedre cloud-beslutninger fra næste uge?</h2>
+        <p class="lead reveal">Book et 30-minutters afklarende møde. Vi drøfter jeres aktuelle beslutnings&shy;udfordringer, tilpasser dagsordenen og bekræfter datoer.</p>
+        <div class="ctacard__actions reveal">
+          <a class="btn btn--primary" href="../?ask=moede#kontakt">Book et afklarende møde <span class="arw">→</span></a>
+          <a class="btn btn--onDark" href="./">Se alle ydelser</a>
+        </div>
+      </div>
+    </div>
+    <div class="trio">
+      <div class="trio__cell reveal">
+        <h3>Ingen forpligtelse</h3>
+        <p>Det afklarende møde er gratis og tager højst 30 minutter.</p>
+      </div>
+      <div class="trio__cell reveal">
+        <h3>Hurtig opstart</h3>
+        <p>Workshops kan typisk planlægges inden for to til tre uger.</p>
+      </div>
+      <div class="trio__cell reveal">
+        <h3>Skræddersyet til jeres teams</h3>
+        <p>Indhold og eksempler tages fra jeres faktiske arkitektur og beslutninger.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Ring: assessment → arkitektur-workshop → enablement → assessment -->
+<section class="stack stack--cont">
+  <div class="wrap">
+    <a class="nextup reveal" href="enablement.html">
+      <span class="nextup__text">
+        <span class="nextup__lab">Næste ydelse</span>
+        <b>Cloud Deliberate Enablement</b>
+      </span>
+      <span class="nextup__go">Læs videre <span class="arw">→</span></span>
+    </a>
+  </div>
+</section>
+</article>
+
+</main>
+
+<footer class="footer">
+  <div class="wrap footer__in">
+    <div class="footer__brand">
+      <span class="footer__mark">Cloud&middot;Deliberate</span>
+      <span class="mono">Et Consid Denmark-initiativ · 2026</span>
+    </div>
+    <div class="footer__links"><a class="mono" href="./">Ydelser</a><a class="mono" href="../assets/cloud-deliberate-whitepaper.pdf" download>Whitepaper</a><a class="mono" href="mailto:kenneth.jensen@consid.com">Kontakt</a></div>
+  </div>
+</footer>
+<script type="application/ld+json">
+{"@context":"https://schema.org","@graph":[
+{"@type":"Service","name":"Cloud Deliberate Arkitektur-workshop","serviceType":"Workshop","description":"En fokuseret arbejdssession der samler jeres arkitektur- og platformteams om, hvordan I træffer cloud-beslutninger. I går derfra med et fælles framework og dokumenterede ADRs. Omfang: 14 timer fordelt på tre faser.","provider":{"@type":"Organization","name":"Consid","url":"https://frijec.github.io/cloud-deliberate/"},"areaServed":"DK","audience":{"@type":"BusinessAudience","audienceType":"Arkitekter, platform-ingeniører, engineering leads"},"additionalProperty":[{"@type":"PropertyValue","name":"Omfang","value":"14 timer"}]},
+{"@type":"BreadcrumbList","itemListElement":[
+{"@type":"ListItem","position":1,"name":"Forside","item":"https://frijec.github.io/cloud-deliberate/"},
+{"@type":"ListItem","position":2,"name":"Ydelser","item":"https://frijec.github.io/cloud-deliberate/ydelser/"},
+{"@type":"ListItem","position":3,"name":"Cloud Deliberate Arkitektur-workshop"}]}]}
+</script>
+<script src="../assets/site.js"></script>
+<script type="module" src="../assets/dither.js"></script>
+</body>
+</html>
