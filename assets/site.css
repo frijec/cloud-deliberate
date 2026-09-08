@@ -333,21 +333,22 @@ button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
    the dividing, per the house rule against structural hairlines. */
 .phases{list-style:none;margin:clamp(2rem,4vw,3rem) 0 0;padding:0;
   display:flex;flex-direction:column;gap:var(--s-4)}
-.phase{display:grid;grid-template-columns:clamp(4.5rem,9vw,6.5rem) minmax(0,1fr);
-  gap:var(--s-5);align-items:start;
-  background:var(--surface);border-radius:var(--r-lg);
+/* min-width:0 — .phase is a flex child of .phases now that the number
+   is no longer a separate grid column; without it a long unbreakable
+   word can hold the card open past the viewport, the same failure
+   977eb7d fixed elsewhere on the site. */
+.phase{background:var(--surface);border-radius:var(--r-lg);min-width:0;
   padding:clamp(1.6rem,3.4vw,2.75rem);box-shadow:var(--lift-1)}
 .phase:nth-child(even){background:var(--sand)}
-.phase__n{font-family:var(--font-display);font-weight:900;
-  font-size:clamp(2.4rem,4.4vw,3.4rem);line-height:.9;letter-spacing:-.02em;
-  color:var(--crimson);font-variant-numeric:tabular-nums}
-.phase__body{min-width:0}
 .phase__meta{font-family:var(--font-mono);font-size:var(--t-micro);letter-spacing:.09em;
   text-transform:uppercase;color:var(--graphite);overflow-wrap:anywhere}
+/* Number and title on one line — the number is an inline span inside
+   the <h3> rather than a separate oversized display digit in its own
+   column, so it reads as part of the heading, not a competing element. */
 .phase h3{font-size:clamp(1.3rem,2.3vw,1.9rem);letter-spacing:-.03em;font-weight:500;margin-top:var(--s-2)}
+.phase__n{font-weight:900;color:var(--crimson);font-variant-numeric:tabular-nums}
 .phase__points{margin-top:var(--s-4);padding-left:1.1em;display:flex;flex-direction:column;gap:var(--s-2)}
 .phase__points li{color:var(--graphite);font-size:var(--t-small);line-height:1.6;max-width:56ch}
-@media (max-width:640px){.phase{grid-template-columns:1fr;gap:var(--s-3)}}
 
 /* Hours table -------------------------------------------- */
 /* table-layout:fixed + <colgroup> is this component's min-width:0. Under
@@ -516,8 +517,6 @@ button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
 .ocard--static{cursor:default}
 .ocard--static:hover{transform:none;box-shadow:var(--lift-1)}
 .ocard--static:hover :is(h2,h3){color:inherit}
-.ocard__tag a{color:var(--wine);text-decoration:none;border-bottom:1px solid currentColor}
-.ocard__tag a:hover{color:var(--crimson)}
 
 /* FRAMEWORK — five decision verbs ------------------------ */
 /* Not a tablist. The sibling site's ladder is a tablist because its four
