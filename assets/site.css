@@ -416,16 +416,15 @@ button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
   min-height:100vh;margin-top:calc(-1 * var(--nav-h, 76px));
   display:flex;flex-direction:column;gap:var(--s-6);
 }
-/* A heightfield of pillars rippling out from the pointer, crested in
-   --coral. Kept from the sibling site because it earns its place harder
-   here: this site's principles section is literally headed "Pejlemærker
-   i et landskab i bevægelse." */
-#heroGrid{
+/* A field of dithered clouds drifting behind the headline — this
+   site's principles section is literally headed "Pejlemærker i et
+   landskab i bevægelse", and cloud is rather the point here. */
+#heroClouds{
   position:absolute;inset:0;width:100%;height:100%;display:block;
   mask-image:radial-gradient(ellipse 62% 58% at 24% 28%, transparent 0%, rgba(0,0,0,.6) 48%, #000 80%);
   -webkit-mask-image:radial-gradient(ellipse 62% 58% at 24% 28%, transparent 0%, rgba(0,0,0,.6) 48%, #000 80%);
 }
-@media (prefers-reduced-motion:reduce){#heroGrid{display:none}}
+@media (prefers-reduced-motion:reduce){#heroClouds{display:none}}
 .hero__fade{
   position:absolute;inset:0;pointer-events:none;
   background:linear-gradient(to bottom, var(--air) 0%, transparent 20%, transparent 80%, var(--air) 100%);
