@@ -133,6 +133,7 @@ button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
    — the default --ink-800 dots are invisible on plum. */
 .btn--primary .arw,
 .ydelse__head .arw,
+.leadcard .arw,
 .nextup .arw{background-image:radial-gradient(#fff 65%, transparent 70%)}
 .btn .arw{transition:transform var(--d-base) var(--ease-spring)}
 .btn:hover{transform:translateY(-2px)}
@@ -605,29 +606,37 @@ button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
 .scard__links a:hover .arw{transform:translateX(4px)}
 
 /* DIN TUR — lead form ------------------------------------ */
-/* Copy on the left, form on the right. Sand rather than the plum CTA
-   card: .ctacard is text-align:center with auto-margined headings,
-   which is wrong for a form, and .leadform's own --surface inputs need
-   no restyling on sand. */
-.leadcard{
-  background:var(--sand);border-radius:var(--r-xl);padding:clamp(1.9rem,4.5vw,3.5rem);
+/* .leadcard combines with .ctacard: same plum background, same
+   WebGL noise-on-hover canvas as the "Næste skridt" CTA cards on the
+   ydelse pages, driven by the same querySelector('.ctacard') in
+   site.js — this is one component, not a lookalike. These rules
+   override .ctacard's centred single-column defaults (built for a
+   headline + a button) for a left-aligned, two-column card carrying
+   copy and a form instead. */
+.leadcard{text-align:left}
+.leadcard .ctacard__content{
   display:grid;grid-template-columns:1fr 1fr;gap:clamp(2rem,5vw,4rem);align-items:start;
 }
-@media (max-width:880px){.leadcard{grid-template-columns:1fr}}
+@media (max-width:880px){.leadcard .ctacard__content{grid-template-columns:1fr}}
+.leadcard h2{max-width:none;margin-inline:0}
+.leadcard .lead{margin-inline:0;text-align:left}
 .leadcard__copy{min-width:0}
 .leadcard__form{min-width:0}
 .leadpoints{list-style:none;margin:var(--s-6) 0 0;padding:0;display:flex;
-  flex-direction:column;gap:var(--s-3);font-size:var(--t-small);color:var(--graphite)}
+  flex-direction:column;gap:var(--s-3);font-size:var(--t-small);color:rgba(255,255,255,.78)}
 .leadpoints li{display:flex;gap:var(--s-3);align-items:baseline}
 .leadpoints .arw{font-size:1.1em;flex:none}
 
 /* Step 1 — the four enquiry types, as a real radio group. Styled to
    look like the pressed/unpressed pill it replaces; the input itself is
    visually hidden but still focusable, so keyboard and screen readers
-   get a proper named radio group rather than four buttons. */
+   get a proper named radio group rather than four buttons. Pills stay
+   on --surface/--ink-800 regardless of the card behind them — the same
+   white-on-dark pairing already used for .lvl/.dots on the ydelse
+   header, so it needs no separate on-plum variant. */
 .ask{border:0;padding:0;margin:0;min-width:0}
 .ask__legend{font-family:var(--font-mono);font-size:var(--t-micro);letter-spacing:.13em;
-  text-transform:uppercase;color:var(--graphite);padding:0}
+  text-transform:uppercase;color:var(--coral);padding:0}
 .ask__opts{position:relative;display:flex;flex-wrap:wrap;gap:var(--s-2);margin-top:var(--s-4)}  /* position:relative contains the absolutely-positioned hidden radios,
      so focusing one scrolls to the pills rather than to wherever the
      nearest positioned ancestor happened to be. */
@@ -639,8 +648,8 @@ button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
              transform var(--d-fast) var(--ease-spring)}
 .opt:hover{color:var(--ink-800);transform:translateY(-2px)}
 .ask input:checked + .opt{background:var(--ink-800);color:#fff}
-.ask input:focus-visible + .opt{outline:2px solid var(--crimson);outline-offset:3px}
-.ask__hint{margin-top:var(--s-4);font-size:var(--t-small);color:var(--ink-700)}
+.ask input:focus-visible + .opt{outline:2px solid var(--coral);outline-offset:3px}
+.ask__hint{margin-top:var(--s-4);font-size:var(--t-small);color:rgba(255,255,255,.78)}
 
 .leadform{display:flex;flex-direction:column;gap:var(--s-4);margin-top:var(--s-6);
   transition:opacity var(--d-base) var(--ease-out)}
@@ -653,28 +662,25 @@ button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
 @media (max-width:560px){.leadform__grid{grid-template-columns:1fr}}
 .field{display:flex;flex-direction:column;gap:.4rem;min-width:0}
 .field label{font-family:var(--font-mono);font-size:var(--t-micro);letter-spacing:.08em;
-  text-transform:uppercase;color:var(--graphite)}
-.field label abbr{text-decoration:none;color:var(--crimson);margin-left:.15em}
+  text-transform:uppercase;color:rgba(255,255,255,.62)}
+.field label abbr{text-decoration:none;color:var(--coral);margin-left:.15em}
+/* Inputs stay --surface/--ink-900 regardless of card background — an
+   off-white field with dark text is legible on any of the site's
+   surfaces, and it keeps the same look the form has everywhere else. */
 .field input{
   padding:.85rem 1rem;border-radius:var(--r-sm);border:1px solid var(--hairline);
   background:var(--surface);font:inherit;font-size:var(--t-small);color:var(--ink-900);min-width:0
 }
-.field input:focus-visible{outline:2px solid var(--crimson);outline-offset:1px}
+.field input:focus-visible{outline:2px solid var(--coral);outline-offset:1px}
 .leadform button{align-self:flex-start}
-.leadform__privacy{font-size:var(--t-micro);color:var(--graphite);max-width:46ch;line-height:1.6}
+.leadform__privacy{font-size:var(--t-micro);color:rgba(255,255,255,.55);max-width:46ch;line-height:1.6}
 #lf-status{
-  margin-top:var(--s-5);font-size:var(--t-small);color:var(--wine);max-width:46ch;line-height:1.6;
+  margin-top:var(--s-5);font-size:var(--t-small);color:var(--coral);max-width:46ch;line-height:1.6;
   opacity:0;transform:translateY(6px);
   transition:opacity var(--d-slow) var(--ease-out),transform var(--d-slow) var(--ease-out);
 }
 #lf-status.is-in{opacity:1;transform:none}
 @media (prefers-reduced-motion:reduce){.leadform,#lf-status{transition:none}}
-
-/* FOOTER wordmark ---------------------------------------- */
-/* Gives --font-wordmark (EB Garamond) its one job on this site. */
-.footer__mark{font-family:var(--font-wordmark);font-size:clamp(1.1rem,2vw,1.5rem);
-  font-weight:600;letter-spacing:.02em;color:var(--ink-800)}
-.footer__brand{display:flex;flex-direction:column;gap:var(--s-1)}
 
 @media (prefers-reduced-motion:reduce){
   html{scroll-behavior:auto}
