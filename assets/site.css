@@ -368,7 +368,7 @@ button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
   letter-spacing:.11em;text-transform:uppercase;color:var(--wine)}
 .htable tbody th{font-family:var(--font-display);font-weight:600;font-size:var(--t-small);
   letter-spacing:-.02em;color:var(--ink-900)}
-.htable__no{display:block;font-family:var(--font-mono);font-size:var(--t-micro);
+.htable__no{font-family:var(--font-mono);font-size:var(--t-micro);
   font-weight:400;letter-spacing:.09em;color:var(--stone);font-variant-numeric:tabular-nums}
 .htable tbody td{font-size:var(--t-small);line-height:1.6;color:var(--graphite)}
 .htable tbody tr:nth-child(even) th,
