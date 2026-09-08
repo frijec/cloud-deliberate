@@ -647,7 +647,7 @@ button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
   transition:color var(--d-fast) var(--ease-out),background-color var(--d-fast) var(--ease-out),
              transform var(--d-fast) var(--ease-spring)}
 .opt:hover{color:var(--ink-800);transform:translateY(-2px)}
-.ask input:checked + .opt{background:var(--ink-800);color:#fff}
+.ask input:checked + .opt{background:var(--coral);color:var(--ink-800)}
 .ask input:focus-visible + .opt{outline:2px solid var(--coral);outline-offset:3px}
 .ask__hint{margin-top:var(--s-4);font-size:var(--t-small);color:rgba(255,255,255,.78)}
 
