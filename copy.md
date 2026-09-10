@@ -30,10 +30,10 @@ Lad være med at køre på autopilot og altid vælge: cloud-first.
 At være cloud deliberate handler ikke om at være for eller imod cloud. Det handler om beslutninger workload for workload, der bevarer fordelene ved cloud og giver jer kontrollen tilbage.
 
 **Button**
-Hent whitepaperet →
+Book en session →
 
 **Button**
-Book en workshop
+Hent whitepaperet
 
 ### Fra cloud-first til cloud-deliberate.
 
@@ -111,7 +111,7 @@ Reducér kognitiv belastning. Klare standarder og veldefinerede paved roads pege
 Gør principper til daglig praksis.
 
 **Tag**
-01 · Princip 1
+Princip 01
 
 **H3**
 Automatisering frem for manuel drift
@@ -120,7 +120,7 @@ Automatisering frem for manuel drift
 Flyt driftsarbejdet fra individuelle handlinger til fælles definitioner. Versioneret, reviewet, deployet kontrolleret, så arbejdet forbliver synligt, auditerbart og reversibelt.
 
 **Tag**
-02 · Princip 2
+Princip 02
 
 **H3**
 Klarhed om udgangspunkt, rammer og ønsket tilstand
@@ -129,7 +129,7 @@ Klarhed om udgangspunkt, rammer og ønsket tilstand
 Kortlæg de systemer, kompetencer og den tekniske gæld I har. Gør lovgivningsmæssige og kontraktuelle rammer eksplicitte. Definér den driftsmodel I vil have, før I vælger teknologi.
 
 **Tag**
-03 · Princip 3
+Princip 03
 
 **H3**
 Arkitekturmønstre til hybrid og multi-cloud
@@ -138,7 +138,7 @@ Arkitekturmønstre til hybrid og multi-cloud
 Vælg teknologier der kan køre på tværs af miljøer. Foretræk åbne standarder. Hold data portable. Design for reversibilitet, ikke for at køre alt overalt.
 
 **Tag**
-04 · Princip 3
+Princip 03
 
 **H3**
 Løbende optimering og review
@@ -147,7 +147,7 @@ Løbende optimering og review
 Behandl omkostninger, performance, sikkerhed og compliance som vedvarende arbejde. FinOps-praksis og regelmæssige reviews fanger ændringer, før de bider sig fast.
 
 **Tag**
-05 · Princip 4
+Princip 04
 
 **H3**
 Paved roads og klare standarder
@@ -278,9 +278,6 @@ Cloud Deliberate Assessment
 **Paragraph**
 Kortlæg jeres nuværende cloud-setup, find det der koster jer kontrol, og gå derfra med en prioriteret vej fremad.
 
-**Audience**
-It-direktører · platform-ansvarlige · CTO'er
-
 **Card link**
 Læs mere →
 
@@ -296,9 +293,6 @@ Arkitektur-workshop
 **Paragraph**
 En fokuseret arbejdssession der samler arkitekter og platformteams om, hvordan I træffer cloud-beslutninger.
 
-**Audience**
-Arkitekter · platform-ingeniører · engineering leads
-
 **Card link**
 Læs mere →
 
@@ -313,9 +307,6 @@ Cloud Deliberate Enablement
 
 **Paragraph**
 Et praktisk forløb der installerer driftsmodellen: automatisering, hybride mønstre, FinOps og klare standarder.
-
-**Audience**
-Platform-teams · engineering leads · it-direktører
 
 **Card link**
 Læs mere →
@@ -373,12 +364,6 @@ Cloud Deliberate Assessment
 **Paragraph**
 Et struktureret assessment, der kortlægger jeres nuværende cloud-setup, finder de beslutninger der koster jer kontrol, og giver jer en konkret, prioriteret vej fremad.
 
-**Audience**
-It-direktører · platform-ansvarlige · CTO'er
-
-**Phases**
-Scoping · Discovery · Analyse · Rapport & gennemgang
-
 **Card link**
 Læs mere →
 
@@ -394,12 +379,6 @@ Cloud Deliberate Arkitektur-workshop
 **Paragraph**
 En fokuseret arbejdssession der samler jeres arkitektur- og platformteams om, hvordan I træffer cloud-beslutninger. I går derfra med et fælles framework og dokumenterede ADRs.
 
-**Audience**
-Arkitekter · platform-ingeniører · engineering leads
-
-**Phases**
-Forberedelse · Workshop-dag · Opfølgning
-
 **Card link**
 Læs mere →
 
@@ -414,12 +393,6 @@ Cloud Deliberate Enablement
 
 **Paragraph**
 Et praktisk forløb der installerer driftsmodellen: automatisering, hybride mønstre, en FinOps-rytme og klare standarder, jeres teams faktisk følger.
-
-**Audience**
-Platform-teams · engineering leads · it-direktører
-
-**Phases**
-Baseline · Automatisering & IaC · Hybrid & paved roads · FinOps · Overdragelse
 
 **Card link**
 Læs mere →
@@ -493,14 +466,11 @@ En konkret, prioriteret liste af anbefalinger. Ikke bare observationer.
 **H2**
 Sådan kører forløbet.
 
-**Phase number**
-00
-
 **Phase meta**
 2 timer · Kickoff
 
 **H3**
-Scoping og alignment
+00 Scoping og alignment
 
 **Bullet**
 Fælles forståelse af scope, adgange og forventninger, før arbejdet starter.
@@ -508,14 +478,11 @@ Fælles forståelse af scope, adgange og forventninger, før arbejdet starter.
 **Bullet**
 Vi afklarer rammer (regulatoriske, budgetmæssige, organisatoriske), så hver anbefaling er forankret i jeres virkelighed.
 
-**Phase number**
-01
-
 **Phase meta**
 12 timer · Forstå nuværende tilstand
 
 **H3**
-Discovery og kortlægning
+01 Discovery og kortlægning
 
 **Bullet**
 Opgørelse af arbejdslaster, miljøer og cloud-forbrug på tværs af jeres landskab.
@@ -526,14 +493,11 @@ Gennemgang af drift: hvordan provisionering, skalering, patching og omkostningss
 **Bullet**
 Baseline etableres, så forbedringer kan følges og dokumenteres fremadrettet.
 
-**Phase number**
-02
-
 **Phase meta**
 8 timer · Find huller og muligheder
 
 **H3**
-Analyse
+02 Analyse
 
 **Bullet**
 Vurdering mod cloud deliberate-principperne: automatisering, klarhed, robusthed og paved roads.
@@ -544,14 +508,11 @@ Gennemgang af omkostnings- og sikkerhedsposture: hvor er fejlkonfigurationerne o
 **Bullet**
 Workload-placering: hvilke arbejdslaster er i det rette miljø, og hvilke er ikke?
 
-**Phase number**
-03
-
 **Phase meta**
 10 timer · Fra indsigt til handling
 
 **H3**
-Rapport og gennemgang
+03 Rapport og gennemgang
 
 **Bullet**
 Skriftlig rapport med fund og en prioriteret anbefalingsliste.
@@ -577,7 +538,7 @@ Indhold
 Timer
 
 **Header cell**
-00Scoping og alignment
+00 Scoping og alignment
 
 **Cell**
 Rammer, adgange og forventninger afklaret før arbejdet starter
@@ -586,7 +547,7 @@ Rammer, adgange og forventninger afklaret før arbejdet starter
 2
 
 **Header cell**
-01Discovery og kortlægning
+01 Discovery og kortlægning
 
 **Cell**
 Arbejdslaster, miljøer, cloud-forbrug og nuværende driftspraksis
@@ -595,7 +556,7 @@ Arbejdslaster, miljøer, cloud-forbrug og nuværende driftspraksis
 12
 
 **Header cell**
-02Analyse
+02 Analyse
 
 **Cell**
 Vurdering mod principperne, omkostnings- og sikkerhedsposture, workload-placering
@@ -604,7 +565,7 @@ Vurdering mod principperne, omkostnings- og sikkerhedsposture, workload-placerin
 8
 
 **Header cell**
-03Rapport og gennemgang
+03 Rapport og gennemgang
 
 **Cell**
 Skriftlig rapport, præsentationsmateriale og live-gennemgang
@@ -716,14 +677,11 @@ Gå derfra med Architecture Decision Records for jeres vigtigste nuværende clou
 **H2**
 Sådan kører forløbet.
 
-**Phase number**
-00
-
 **Phase meta**
 4 timer · Inden workshoppen
 
 **H3**
-Forberedelse
+00 Forberedelse
 
 **Bullet**
 For-workshop-interviews med nøgledeltagere for at forstå nuværende beslutningssmerter og teamdynamik.
@@ -731,14 +689,11 @@ For-workshop-interviews med nøgledeltagere for at forstå nuværende beslutning
 **Bullet**
 Tilpasning af workshop-indhold og eksempler til jeres specifikke kontekst og teknologistack.
 
-**Phase number**
-01
-
 **Phase meta**
 6 timer · Halv dag on-site eller remote
 
 **H3**
-Workshop-dag
+01 Workshop-dag
 
 **Bullet**
 Introduktion til cloud deliberate-principperne og hvorfor de er relevante i jeres kontekst.
@@ -752,14 +707,11 @@ Hands-on ADR-skrivning for to til fire af jeres mest kritiske aktuelle cloud-bes
 **Bullet**
 Enighed om standarder, paved roads og eskalationsveje fremadrettet.
 
-**Phase number**
-02
-
 **Phase meta**
 4 timer · Inden for én uge
 
 **H3**
-Opfølgning
+02 Opfølgning
 
 **Bullet**
 Skriftligt resumé af workshoppens udfald, aftalte principper og producerede ADRs.
@@ -782,7 +734,7 @@ Indhold
 Timer
 
 **Header cell**
-00Forberedelse
+00 Forberedelse
 
 **Cell**
 Interviews med nøgledeltagere og tilpasning til jeres kontekst
@@ -791,7 +743,7 @@ Interviews med nøgledeltagere og tilpasning til jeres kontekst
 4
 
 **Header cell**
-01Workshop-dag
+01 Workshop-dag
 
 **Cell**
 Principper, beslutningsframework anvendt på jeres backlog og hands-on ADR-skrivning
@@ -800,7 +752,7 @@ Principper, beslutningsframework anvendt på jeres backlog og hands-on ADR-skriv
 6
 
 **Header cell**
-02Opfølgning
+02 Opfølgning
 
 **Cell**
 Skriftligt resumé, producerede ADRs og et starter-kit
@@ -912,14 +864,11 @@ Løbende optimering som vedvarende praksis, ikke som et periodisk oprydningsproj
 **H2**
 Sådan kører forløbet.
 
-**Phase number**
-00
-
 **Phase meta**
 4 timer · Alignment og udgangspunkt
 
 **H3**
-Scoping og baseline
+00 Scoping og baseline
 
 **Bullet**
 Aftale om scope, teamstruktur og ønskede resultater.
@@ -927,14 +876,11 @@ Aftale om scope, teamstruktur og ønskede resultater.
 **Bullet**
 Hurtig baseline af nuværende praksis: automatiseringsmodenhed, omkostningssynlighed og beslutningskonsistens.
 
-**Phase number**
-01
-
 **Phase meta**
 20 timer · Uge 1–2
 
 **H3**
-Automatisering og infrastructure as code
+01 Automatisering og infrastructure as code
 
 **Bullet**
 Vurdering og forbedring af infrastruktur-provisionering, skalering og miljøstyring.
@@ -945,14 +891,11 @@ Indførelse eller styrkelse af infrastructure-as-code-praksis på tværs af rele
 **Bullet**
 Automatisering af rutinemæssige driftsopgaver: patching, oprydning, skaleringspolitikker.
 
-**Phase number**
-02
-
 **Phase meta**
 20 timer · Uge 3–4
 
 **H3**
-Hybride mønstre og paved roads
+02 Hybride mønstre og paved roads
 
 **Bullet**
 Workload-placering og implementering af hybride/multi-cloud-mønstre hvor det giver mening.
@@ -963,14 +906,11 @@ Definition og dokumentation af paved roads: foretrukne services, deployment-møn
 **Bullet**
 Udvikler-portabilitet: lokalt udviklingssetup og konsistens på tværs af miljøer.
 
-**Phase number**
-03
-
 **Phase meta**
 12 timer · Uge 5–6
 
 **H3**
-FinOps-rytme og løbende optimering
+03 FinOps-rytme og løbende optimering
 
 **Bullet**
 Opsætning af omkostningssynlighed og tagging-praksis på tværs af landskabet.
@@ -981,14 +921,11 @@ Etablering af en fast review-kadence: hvad der gennemgås, hvem der ejer det, og
 **Bullet**
 FinOps-praksis indlejret i teamets workflows frem for håndteret af en separat funktion.
 
-**Phase number**
-04
-
 **Phase meta**
 8 timer · Sidste uge
 
 **H3**
-Overdragelse og dokumentation
+04 Overdragelse og dokumentation
 
 **Bullet**
 Fuld dokumentation af alt det installerede: paved roads-katalog, ADRs, automation-runbooks og review-kadence.
@@ -1014,7 +951,7 @@ Indhold
 Timer
 
 **Header cell**
-00Scoping og baseline
+00 Scoping og baseline
 
 **Cell**
 Scope, teamstruktur og en baseline af nuværende praksis
@@ -1023,7 +960,7 @@ Scope, teamstruktur og en baseline af nuværende praksis
 4
 
 **Header cell**
-01Automatisering og IaC
+01 Automatisering og IaC
 
 **Cell**
 Provisionering, skalering, miljøstyring og automatiseret rutinedrift
@@ -1032,7 +969,7 @@ Provisionering, skalering, miljøstyring og automatiseret rutinedrift
 20
 
 **Header cell**
-02Hybride mønstre og paved roads
+02 Hybride mønstre og paved roads
 
 **Cell**
 Workload-placering, dokumenterede paved roads og udvikler-portabilitet
@@ -1041,7 +978,7 @@ Workload-placering, dokumenterede paved roads og udvikler-portabilitet
 20
 
 **Header cell**
-03FinOps-rytme
+03 FinOps-rytme
 
 **Cell**
 Omkostningssynlighed, tagging og en fast review-kadence
@@ -1050,7 +987,7 @@ Omkostningssynlighed, tagging og en fast review-kadence
 12
 
 **Header cell**
-04Overdragelse
+04 Overdragelse
 
 **Cell**
 Dokumentation, vidensoverdragelse og anbefalede næste skridt
@@ -1100,7 +1037,7 @@ Saml arkitekterne i en workshop først →
 Hvordan virker cloud-automatisering i praksis?
 
 **Body**
-Hver ændring af infrastruktur udtrykkes som kode, reviewes som al anden kode og påføres af en pipeline. Aldrig af et menneske i en konsol. Rutinemæssige driftsoperationer (patching, skalering, oprydning, omkostningsoptimering) håndteres af politikker og planlagte jobs. Teams forbruger paved roads, opinionerede skabeloner for de almindelige arbejdslaster, så de får produktionsklare standarder uden at genopfinde dem.
+Hver ændring af infrastruktur udtrykkes som kode, reviewes som al anden kode og påføres af en pipeline, aldrig af et menneske i en konsol. Rutinemæssige driftsoperationer (patching, skalering, oprydning, omkostningsoptimering) håndteres af politikker og planlagte jobs. Teams forbruger paved roads, opinionerede skabeloner for de almindelige arbejdslaster, så de får produktionsklare standarder uden at genopfinde dem.
 
 **Link**
 Se hvor I står med et Assessment →
@@ -1109,7 +1046,7 @@ Se hvor I står med et Assessment →
 Hvordan reducerer cloud-automatisering cloud-omkostninger?
 
 **Body**
-Automatisering lukker de tre store lækager: idle ressourcer der kører uden for kontortid, overdimensionerede arbejdslaster som ingen højre-skalerer, og skygge-miljøer der bliver hængende efter et projekt slutter. En FinOps-rytme — tagging, planlagte reviews, automatiseret oprydning, rightsizing-anbefalinger — gør omkostningsstyring fra et kvartalsprojekt til en løbende praksis ejet af de teams, der bruger pengene.
+Automatisering lukker de tre store lækager: idle ressourcer der kører uden for kontortid, overdimensionerede arbejdslaster som ingen højre-skalerer, og skygge-miljøer der bliver hængende efter et projekt slutter. En FinOps-rytme (tagging, planlagte reviews, automatiseret oprydning, rightsizing-anbefalinger) gør omkostningsstyring fra et kvartalsprojekt til en løbende praksis ejet af de teams, der bruger pengene.
 
 **Link**
 FinOps-rytme i Enablement-faserne →
