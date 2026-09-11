@@ -81,8 +81,23 @@
 <section class="stack stack--cont" id="forloeb">
   <div class="wrap">
     <h2 class="reveal" style="max-width:16ch">Sådan kører forløbet.</h2>
+    <div class="journey">
+      <aside class="journey__rail reveal" aria-hidden="true">
+        <div class="journey__stage">
+          <div class="journey__mark" data-illus="frame" data-zoom="3.5"></div>
+          <div class="journey__mark" data-illus="cluster" data-ink="--crimson" data-zoom="3.7"></div>
+          <div class="journey__mark" data-illus="handoff" data-zoom="3.6"></div>
+        </div>
+        <div class="journey__track">
+          <div class="journey__fill"></div>
+          <ol class="journey__stations"><li>00</li><li>01</li><li>02</li></ol>
+        </div>
+        <p class="journey__hours"><b data-hours-now>0</b> af 14 timer</p>
+      </aside>
+      <div class="journey__chapters">
+    <p class="journey__bookend journey__bookend--start reveal"><span class="mono">Dag 0</span> Cloud-beslutninger bliver truffet forskelligt fra team til team, og ingen kan pege på hvorfor.</p>
     <ol class="phases" role="list">
-      <li class="phase reveal" role="listitem">
+      <li class="phase reveal" role="listitem" data-hours="4">
         <div class="phase__illus" data-illus="frame" aria-hidden="true"></div>
         <p class="phase__meta">4 timer · Inden workshoppen</p>
         <h3><span class="phase__n">00</span> Forberedelse</h3>
@@ -91,7 +106,7 @@
             <li>Tilpasning af workshop-indhold og eksempler til jeres specifikke kontekst og teknologistack.</li>
         </ul>
       </li>
-      <li class="phase reveal" role="listitem">
+      <li class="phase reveal" role="listitem" data-hours="6">
         <div class="phase__illus" data-illus="cluster" data-ink="--crimson" data-zoom="4.4" aria-hidden="true"></div>
         <p class="phase__meta">6 timer · Halv dag on-site eller remote</p>
         <h3><span class="phase__n">01</span> Workshop-dag</h3>
@@ -102,7 +117,7 @@
             <li>Enighed om standarder, paved roads og eskalationsveje fremadrettet.</li>
         </ul>
       </li>
-      <li class="phase reveal" role="listitem">
+      <li class="phase reveal" role="listitem" data-hours="4">
         <div class="phase__illus" data-illus="handoff" data-zoom="4.2" aria-hidden="true"></div>
         <p class="phase__meta">4 timer · Inden for én uge</p>
         <h3><span class="phase__n">02</span> Opfølgning</h3>
@@ -112,6 +127,9 @@
         </ul>
       </li>
     </ol>
+    <p class="journey__bookend journey__bookend--end reveal"><span class="mono">Efter 14 timer</span> Et fælles beslutningsframework, to til fire skrevne ADRs og et starter-kit til jeres egne paved roads.</p>
+      </div>
+    </div>
   </div>
 </section>
 

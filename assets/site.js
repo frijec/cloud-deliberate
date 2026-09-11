@@ -94,6 +94,57 @@ if (splitTarget && !REDUCED) {
   [...splitTarget.querySelectorAll('.word')].forEach((w, i) => setTimeout(() => w.classList.add('is-in'), 90 + i * 42));
 }
 
+/* Journey rail — the offering pages' phase list beside a sticky rail.
+   The active fase is the last one whose top has crossed a line 45% down
+   the viewport, so a card becomes current as its heading arrives in the
+   reading zone rather than when its last bullet leaves. The rail's mark,
+   station and fill follow; the hour count tweens to the running total.
+   Scroll work is coalesced to one rAF per frame. */
+document.querySelectorAll('.journey').forEach(journey => {
+  const phases = [...journey.querySelectorAll('.phase')];
+  const marks = [...journey.querySelectorAll('.journey__mark')];
+  const stations = [...journey.querySelectorAll('.journey__stations li')];
+  const fill = journey.querySelector('.journey__fill');
+  const hoursEl = journey.querySelector('[data-hours-now]');
+  if (!phases.length || !marks.length) return;
+  const hours = phases.map(p => +p.dataset.hours || 0);
+
+  let active = -1, shownHours = 0, hoursRaf = null;
+  const tweenHours = target => {
+    if (hoursRaf) cancelAnimationFrame(hoursRaf);
+    if (REDUCED) { shownHours = target; hoursEl.textContent = target; return }
+    const from = shownHours, t0 = performance.now(), dur = 480;
+    const step = now => {
+      const k = Math.min(1, (now - t0) / dur), e = 1 - Math.pow(1 - k, 3);
+      shownHours = Math.round(from + (target - from) * e);
+      hoursEl.textContent = shownHours;
+      if (k < 1) hoursRaf = requestAnimationFrame(step);
+    };
+    hoursRaf = requestAnimationFrame(step);
+  };
+
+  const set = i => {
+    active = i;
+    marks.forEach((m, k) => m.classList.toggle('is-active', k === i));
+    stations.forEach((s, k) => { s.classList.toggle('is-active', k === i); s.classList.toggle('is-done', k < i) });
+    const st = stations[i];
+    if (fill && st) fill.style.height = (st.offsetTop + st.offsetHeight / 2) + 'px';
+    if (hoursEl) tweenHours(hours.slice(0, i + 1).reduce((a, b) => a + b, 0));
+  };
+
+  const update = () => {
+    const line = innerHeight * 0.45;
+    let i = 0;
+    phases.forEach((p, k) => { if (p.getBoundingClientRect().top < line) i = k });
+    if (i !== active) set(i);
+  };
+  let raf = null;
+  const onScroll = () => { if (!raf) raf = requestAnimationFrame(() => { raf = null; update() }) };
+  addEventListener('scroll', onScroll, { passive: true });
+  addEventListener('resize', () => { active = -1; update() }, { passive: true });
+  update();
+});
+
 /* ============================================================
    DIN TUR — the enquiry form.
 

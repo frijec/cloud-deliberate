@@ -81,8 +81,25 @@
 <section class="stack stack--cont" id="forloeb">
   <div class="wrap">
     <h2 class="reveal" style="max-width:16ch">Sådan kører forløbet.</h2>
+    <div class="journey">
+      <aside class="journey__rail reveal" aria-hidden="true">
+        <div class="journey__stage">
+          <div class="journey__mark" data-illus="frame" data-zoom="3.5"></div>
+          <div class="journey__mark" data-illus="stack" data-zoom="3.5"></div>
+          <div class="journey__mark" data-illus="road" data-zoom="3.5"></div>
+          <div class="journey__mark" data-illus="ledger" data-zoom="3.7"></div>
+          <div class="journey__mark" data-illus="handoff" data-zoom="3.6"></div>
+        </div>
+        <div class="journey__track">
+          <div class="journey__fill"></div>
+          <ol class="journey__stations"><li>00</li><li>01</li><li>02</li><li>03</li><li>04</li></ol>
+        </div>
+        <p class="journey__hours"><b data-hours-now>0</b> af 64 timer</p>
+      </aside>
+      <div class="journey__chapters">
+    <p class="journey__bookend journey__bookend--start reveal"><span class="mono">Dag 0</span> I ved, hvordan godt ser ud. Det er maskineriet til at gøre det hver dag, der mangler.</p>
     <ol class="phases" role="list">
-      <li class="phase reveal" role="listitem">
+      <li class="phase reveal" role="listitem" data-hours="4">
         <div class="phase__illus" data-illus="frame" aria-hidden="true"></div>
         <p class="phase__meta">4 timer · Alignment og udgangspunkt</p>
         <h3><span class="phase__n">00</span> Scoping og baseline</h3>
@@ -91,7 +108,7 @@
             <li>Hurtig baseline af nuværende praksis: automatiseringsmodenhed, omkostnings&shy;synlighed og beslutnings&shy;konsistens.</li>
         </ul>
       </li>
-      <li class="phase reveal" role="listitem">
+      <li class="phase reveal" role="listitem" data-hours="20">
         <div class="phase__illus" data-illus="stack" aria-hidden="true"></div>
         <p class="phase__meta">20 timer · Uge 1–2</p>
         <h3><span class="phase__n">01</span> Automatisering og infrastructure as code</h3>
@@ -101,7 +118,7 @@
             <li>Automatisering af rutinemæssige driftsopgaver: patching, oprydning, skaleringspolitikker.</li>
         </ul>
       </li>
-      <li class="phase reveal" role="listitem">
+      <li class="phase reveal" role="listitem" data-hours="20">
         <div class="phase__illus" data-illus="road" aria-hidden="true"></div>
         <p class="phase__meta">20 timer · Uge 3–4</p>
         <h3><span class="phase__n">02</span> Hybride mønstre og paved roads</h3>
@@ -111,7 +128,7 @@
             <li>Udvikler-portabilitet: lokalt udviklingssetup og konsistens på tværs af miljøer.</li>
         </ul>
       </li>
-      <li class="phase reveal" role="listitem">
+      <li class="phase reveal" role="listitem" data-hours="12">
         <div class="phase__illus" data-illus="ledger" aria-hidden="true"></div>
         <p class="phase__meta">12 timer · Uge 5–6</p>
         <h3><span class="phase__n">03</span> FinOps-rytme og løbende optimering</h3>
@@ -121,7 +138,7 @@
             <li>FinOps-praksis indlejret i teamets workflows frem for håndteret af en separat funktion.</li>
         </ul>
       </li>
-      <li class="phase reveal" role="listitem">
+      <li class="phase reveal" role="listitem" data-hours="8">
         <div class="phase__illus" data-illus="handoff" data-zoom="4.2" aria-hidden="true"></div>
         <p class="phase__meta">8 timer · Sidste uge</p>
         <h3><span class="phase__n">04</span> Overdragelse og dokumentation</h3>
@@ -132,6 +149,9 @@
         </ul>
       </li>
     </ol>
+    <p class="journey__bookend journey__bookend--end reveal"><span class="mono">Efter 64 timer</span> Infrastructure as code, paved roads og en FinOps-kadence, som teamet selv ejer og kører videre.</p>
+      </div>
+    </div>
   </div>
 </section>
 

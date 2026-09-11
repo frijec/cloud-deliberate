@@ -81,8 +81,24 @@
 <section class="stack stack--cont" id="forloeb">
   <div class="wrap">
     <h2 class="reveal" style="max-width:16ch">Sådan kører forløbet.</h2>
+    <div class="journey">
+      <aside class="journey__rail reveal" aria-hidden="true">
+        <div class="journey__stage">
+          <div class="journey__mark" data-illus="frame" data-zoom="3.5"></div>
+          <div class="journey__mark" data-illus="survey" data-zoom="3.2"></div>
+          <div class="journey__mark" data-illus="sift" data-zoom="3.4"></div>
+          <div class="journey__mark" data-illus="handoff" data-zoom="3.6"></div>
+        </div>
+        <div class="journey__track">
+          <div class="journey__fill"></div>
+          <ol class="journey__stations"><li>00</li><li>01</li><li>02</li><li>03</li></ol>
+        </div>
+        <p class="journey__hours"><b data-hours-now>0</b> af 32 timer</p>
+      </aside>
+      <div class="journey__chapters">
+    <p class="journey__bookend journey__bookend--start reveal"><span class="mono">Dag 0</span> I har en fornemmelse af, at cloud-regningen og kontrollen er gledet fra hinanden. Det, der mangler, er tallene til at vise det.</p>
     <ol class="phases" role="list">
-      <li class="phase reveal" role="listitem">
+      <li class="phase reveal" role="listitem" data-hours="2">
         <div class="phase__illus" data-illus="frame" aria-hidden="true"></div>
         <p class="phase__meta">2 timer · Kickoff</p>
         <h3><span class="phase__n">00</span> Scoping og alignment</h3>
@@ -91,7 +107,7 @@
             <li>Vi afklarer rammer (regulatoriske, budgetmæssige, organisatoriske), så hver anbefaling er forankret i jeres virkelighed.</li>
         </ul>
       </li>
-      <li class="phase reveal" role="listitem">
+      <li class="phase reveal" role="listitem" data-hours="12">
         <div class="phase__illus" data-illus="survey" aria-hidden="true"></div>
         <p class="phase__meta">12 timer · Forstå nuværende tilstand</p>
         <h3><span class="phase__n">01</span> Discovery og kortlægning</h3>
@@ -101,7 +117,7 @@
             <li>Baseline etableres, så forbedringer kan følges og dokumenteres fremadrettet.</li>
         </ul>
       </li>
-      <li class="phase reveal" role="listitem">
+      <li class="phase reveal" role="listitem" data-hours="8">
         <div class="phase__illus" data-illus="sift" aria-hidden="true"></div>
         <p class="phase__meta">8 timer · Find huller og muligheder</p>
         <h3><span class="phase__n">02</span> Analyse</h3>
@@ -111,7 +127,7 @@
             <li>Workload-placering: hvilke arbejdslaster er i det rette miljø, og hvilke er ikke?</li>
         </ul>
       </li>
-      <li class="phase reveal" role="listitem">
+      <li class="phase reveal" role="listitem" data-hours="10">
         <div class="phase__illus" data-illus="handoff" data-zoom="4.2" aria-hidden="true"></div>
         <p class="phase__meta">10 timer · Fra indsigt til handling</p>
         <h3><span class="phase__n">03</span> Rapport og gennemgang</h3>
@@ -122,6 +138,9 @@
         </ul>
       </li>
     </ol>
+    <p class="journey__bookend journey__bookend--end reveal"><span class="mono">Efter 32 timer</span> Et klart billede af, hvor jeres setup står, og en prioriteret liste over, hvad der skal flyttes, rettes eller lades være.</p>
+      </div>
+    </div>
   </div>
 </section>
 
