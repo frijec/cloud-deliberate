@@ -338,8 +338,18 @@ button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
    word can hold the card open past the viewport, the same failure
    977eb7d fixed elsewhere on the site. */
 .phase{background:var(--surface);border-radius:var(--r-lg);min-width:0;
-  padding:clamp(1.6rem,3.4vw,2.75rem);box-shadow:var(--lift-1)}
+  padding:clamp(1.6rem,3.4vw,2.75rem);box-shadow:var(--lift-1);position:relative}
 .phase:nth-child(even){background:var(--sand)}
+/* One dithered mark per fase, top-right. Absolutely positioned rather
+   than a flex sibling so the meta/title/points column keeps its own
+   flow; the heading's max-width leaves it room at every width that
+   shows it. Dropped under 640px, where the card is a single narrow
+   column and the mark would push the title down. */
+.phase__illus{position:absolute;top:clamp(1.1rem,2.4vw,1.8rem);right:clamp(1.1rem,2.4vw,1.8rem);
+  width:clamp(96px,10vw,124px);height:clamp(96px,10vw,124px);border-radius:8px;overflow:hidden}
+.phase__illus canvas{display:block;width:100%;height:100%}
+.phase h3,.phase__meta{max-width:calc(100% - clamp(96px,10vw,124px) - var(--s-4))}
+@media (max-width:640px){.phase__illus{display:none} .phase h3,.phase__meta{max-width:none}}
 .phase__meta{font-family:var(--font-mono);font-size:var(--t-micro);letter-spacing:.09em;
   text-transform:uppercase;color:var(--graphite);overflow-wrap:anywhere}
 /* Number and title on one line — the number is an inline span inside

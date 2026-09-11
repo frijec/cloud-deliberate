@@ -235,7 +235,10 @@ function jitterGeo(geo, R, amt) {
    For jittered shapes R_max is R·(1 + amt/2), not R. */
 const SHAPE_ZOOM = {
   drift: 2.85, repatriate: 3.00, handoff: 3.20, tether: 3.10,
-  terrain: 2.20, cluster: 2.40, paved: 2.10
+  terrain: 2.20, cluster: 2.40, paved: 2.10,
+  // Fase marks sit in ~100px boxes, smaller than any other in-flow mark,
+  // so they fill more of the frame: F = 0.78 rather than 0.60.
+  frame: 4.10, survey: 3.80, sift: 4.00, stack: 4.10, road: 4.10, ledger: 4.40
 };
 
 /* The Ydelse header marks sit on plum and read as background texture,
@@ -391,13 +394,194 @@ const SHAPE_BUILDERS = {
     group.add(new THREE.Mesh(new THREE.SphereGeometry(0.2, 16, 16), mat()));
     scene.add(group);
     return dt => { group.rotation.x += dt * 0.2; group.rotation.y += dt * 0.28; };
+  },
+
+  /* ---- Fase marks. Small in-flow marks on the offering pages' phase
+     cards, one per fase. Shared across the three offerings where the
+     fase is the same beat, so the vocabulary stays at a handful of forms
+     rather than twelve one-offs. ---- */
+
+  // Scoping: the boundary drawn before anything goes inside it. A wire
+  // cube built from twelve bars, with the thing being scoped as a small
+  // irregular mass at its centre.
+  frame: scene => {
+    const g = new THREE.Group(), m = mat();
+    const H = 0.42, T = 0.05;
+    const bar = (len, axis) => {
+      const size = axis === 'x' ? [len, T, T] : axis === 'y' ? [T, len, T] : [T, T, len];
+      return new THREE.Mesh(new THREE.BoxGeometry(...size), m);
+    };
+    for (const s1 of [-H, H]) for (const s2 of [-H, H]) {
+      const bx = bar(H * 2 + T, 'x'); bx.position.set(0, s1, s2); g.add(bx);
+      const by = bar(H * 2 + T, 'y'); by.position.set(s1, 0, s2); g.add(by);
+      const bz = bar(H * 2 + T, 'z'); bz.position.set(s1, s2, 0); g.add(bz);
+    }
+    const core = new THREE.Mesh(jitterGeo(new THREE.IcosahedronGeometry(0.15, 2), 0.15, 0.22), m);
+    g.add(core);
+    g.rotation.set(0.5, 0.6, 0);
+    scene.add(g);
+    let t = 0;
+    return dt => {
+      t += dt;
+      g.rotation.y += dt * 0.22; g.rotation.x += dt * 0.08;
+      core.rotation.x -= dt * 0.4; core.rotation.y += dt * 0.3;
+      core.position.y = Math.sin(t * 0.9) * 0.05;
+    };
+  },
+
+  // Discovery: the landscape being mapped. A flat lattice with a few
+  // survey markers raised off it on stems — the terrain mark's cousin,
+  // but a map rather than a heightfield.
+  survey: scene => {
+    const g = new THREE.Group(), m = mat();
+    const S = 0.55, N = 5, T = 0.03;
+    const line = new THREE.BoxGeometry(S * 2, T, T);
+    for (let i = 0; i < N; i++) {
+      const p = -S + (i / (N - 1)) * S * 2;
+      const a = new THREE.Mesh(line, m); a.position.set(0, 0, p); g.add(a);
+      const b = new THREE.Mesh(line, m); b.position.set(p, 0, 0); b.rotation.y = Math.PI / 2; g.add(b);
+    }
+    const stemGeo = new THREE.CylinderGeometry(0.018, 0.018, 1, 8);
+    stemGeo.translate(0, 0.5, 0);
+    const markers = [];
+    [[-1, -1], [1, 0], [0, 1], [-1, 2]].forEach(([ix, iz], k) => {
+      const x = ix * (S / 2), z = iz * (S / 2);
+      const stem = new THREE.Mesh(stemGeo, m); stem.position.set(x, 0, z);
+      const head = new THREE.Mesh(new THREE.SphereGeometry(0.06, 12, 12), m); head.position.set(x, 0, z);
+      g.add(stem, head);
+      markers.push({ stem, head, phase: k * 1.6 });
+    });
+    g.rotation.x = 0.82;
+    g.position.y = -0.05;
+    scene.add(g);
+    let t = 0;
+    return dt => {
+      t += dt;
+      g.rotation.y += dt * 0.14;
+      markers.forEach(mk => {
+        const h = 0.20 + 0.08 * Math.sin(t * 1.1 + mk.phase);
+        mk.stem.scale.y = h; mk.head.position.y = h;
+      });
+    };
+  },
+
+  // Analysis: a funnel with fragments passing through it — everything
+  // goes in wide at the top and comes out narrow and ordered.
+  sift: scene => {
+    const g = new THREE.Group(), m = matD();
+    const cone = new THREE.Mesh(new THREE.CylinderGeometry(0.48, 0.10, 0.56, 28, 1, true), m);
+    cone.position.y = -0.02;
+    g.add(cone);
+    const frags = [];
+    const fm = mat();
+    for (let i = 0; i < 5; i++) {
+      const f = new THREE.Mesh(new THREE.IcosahedronGeometry(0.055, 1), fm);
+      frags.push({ mesh: f, t: i / 5, a: i * 2.4 });
+      g.add(f);
+    }
+    g.rotation.x = 0.30;
+    scene.add(g);
+    return dt => {
+      g.rotation.y += dt * 0.20;
+      frags.forEach(f => {
+        f.t = (f.t + dt * 0.22) % 1;
+        // top of travel is above the rim and spread wide; the radius
+        // narrows with the cone and the fragment drops out the bottom
+        const y = 0.62 - f.t * 1.10;
+        const r = y > 0.26 ? 0.42 : Math.max(0.04, 0.42 * ((y + 0.30) / 0.56));
+        f.mesh.position.set(Math.cos(f.a) * r, y, Math.sin(f.a) * r);
+        f.mesh.rotation.x += dt; f.mesh.rotation.z += dt * 0.7;
+      });
+    };
+  },
+
+  // Automation / infrastructure as code: identical blocks snapping into
+  // a column. The top block drops in, seats, and the cycle repeats —
+  // the same unit stamped out again and again.
+  stack: scene => {
+    const g = new THREE.Group(), m = mat();
+    // Wide, thin slabs with a gap wider than a dither cell between them —
+    // narrower blocks or a tighter gap and the 1-bit pass fuses the
+    // column into one blob.
+    const geo = new THREE.BoxGeometry(0.72, 0.14, 0.72);
+    const GAP = 0.30, BASE = -0.48, N = 4;
+    for (let i = 0; i < N - 1; i++) {
+      const b = new THREE.Mesh(geo, m); b.position.y = BASE + i * GAP; g.add(b);
+    }
+    const top = new THREE.Mesh(geo, m);
+    const seatY = BASE + (N - 1) * GAP;
+    g.add(top);
+    g.rotation.set(0.55, 0.7, 0);
+    scene.add(g);
+    let t = 0;
+    return dt => {
+      t += dt;
+      g.rotation.y += dt * 0.18;
+      const c = (t * 0.45) % 1;
+      // ease in over the first half of the cycle, sit for the second
+      const e = c < 0.5 ? 1 - Math.pow(1 - c / 0.5, 3) : 1;
+      top.position.y = seatY + (1 - e) * 0.34;
+    };
+  },
+
+  // Paved roads, sized for a fase box: the header's `paved` ribbon is
+  // drawn for a backdrop that bleeds off a 400px panel and thins to a
+  // scratch at 100px, so this is a shorter, thicker stretch of the same
+  // road with the same kerb markers.
+  road: scene => {
+    const g = new THREE.Group(), m = mat();
+    const curve = new THREE.CatmullRomCurve3([
+      new THREE.Vector3(-0.62, -0.22, 0.08),
+      new THREE.Vector3(-0.20, -0.02, -0.12),
+      new THREE.Vector3(0.22, 0.10, 0.12),
+      new THREE.Vector3(0.62, 0.30, -0.06)
+    ]);
+    g.add(new THREE.Mesh(new THREE.TubeGeometry(curve, 80, 0.15, 12, false), m));
+    const kerb = new THREE.BoxGeometry(0.11, 0.11, 0.11);
+    for (let i = 0; i <= 3; i++) {
+      const p = curve.getPointAt(i / 3);
+      const k = new THREE.Mesh(kerb, m);
+      k.position.set(p.x, p.y + 0.24, p.z);
+      g.add(k);
+    }
+    scene.add(g);
+    let t = 0;
+    return dt => { t += dt; g.rotation.y += dt * 0.22; g.rotation.x = Math.sin(t * 0.30) * 0.16; };
+  },
+
+  // FinOps rhythm: stepped bars breathing in a slow, offset cadence —
+  // the numbers being watched period after period, not read once.
+  ledger: scene => {
+    const g = new THREE.Group(), m = mat();
+    const geo = new THREE.BoxGeometry(0.15, 1, 0.15);
+    geo.translate(0, 0.5, 0);
+    const bars = [];
+    const N = 5;
+    for (let i = 0; i < N; i++) {
+      const b = new THREE.Mesh(geo, m);
+      b.position.set((i - (N - 1) / 2) * 0.22, -0.40, 0);
+      const base = 0.22 + i * 0.15;
+      b.scale.y = base;
+      g.add(b);
+      bars.push({ mesh: b, base, phase: i * 0.9 });
+    }
+    g.rotation.set(0.36, -0.45, 0);
+    scene.add(g);
+    let t = 0;
+    return dt => {
+      t += dt;
+      g.rotation.y = -0.45 + Math.sin(t * 0.25) * 0.35;
+      bars.forEach(b => b.mesh.scale.y = b.base + 0.06 * Math.sin(t * 1.2 + b.phase));
+    };
   }
 };
 
-/* data-ink lets one shape name carry two tints — the same form can be a
-   crimson foreground mark in the page body and a plum-tint backdrop in
-   a Ydelse header. SHAPE_INK stays the default. */
+/* data-ink and data-zoom let one shape name serve two contexts — the
+   same form can be a crimson foreground mark in the page body and a
+   plum-tint backdrop in a Ydelse header, and a shape framed for a large
+   section mount can be framed tighter in a small fase box. SHAPE_INK and
+   SHAPE_ZOOM stay the defaults. */
 Object.entries(SHAPE_BUILDERS).forEach(([name, build]) => {
   document.querySelectorAll(`[data-illus="${name}"]`).forEach(el =>
-    makeIllusScene(el, build, SHAPE_ZOOM[name], el.dataset.ink || SHAPE_INK[name]));
+    makeIllusScene(el, build, el.dataset.zoom ? +el.dataset.zoom : SHAPE_ZOOM[name], el.dataset.ink || SHAPE_INK[name]));
 });
