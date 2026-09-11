@@ -352,26 +352,20 @@ button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
 @media (max-width:640px){.phase__illus{display:none} .phase h3,.phase__meta{max-width:none}}
 
 /* Journey rail ------------------------------------------- */
-/* Above 900px the phases run as chapters beside a sticky rail that
-   carries a large mark for the fase currently in view, a dotted track
-   with one station per fase, and an hour count that accumulates as you
-   read down. site.js drives is-active / is-done and the fill height.
-   The per-card marks step aside here — the rail carries the same
-   shapes at four times the size — and come back below 900px, where
-   the rail is gone and the cards stand alone. The dotted track is a
-   halftone field (the same radial-gradient trick as .arw), not a
-   hairline. */
-.journey{display:grid;grid-template-columns:minmax(200px,272px) minmax(0,1fr);
+/* Above 900px the phases run as chapters beside a sticky rail: a dotted
+   track with one station per fase and an hour count that accumulates as
+   you read down. site.js drives is-active / is-done and the fill height.
+   Each card keeps its own mark; the rail only carries the storyline.
+   The chapters are spaced well apart so the journey has scroll to
+   travel through, and the rail has time to move with it. The dotted
+   track is a halftone field (the same radial-gradient trick as .arw),
+   not a hairline. */
+.journey{display:grid;grid-template-columns:minmax(140px,180px) minmax(0,1fr);
   gap:clamp(2rem,5vw,5rem);align-items:start;margin-top:clamp(2rem,4vw,3rem)}
 .journey .phases{margin-top:0}
-.journey__rail{position:sticky;top:calc(var(--nav-h,76px) + 1.25rem);
+.journey__rail{position:sticky;top:calc(var(--nav-h,76px) + 2rem);
   display:flex;flex-direction:column;gap:var(--s-6)}
-.journey__stage{position:relative;width:100%;aspect-ratio:1}
-.journey__mark{position:absolute;inset:0;opacity:0;transform:scale(.9);
-  transition:opacity var(--d-slow) var(--ease-out),transform var(--d-slow) var(--ease-out)}
-.journey__mark.is-active{opacity:1;transform:none}
-.journey__mark canvas{display:block;width:100%;height:100%}
-.journey__track{position:relative;height:clamp(140px,20vh,200px);padding-left:1.6rem;margin-left:var(--s-2)}
+.journey__track{position:relative;height:clamp(200px,34vh,340px);padding-left:1.6rem;margin-left:var(--s-2)}
 .journey__track::before{content:"";position:absolute;left:0;top:0;bottom:0;width:6px;
   background-image:radial-gradient(var(--stone) 55%,transparent 62%);background-size:3px 3px;opacity:.3}
 .journey__fill{position:absolute;left:0;top:0;width:6px;height:0;
@@ -400,9 +394,9 @@ button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
   padding-inline:clamp(1.6rem,3.4vw,2.75rem);color:var(--graphite);
   font-size:var(--t-small);line-height:1.6;max-width:60ch}
 .journey__bookend .mono{color:var(--crimson);flex:none;letter-spacing:.11em}
-.journey__bookend--start{margin-bottom:var(--s-5)}
-.journey__bookend--end{margin-top:var(--s-5)}
-@media (min-width:901px){.phase__illus{display:none} .phase h3,.phase__meta{max-width:none}}
+.journey__bookend--start{margin-bottom:var(--s-6)}
+.journey__bookend--end{margin-top:var(--s-6)}
+@media (min-width:901px){.journey .phases{gap:clamp(4rem,16vh,10rem)}}
 @media (max-width:900px){.journey{display:block} .journey__rail{display:none}
   .journey .phases{margin-top:0}}
 .phase__meta{font-family:var(--font-mono);font-size:var(--t-micro);letter-spacing:.09em;

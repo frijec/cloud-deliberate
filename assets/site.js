@@ -97,16 +97,15 @@ if (splitTarget && !REDUCED) {
 /* Journey rail — the offering pages' phase list beside a sticky rail.
    The active fase is the last one whose top has crossed a line 45% down
    the viewport, so a card becomes current as its heading arrives in the
-   reading zone rather than when its last bullet leaves. The rail's mark,
+   reading zone rather than when its last bullet leaves. The rail's
    station and fill follow; the hour count tweens to the running total.
    Scroll work is coalesced to one rAF per frame. */
 document.querySelectorAll('.journey').forEach(journey => {
   const phases = [...journey.querySelectorAll('.phase')];
-  const marks = [...journey.querySelectorAll('.journey__mark')];
   const stations = [...journey.querySelectorAll('.journey__stations li')];
   const fill = journey.querySelector('.journey__fill');
   const hoursEl = journey.querySelector('[data-hours-now]');
-  if (!phases.length || !marks.length) return;
+  if (!phases.length || !stations.length) return;
   const hours = phases.map(p => +p.dataset.hours || 0);
 
   let active = -1, shownHours = 0, hoursRaf = null;
@@ -125,7 +124,6 @@ document.querySelectorAll('.journey').forEach(journey => {
 
   const set = i => {
     active = i;
-    marks.forEach((m, k) => m.classList.toggle('is-active', k === i));
     stations.forEach((s, k) => { s.classList.toggle('is-active', k === i); s.classList.toggle('is-done', k < i) });
     const st = stations[i];
     if (fill && st) fill.style.height = (st.offsetTop + st.offsetHeight / 2) + 'px';
