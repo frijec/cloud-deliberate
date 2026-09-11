@@ -63,8 +63,8 @@ const REDUCED_HERO = matchMedia('(prefers-reduced-motion: reduce)').matches;
     return s;
   }
 
-  /* ---- scene pass: a fullscreen triangle sampling a two-layer fractal
-     noise field, shaped into a drifting cloud band. No camera, no
+  /* ---- scene pass: a fullscreen triangle sampling a three-layer fractal
+     noise field, shaped into clouds spanning the full hero. No camera, no
      geometry — a background texture doesn't need real 3D, and every
      3D element on this page gets flattened to 1-bit ink by the dither
      pass two steps from now regardless. ---- */
@@ -107,30 +107,58 @@ const REDUCED_HERO = matchMedia('(prefers-reduced-motion: reduce)').matches;
   void main(){
     vec2 uv=vUv; uv.x*=uAspect;
 
-    // One large-scale field carries the shape — where the clumps are —
-    // and dominates the mix; a second, finer field is added at low
-    // weight for wisp texture without diluting the first field's own
-    // contrast back down to an even haze. A cheap stand-in for parallax
-    // depth: the first reads as the nearer, larger formation, the
-    // second as faster-moving wisps threaded through it.
-    vec2 windA=vec2(uTime*0.015, uTime*0.003);
-    vec2 windB=vec2(uTime*-0.009, uTime*0.006);
-    float shape=fbm(uv*1.05+windA);
-    float wisp=fbm(uv*3.0-windB+vec2(9.2,1.7));
-    float density=shape*0.85+wisp*0.25;
+    // Three fields at distinct scale and drift speed, each its own visual
+    // layer rather than a blend into one density value: a broad, slow
+    // backdrop; the main mid-scale formations; and fine, fast wisps on
+    // top. Composited back-to-front below, the differing drift speeds
+    // read as motion parallax — real depth, not a static tint.
+    vec2 windFar=vec2(uTime*0.008, uTime*0.002);
+    vec2 windMid=vec2(uTime*0.015, uTime*0.004);
+    vec2 windNear=vec2(uTime*-0.026, uTime*0.009);
+    float far=fbm(uv*0.55+windFar);
+    float mid=fbm(uv*1.10+windMid);
+    float near=fbm(uv*2.6-windNear+vec2(9.2,1.7));
 
-    // A band, not wallpaper: coverage fades out approaching the top and
-    // bottom of the hero rather than filling it edge to edge.
-    float envelope=smoothstep(0.02,0.30,uv.y)*(1.0-smoothstep(0.55,0.95,uv.y));
-    density*=envelope;
+    // Wallpaper, not a thin mid-canvas band: coverage spans most of the
+    // hero height now. uv.y runs bottom(0)-to-top(1) in this fullscreen-
+    // triangle's clip space, so "topFrac" (visual distance down from the
+    // top edge, where the headline sits) is the inverse of uv.y. How
+    // deep that top clear zone reaches is tied to uAspect rather than a
+    // fixed fraction — a narrow/tall hero (mobile) wraps the headline
+    // across more lines and needs a deeper clear zone; a wide desktop
+    // hero needs only a little.
+    float topFrac=1.0-uv.y;
+    float wideT=clamp((uAspect-0.5)/1.2,0.0,1.0);
+    float fullStart=mix(0.64,0.30,wideT);
+    float rampWidth=mix(0.30,0.20,wideT);
+    float envelope=smoothstep(fullStart-rampWidth,fullStart,topFrac)*(1.0-smoothstep(0.90,0.99,topFrac));
 
-    // Threshold band picked by sampling the field's real value
-    // distribution (median ~0.47 before the envelope) rather than
-    // guessing and re-screenshotting: this puts average coverage
-    // around 30%, clumped rather than an even haze.
-    float coverage=smoothstep(0.32,0.48,density);
-    vec3 color=mix(uColorBase,uColorHigh,clamp(coverage*1.15,0.0,1.0));
-    fragColor=vec4(color,coverage);
+    // Threshold bands picked by sampling each field's real value
+    // distribution rather than guessing and re-screenshotting. Density
+    // is scaled by envelope *before* thresholding (as the field this
+    // replaces did) rather than after: that gives a clean cutoff behind
+    // the headline instead of faint texture bleeding through the ramp.
+    float covFar=smoothstep(0.20,0.42,far*envelope)*0.55;
+    float covMid=smoothstep(0.40,0.56,mid*envelope)*0.85;
+    float covNear=smoothstep(0.42,0.58,near*envelope)*0.9;
+
+    // Back-to-front premultiplied-alpha compositing: far layer muted
+    // toward the base tone (reads as hazier/farther), mid layer at the
+    // original base-to-coral mix, near wisps at full coral so they read
+    // as the closest, crispest layer.
+    vec3 farColor=mix(uColorBase,uColorHigh,0.35);
+    vec3 midColor=mix(uColorBase,uColorHigh,0.9);
+    vec3 nearColor=uColorHigh;
+
+    vec3 accRgb=farColor*covFar;
+    float accA=covFar;
+    accRgb=midColor*covMid+accRgb*(1.0-covMid);
+    accA=covMid+accA*(1.0-covMid);
+    accRgb=nearColor*covNear+accRgb*(1.0-covNear);
+    accA=covNear+accA*(1.0-covNear);
+
+    vec3 color=accA>0.0001?accRgb/accA:uColorBase;
+    fragColor=vec4(color,accA);
   }`;
 
   const vs=compile(gl.VERTEX_SHADER,VERT_SRC), fs=compile(gl.FRAGMENT_SHADER,FRAG_SRC);
