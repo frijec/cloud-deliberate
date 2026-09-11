@@ -70,8 +70,8 @@ if (navEl) {
 }
 
 /* Headline word-split — wraps each word of [data-split] so they can
-   rise in one after another. The coral .pill/.soft chips are treated
-   as single words rather than descended into, so their rotation and
+   rise in one after another. The coral .pill chip is treated as a
+   single word rather than descended into, so its rotation and
    background survive the split. No-ops on pages without one. */
 const splitTarget = document.querySelector('[data-split]');
 if (splitTarget && !REDUCED) {
@@ -85,7 +85,7 @@ if (splitTarget && !REDUCED) {
         });
         n.replaceWith(frag);
       } else if (n.nodeType === 1 && !n.classList.contains('word')) {
-        if (n.classList.contains('pill') || n.classList.contains('soft')) { n.classList.add('word') }
+        if (n.classList.contains('pill')) { n.classList.add('word') }
         else walk(n);
       }
     });
