@@ -388,14 +388,22 @@ button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
   text-transform:uppercase;color:var(--graphite);margin-left:var(--s-2)}
 .journey__hours b{color:var(--crimson);font-weight:700;font-variant-numeric:tabular-nums}
 /* The story's two bookends: where you stand on day 0 and what you hold
-   at the end. Plain text aligned with the card padding, so they read
-   as narration around the chapters rather than as two more chapters. */
-.journey__bookend{display:flex;gap:var(--s-4);align-items:baseline;
-  padding-inline:clamp(1.6rem,3.4vw,2.75rem);color:var(--graphite);
-  font-size:var(--t-small);line-height:1.6;max-width:60ch}
-.journey__bookend .mono{color:var(--crimson);flex:none;letter-spacing:.11em}
-.journey__bookend--start{margin-bottom:var(--s-6)}
-.journey__bookend--end{margin-top:var(--s-6)}
+   at the end. No card and no background, so they read as narration
+   around the chapters rather than as two more chapters — but set with
+   their own weight: the label in the display face at the fase-title
+   size, led by a station diamond that ties them to the rail's track,
+   and the sentence at lead size beneath. Held clear of the cards by a
+   gap of their own. */
+.journey__bookend{display:block;padding-inline:clamp(1.6rem,3.4vw,2.75rem);
+  color:var(--graphite);font-size:var(--t-lead);line-height:1.5;max-width:44ch}
+.journey__bookend .mono{display:flex;align-items:center;gap:.55em;margin-bottom:var(--s-3);
+  font-family:var(--font-display);font-size:clamp(1.3rem,2.3vw,1.9rem);font-weight:700;
+  letter-spacing:-.03em;text-transform:none;color:var(--crimson);font-variant-numeric:tabular-nums}
+.journey__bookend .mono::before{content:"";flex:none;width:11px;height:11px;
+  transform:rotate(45deg);background:var(--crimson)}
+.journey__bookend--start{margin-top:var(--s-4);margin-bottom:clamp(3rem,9vh,5.5rem)}
+.journey__bookend--end{margin-top:clamp(3rem,9vh,5.5rem)}
+@media (max-width:900px){.journey__bookend--start{margin-bottom:var(--s-7)} .journey__bookend--end{margin-top:var(--s-7)}}
 @media (min-width:901px){.journey .phases{gap:clamp(4rem,16vh,10rem)}}
 @media (max-width:900px){.journey{display:block} .journey__rail{display:none}
   .journey .phases{margin-top:0}}
