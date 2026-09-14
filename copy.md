@@ -466,6 +466,24 @@ En konkret, prioriteret liste af anbefalinger. Ikke bare observationer.
 **H2**
 Sådan kører forløbet.
 
+**Bullet**
+00
+
+**Bullet**
+01
+
+**Bullet**
+02
+
+**Bullet**
+03
+
+**Paragraph**
+0 af 32 timer
+
+**Paragraph**
+Dag 0 I har en fornemmelse af, at cloud-regningen og kontrollen er gledet fra hinanden. Det, der mangler, er tallene til at vise det.
+
 **Phase meta**
 2 timer · Kickoff
 
@@ -522,6 +540,9 @@ Præsentationsmateriale til interne interessenter.
 
 **Bullet**
 Live-gennemgang med jeres nøglebeslutningstagere, inkl. Q&A.
+
+**Paragraph**
+Efter 32 timer Et klart billede af, hvor jeres setup står, og en prioriteret liste over, hvad der skal flyttes, rettes eller lades være.
 
 ### Hver fase, gjort op.
 
@@ -677,6 +698,21 @@ Gå derfra med Architecture Decision Records for jeres vigtigste nuværende clou
 **H2**
 Sådan kører forløbet.
 
+**Bullet**
+00
+
+**Bullet**
+01
+
+**Bullet**
+02
+
+**Paragraph**
+0 af 14 timer
+
+**Paragraph**
+Dag 0 Cloud-beslutninger bliver truffet forskelligt fra team til team, og ingen kan pege på hvorfor.
+
 **Phase meta**
 4 timer · Inden workshoppen
 
@@ -718,6 +754,9 @@ Skriftligt resumé af workshoppens udfald, aftalte principper og producerede ADR
 
 **Bullet**
 Et starter-kit: ADR-skabelon, tjekliste over beslutningskriterier og et forslag til paved roads-katalog for jeres kontekst.
+
+**Paragraph**
+Efter 14 timer Et fælles beslutningsframework, to til fire skrevne ADRs og et starter-kit til jeres egne paved roads.
 
 ### Hver fase, gjort op.
 
@@ -864,6 +903,27 @@ Løbende optimering som vedvarende praksis, ikke som et periodisk oprydningsproj
 **H2**
 Sådan kører forløbet.
 
+**Bullet**
+00
+
+**Bullet**
+01
+
+**Bullet**
+02
+
+**Bullet**
+03
+
+**Bullet**
+04
+
+**Paragraph**
+0 af 64 timer
+
+**Paragraph**
+Dag 0 Automatiseringen findes i pletter, omkostningerne bliver set på kvartalsvis, og hvert team træffer sine cloud-valg på sin egen måde.
+
 **Phase meta**
 4 timer · Alignment og udgangspunkt
 
@@ -935,6 +995,9 @@ Vidensoverdragelse til team-leads.
 
 **Bullet**
 Skriftligt resumé af resultater og anbefalede næste skridt.
+
+**Paragraph**
+Efter 64 timer Infrastructure as code, paved roads og en FinOps-kadence, som teamet selv ejer og kører videre.
 
 ### Hver fase, gjort op.
 
