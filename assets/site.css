@@ -170,7 +170,13 @@ button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
 .nav__link{text-decoration:none;font-size:var(--t-small);color:var(--graphite);transition:color var(--d-fast) var(--ease-out)}
 .nav__link:hover{color:var(--ink-800)}
 .nav .btn{padding:.7rem 1.2rem}
-@media (max-width:900px){.nav__links .nav__link{display:none} .brand__sub{display:none}}
+/* Below 900px the section anchors go, but Ydelser stays: it is the only
+   real destination on the site, and without it a phone visitor can only
+   reach the offerings by scrolling to the footer. */
+@media (max-width:900px){.nav__links .nav__link:not(.nav__link--stay){display:none} .brand__sub{display:none}}
+/* Brand + Ydelser + button have to share one row on a phone. */
+@media (max-width:640px){.nav__links{gap:var(--s-4)} .nav .btn{padding:.75rem 1.1rem;font-size:.875rem}}
+@media (max-width:420px){.nav__links{gap:var(--s-3)} .nav .btn .arw{display:none} .brand__mark{width:76px;height:auto}}
 
 /* Nav-on-dark variant — for pages whose top section is a plum band
    (the Ydelse pages): the nav overlays that band as a transparent bar
@@ -247,7 +253,8 @@ button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
 .footer{padding-block:var(--s-7)}
 .footer__in{display:flex;flex-wrap:wrap;gap:var(--s-5);justify-content:space-between;align-items:center;font-size:var(--t-small);color:var(--stone)}
 .footer__links{display:flex;gap:var(--s-5)}
-.footer__links a{text-decoration:none;transition:color var(--d-fast) var(--ease-out)}
+.footer__links a{text-decoration:none;display:inline-block;padding-block:.65rem;
+  transition:color var(--d-fast) var(--ease-out)}
 .footer__links a:hover{color:var(--ink-800)}
 
 /* REVEAL --------------------------------------------------- */
@@ -508,6 +515,9 @@ button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
   transform:rotate(-1.4deg);
 }
 .hero__cards{position:relative;z-index:1;padding-bottom:10vh}
+/* On a phone the full-viewport hero left a screen's worth of air above
+   the headline; let content set the height there instead. */
+@media (max-width:640px){.hero{min-height:0} .hero__headline{padding-block:var(--s-7) var(--s-6)} .hero__cards{padding-bottom:var(--s-7)}}
 .hero__leadcard{display:flex;flex-direction:column;justify-content:center;gap:var(--s-5);
   max-width:52rem;margin-inline:auto}
 .hero__leadcard .lead{color:rgba(255,255,255,.78);max-width:none;font-size:var(--t-body)}
@@ -680,8 +690,10 @@ button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
    white-on-dark pairing already used for .lvl/.dots on the ydelse
    header, so it needs no separate on-plum variant. */
 .ask{border:0;padding:0;margin:0;min-width:0}
-.ask__legend{font-family:var(--font-mono);font-size:var(--t-micro);letter-spacing:.13em;
-  text-transform:uppercase;color:var(--coral);padding:0}
+/* A plain question, not an eyebrow: sighted users need to see what the
+   four pills are choosing between, and the answer chosen changes the
+   hint and the submit label below. */
+.ask__legend{font-size:var(--t-body);font-weight:600;color:#fff;padding:0}
 .ask__opts{position:relative;display:flex;flex-wrap:wrap;gap:var(--s-2);margin-top:var(--s-4)}  /* position:relative contains the absolutely-positioned hidden radios,
      so focusing one scrolls to the pills rather than to wherever the
      nearest positioned ancestor happened to be. */
@@ -698,7 +710,6 @@ button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
 
 .leadform{display:flex;flex-direction:column;gap:var(--s-4);margin-top:var(--s-6);
   transition:opacity var(--d-base) var(--ease-out)}
-.leadform.is-leaving{opacity:0}
 /* display:flex above has equal specificity to the browser's built-in
    [hidden]{display:none} and wins on source order, so the hidden
    attribute alone would leave the form's full-height box in place. */

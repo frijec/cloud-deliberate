@@ -33,7 +33,7 @@ At være cloud deliberate handler ikke om at være for eller imod cloud. Det han
 Book en session →
 
 **Button**
-Hent whitepaperet
+Få whitepaperet
 
 ### Fra cloud-first til cloud-deliberate.
 
@@ -60,6 +60,56 @@ Repatriering er en rebalancering
 
 **Paragraph**
 Repatriering, en tendens siden 2018, er ikke et tilbagetog. Det er en rebalancering, en del af en multi- eller hybrid-cloud-strategi. Vi så behovet for at skærpe fokus på det, der betyder noget: hvordan I bliver bevidste i jeres cloud-styring.
+
+### Hvorfor kontrol bliver svær i det offentlige cloud.
+
+**H2**
+Hvorfor kontrol bliver svær i det offentlige cloud.
+
+**Lead**
+De grunde, virksomheder selv peger på, når de mister kontrollen. Hver enkelt kan løses, når den først er navngivet.
+
+**Heading**
+Eskalerende, uforudsigelige omkostninger
+
+**Body**
+Elastisk prissætning belønner korrekt konfiguration og straffer drift. Fejlkonfigureret autoskalering, idle ressourcer og egress-gebyrer hober sig stille op.
+
+**Heading**
+Sikkerhed og delt ansvar
+
+**Body**
+Avancerede kontroller, men en flydende grænse. Misforstået ejerskab fører til dataeksponering og IAM-huller.
+
+**Heading**
+Compliance og datasuverænitet
+
+**Body**
+Forhåndsauditeret infrastruktur hjælper. Konstant platformudvikling og for tilladelige standarder skaber regulatorisk risiko.
+
+**Heading**
+Performance og latency
+
+**Body**
+Multi-tenancy giver støjende naboer. Hybride opdelinger tilføjer netværkshop. Datatyngde trækker stille arbejdslaster derhen, hvor dataene allerede ligger.
+
+**Heading**
+Vendor lock-in
+
+**Body**
+Proprietære værktøjer, formater og tæt integrerede services skaber afhængigheder og udsætter jer for udbyderens prissætning og roadmap.
+
+**Heading**
+Strategisk og geopolitisk eksponering
+
+**Body**
+Koncentration på få hyperscalere gør juridisk og politisk risiko til et arkitekturanliggende, ikke kun et indkøbsanliggende.
+
+**Heading**
+Kognitiv belastning
+
+**Body**
+Hundredevis af services, to driftsmodeller, konstant forandring. Spørgsmålet er ikke, om kompleksitet eksisterer, men hvor den ligger, og hvem der kan håndtere den.
 
 ### Pejlemærker i et landskab i bevægelse.
 
@@ -208,56 +258,6 @@ Dokumentér
 **Paragraph**
 ADRs fanger kontekst, muligheder og ræsonnement. Distribueret bliver sikkert.
 
-### Hvorfor kontrol bliver svær i det offentlige cloud.
-
-**H2**
-Hvorfor kontrol bliver svær i det offentlige cloud.
-
-**Lead**
-De grunde, virksomheder selv peger på, når de mister kontrollen. Hver enkelt kan løses, når den først er navngivet.
-
-**Heading**
-Eskalerende, uforudsigelige omkostninger
-
-**Body**
-Elastisk prissætning belønner korrekt konfiguration og straffer drift. Fejlkonfigureret autoskalering, idle ressourcer og egress-gebyrer hober sig stille op.
-
-**Heading**
-Sikkerhed og delt ansvar
-
-**Body**
-Avancerede kontroller, men en flydende grænse. Misforstået ejerskab fører til dataeksponering og IAM-huller.
-
-**Heading**
-Compliance og datasuverænitet
-
-**Body**
-Forhåndsauditeret infrastruktur hjælper. Konstant platformudvikling og for tilladelige standarder skaber regulatorisk risiko.
-
-**Heading**
-Performance og latency
-
-**Body**
-Multi-tenancy giver støjende naboer. Hybride opdelinger tilføjer netværkshop. Datatyngde trækker stille arbejdslaster derhen, hvor dataene allerede ligger.
-
-**Heading**
-Vendor lock-in
-
-**Body**
-Proprietære værktøjer, formater og tæt integrerede services skaber afhængigheder og udsætter jer for udbyderens prissætning og roadmap.
-
-**Heading**
-Strategisk og geopolitisk eksponering
-
-**Body**
-Koncentration på få hyperscalere gør juridisk og politisk risiko til et arkitekturanliggende, ikke kun et indkøbsanliggende.
-
-**Heading**
-Kognitiv belastning
-
-**Body**
-Hundredevis af services, to driftsmodeller, konstant forandring. Spørgsmålet er ikke, om kompleksitet eksisterer, men hvor den ligger, og hvem der kan håndtere den.
-
 ### Tre måder at omsætte det her til praksis.
 
 **H2**
@@ -270,7 +270,7 @@ Se alle ydelser →
 Assessment
 
 **Hours**
-32 timerT
+32 timer t
 
 **H3**
 Cloud Deliberate Assessment
@@ -285,7 +285,7 @@ Læs mere →
 Workshop
 
 **Hours**
-14 timerT
+14 timer t
 
 **H3**
 Arkitektur-workshop
@@ -300,7 +300,7 @@ Læs mere →
 Enablement
 
 **Hours**
-64 timerT
+64 timer t
 
 **H3**
 Cloud Deliberate Enablement
@@ -356,7 +356,7 @@ Tre forløb, skåret til der hvor I er. Start med et fokuseret assessment, saml 
 Assessment
 
 **Hours**
-32 timerT
+32 timer t
 
 **H2**
 Cloud Deliberate Assessment
@@ -371,7 +371,7 @@ Læs mere →
 Workshop
 
 **Hours**
-14 timerT
+14 timer t
 
 **H2**
 Cloud Deliberate Arkitektur-workshop
@@ -386,7 +386,7 @@ Læs mere →
 Enablement
 
 **Hours**
-64 timerT
+64 timer t
 
 **H2**
 Cloud Deliberate Enablement

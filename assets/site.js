@@ -168,7 +168,7 @@ if (leadform) {
   const arrow = '<span class="arw">→</span>';
 
   const ASK = {
-    'whitepaper': { hint: 'Send mig hele PDF\u2019en.',                              cta: 'Hent whitepaperet' },
+    'whitepaper': { hint: 'Send mig hele PDF\u2019en.',                              cta: 'Send mig whitepaperet' },
     'moede':      { hint: 'Et kort møde, hvor I fortæller hvad I er i gang med.',      cta: 'Book et afklarende møde' },
     'frokost':    { hint: 'En uformel frokost, hvor vi vender jeres udfordringer.',    cta: 'Foreslå en frokost' },
     'workshop':   { hint: 'En halv dag, hvor vi kortlægger jeres landskab sammen.',    cta: 'Book en halvdagsworkshop' }
@@ -215,13 +215,14 @@ if (leadform) {
       + `?subject=${encodeURIComponent('Cloud Deliberate — ' + d.get('oenske'))}`
       + `&body=${encodeURIComponent(body)}`;
 
-    const finish = () => {
-      leadform.hidden = true;
-      status.textContent = 'Vi har åbnet en mail til dig med dine oplysninger — tryk send, så vender vi tilbage inden for to arbejdsdage.';
-      status.hidden = false;
-      requestAnimationFrame(() => requestAnimationFrame(() => status.classList.add('is-in')));
-    };
-    if (REDUCED) { finish(); } else { leadform.classList.add('is-leaving'); setTimeout(finish, 260); }
+    // The form stays on screen. A mailto: hand-off fails silently on a
+    // machine with no mail client, so the visitor must still be able to
+    // see their entries and has the address itself as the fallback.
+    const addr = leadform.dataset.mailto;
+    status.innerHTML = 'Vi har åbnet en mail med dine oplysninger. Tryk send, så vender vi tilbage inden for to arbejdsdage. '
+      + 'Åbnede der ikke en mail? Skriv direkte til <a href="mailto:' + addr + '">' + addr + '</a>.';
+    status.hidden = false;
+    requestAnimationFrame(() => requestAnimationFrame(() => status.classList.add('is-in')));
   });
 }
 
