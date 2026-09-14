@@ -311,10 +311,10 @@ Et praktisk forløb der installerer driftsmodellen: automatisering, hybride møn
 **Card link**
 Læs mere →
 
-### Start hvor det betyder noget. Handl med hensigt.
+### Start hvor det betyder noget. Gør det bevidst.
 
 **H2**
-Start hvor det betyder noget. Handl med hensigt.
+Start hvor det betyder noget. Gør det bevidst.
 
 **Lead**
 Vælg det, der passer: whitepaperet til den grundige læsning, en kort besked for mere information, eller en frokost eller halvdagsworkshop hvor vi kortlægger jeres landskab sammen.
