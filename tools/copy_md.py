@@ -122,6 +122,17 @@ def collect(n, out):
             if t and lab:
                 out.append((lab, t))
                 return
+    # Not a leaf, so we are about to recurse into the children. Anything
+    # the node says itself would vanish on the way down: "Ikke sikker på
+    # hvilken? <a>Tag cloud-tjekket</a>" kept only the link, because the
+    # <a> carries a decorative arrow span and so fails the leaf test
+    # above. Emit the node's own words first, then descend.
+    own = re.sub(r'\s+', ' ', ''.join(i for i in n.items if isinstance(i, str))
+                 .replace('­', '')).strip()
+    if own:
+        lab = label_for(n)
+        if lab:
+            out.append((lab, own))
     for k in n.kids:
         collect(k, out)
 

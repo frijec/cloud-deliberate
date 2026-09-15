@@ -263,6 +263,9 @@ ADRs fanger kontekst, muligheder og ræsonnement. Distribueret bliver sikkert.
 **H2**
 Tre måder at omsætte det her til praksis.
 
+**Paragraph**
+Ikke sikker på hvilken?
+
 **Link**
 Tag cloud-tjekket →
 
@@ -334,6 +337,9 @@ Vælg det, der passer: whitepaperet til den grundige læsning, en kort besked fo
 **Paragraph**
 Send mig hele PDF'en.
 
+**Button**
+Send mig whitepaperet
+
 **Paragraph**
 Vi bruger kun dine oplysninger til opfølgning. Intet nyhedsbrev, ingen tredjeparter.
 
@@ -385,6 +391,12 @@ Stor eksponering, få bevidste valg
 **Paragraph**
 Vi placerer jer på to akser: hvor meget cloud fylder hos jer, og hvor bevidst beslutningerne bliver truffet. Ét af felterne betyder, at I ikke har brug for os lige nu. Det siger vi også.
 
+**Button**
+Start tjekket
+
+**Paragraph**
+Tjekket kræver JavaScript for at kunne regne på jeres svar. Er det slået fra, så book et afklarende møde i stedet, og tag spørgsmålene med os direkte.
+
 **Link**
 Spring over og book et møde direkte →
 
@@ -394,11 +406,17 @@ Spørgsmål 1 af 7
 **Link**
 Spring over
 
+**Button**
+Videre
+
 **Kicker**
 Eksponering
 
 **Kicker**
 Bevidsthed
+
+**Paragraph**
+Det, der begrænser jer lige nu: .
 
 **Link**
 Læs princippet →
@@ -442,6 +460,15 @@ Tag whitepaperet i stedet
 **Button**
 Få whitepaperet →
 
+**Button**
+Få en gennemgang af jeres svar
+
+**Button**
+Tag tjekket forfra
+
+**Paragraph**
+Ikke klar til en samtale?
+
 **Link**
 Få whitepaperet i stedet →
 
@@ -450,6 +477,9 @@ En gennemgang af jeres svar
 
 **Paragraph**
 Kun e-mailen er påkrævet. Resten hjælper os med at gøre gennemgangen konkret.
+
+**Button**
+Send og få en gennemgang
 
 **Paragraph**
 Vi bruger kun dine oplysninger til opfølgning. Intet nyhedsbrev, ingen tredjeparter.
@@ -740,6 +770,12 @@ Book et afklarende møde →
 **Button**
 Se alle ydelser
 
+**Paragraph**
+Ikke sikker på om det er det rigtige forløb?
+
+**Link**
+Tag cloud-tjekket →
+
 **H3**
 Ingen forpligtelse
 
@@ -944,6 +980,12 @@ Book et afklarende møde →
 
 **Button**
 Se alle ydelser
+
+**Paragraph**
+Ikke sikker på om det er det rigtige forløb?
+
+**Link**
+Tag cloud-tjekket →
 
 **H3**
 Ingen forpligtelse
@@ -1268,6 +1310,12 @@ Book et afklarende møde →
 
 **Button**
 Se alle ydelser
+
+**Paragraph**
+Ikke sikker på om det er det rigtige forløb?
+
+**Link**
+Tag cloud-tjekket →
 
 **H3**
 Ingen forpligtelse

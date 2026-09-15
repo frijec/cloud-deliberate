@@ -173,7 +173,13 @@ button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
 /* Below 900px the section anchors go, but Ydelser stays: it is the only
    real destination on the site, and without it a phone visitor can only
    reach the offerings by scrolling to the footer. */
-@media (max-width:900px){.nav__links .nav__link:not(.nav__link--stay){display:none} .brand__sub{display:none}}
+/* Five nav links plus the button need 1021px, but the links only
+   collapse at 900px — which left the button clipped and the page
+   scrolling sideways between roughly 900 and 990. The wordmark suffix
+   is the cheapest 146px to give back, so it goes first and the links
+   survive down to the real breakpoint. */
+@media (max-width:1100px){.brand__sub{display:none}}
+@media (max-width:900px){.nav__links .nav__link:not(.nav__link--stay){display:none}}
 /* Brand + Ydelser + button have to share one row on a phone. */
 @media (max-width:640px){.nav__links{gap:var(--s-4)} .nav .btn{padding:.75rem 1.1rem;font-size:.875rem}}
 @media (max-width:420px){.nav__links{gap:var(--s-3)} .nav .btn .arw{display:none} .brand__mark{width:76px;height:auto}}
@@ -250,6 +256,12 @@ button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
 .ctacard h2{max-width:18ch;margin-inline:auto;margin-top:var(--s-5)}
 .ctacard .lead{margin-inline:auto;margin-top:var(--s-5);text-align:center;color:rgba(255,255,255,.72)}
 .ctacard__actions{display:flex;gap:var(--s-3);flex-wrap:wrap;justify-content:center;margin-top:var(--s-7)}
+/* The route into the tjek for anyone still deciding. It matters most on
+   a phone, where the nav link to it is collapsed away. */
+.ctacard__alt{margin-top:var(--s-5);text-align:center;font-size:var(--t-small);color:rgba(255,255,255,.72)}
+/* nowrap so the arrow never orphans onto a line of its own. */
+.ctacard__alt a{color:var(--coral);text-decoration:none;white-space:nowrap}
+.ctacard__alt a:hover{text-decoration:underline}
 .footer{padding-block:var(--s-7)}
 .footer__in{display:flex;flex-wrap:wrap;gap:var(--s-5);justify-content:space-between;align-items:center;font-size:var(--t-small);color:var(--stone)}
 .footer__links{display:flex;gap:var(--s-5)}
@@ -827,7 +839,9 @@ button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
 .tjek-result__title:focus-visible{outline:none}
 .tjek-axes{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:var(--s-4);margin-top:var(--s-6)}
 .tjek-axis{background:var(--sand);border-radius:var(--r-md);padding:clamp(1rem,2.4vw,1.5rem);min-width:0}
-.tjek-axis .mono{color:var(--stone)}
+/* --graphite, not --stone: on the sand card at 12px, stone measures
+   4.26:1 and AA wants 4.5. */
+.tjek-axis .mono{color:var(--graphite)}
 .tjek-axis p{font-size:clamp(1.3rem,2.4vw,1.8rem);font-weight:700;letter-spacing:-.03em;
   color:var(--crimson);margin-top:var(--s-2)}
 .tjek-axis__d{display:block;margin-top:var(--s-2);font-size:var(--t-micro);line-height:1.5;color:var(--graphite)}
