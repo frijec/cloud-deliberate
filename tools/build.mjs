@@ -114,7 +114,7 @@ for (const p of M.pages) {
     }
   }
 }
-console.log(problems ? `\n${problems} mismatch(es) between the pages and tools/content.json` : '✓ all 5 pages match tools/content.json');
+console.log(problems ? `\n${problems} mismatch(es) between the pages and tools/content.json` : `✓ all ${M.pages.length} pages match tools/content.json`);
 if (problems) process.exit(1);
 if (checkOnly) process.exit(0);
 

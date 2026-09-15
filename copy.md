@@ -263,6 +263,9 @@ ADRs fanger kontekst, muligheder og ræsonnement. Distribueret bliver sikkert.
 **H2**
 Tre måder at omsætte det her til praksis.
 
+**Link**
+Tag cloud-tjekket →
+
 **Button**
 Se alle ydelser →
 
@@ -336,6 +339,120 @@ Vi bruger kun dine oplysninger til opfølgning. Intet nyhedsbrev, ingen tredjepa
 
 ---
 
+## /cloud-tjek/
+
+**Browser tab title**
+Cloud-tjekket — Cloud Deliberate — Consid
+
+**Meta description**
+Seks spørgsmål om jeres cloud-landskab og jeres beslutninger. Få at vide hvor I står, hvilket princip der begrænser jer, og hvilket forløb der giver mening. Under to minutter.
+
+### Hvor bevidst styrer I jeres cloud?
+
+**Back link**
+← Forsiden
+
+**H1**
+Hvor bevidst styrer I jeres cloud?
+
+**Lead**
+Seks spørgsmål om jeres landskab og jeres beslutninger. I får at vide, hvad der begrænser jer lige nu, og hvilket forløb der giver mening. Det tager under to minutter.
+
+**Kicker**
+Ingen ydelse
+
+**Paragraph**
+Begrænset eksponering, bevidste valg
+
+**Kicker**
+Enablement
+
+**Paragraph**
+Stor eksponering, bevidste valg
+
+**Kicker**
+Workshop
+
+**Paragraph**
+Begrænset eksponering, få bevidste valg
+
+**Kicker**
+Assessment
+
+**Paragraph**
+Stor eksponering, få bevidste valg
+
+**Paragraph**
+Vi placerer jer på to akser: hvor meget cloud fylder hos jer, og hvor bevidst beslutningerne bliver truffet. Ét af felterne betyder, at I ikke har brug for os lige nu. Det siger vi også.
+
+**Button**
+Spring over, book direkte
+
+**Kicker**
+Spørgsmål 1 af 6
+
+**Kicker**
+Eksponering
+
+**Kicker**
+Bevidsthed
+
+**Link**
+Læs princippet →
+
+**Kicker**
+Ingen ydelse
+
+**Paragraph**
+Begrænset eksponering, bevidste valg
+
+**Kicker**
+Enablement
+
+**Paragraph**
+Stor eksponering, bevidste valg
+
+**Kicker**
+Workshop
+
+**Paragraph**
+Begrænset eksponering, få bevidste valg
+
+**Kicker**
+Assessment
+
+**Paragraph**
+Stor eksponering, få bevidste valg
+
+**Kicker**
+Det forløb der passer
+
+**Button**
+Læs hvad det indeholder →
+
+**Kicker**
+Ingen ydelse lige nu
+
+**H3**
+Tag whitepaperet i stedet
+
+**Button**
+Få whitepaperet →
+
+**H2**
+En gennemgang af jeres svar
+
+**Lead**
+Vi læser jeres svar igennem og vender tilbage med, hvad vi ser, og hvad vi ville gøre først. Inden for to arbejdsdage.
+
+**Paragraph**
+Vi bruger kun dine oplysninger til opfølgning. Intet nyhedsbrev, ingen tredjeparter.
+
+**Paragraph**
+Tak. Vi har åbnet en mail med dine svar. Tryk send, så vender vi tilbage inden for to arbejdsdage. Åbnede der ikke en mail? Skriv direkte til anders.bendtsen@consid.com.
+
+---
+
 ## /ydelser/
 
 **Browser tab title**
@@ -403,13 +520,13 @@ Læs mere →
 Ikke sikker på hvilket forløb der passer?
 
 **Lead**
-Book et 30-minutters afklarende møde. Vi taler jeres udgangspunkt igennem og peger på det sted, det giver mest mening at starte.
+Tag cloud-tjekket, så peger vi på det forløb der passer til jeres landskab. Seks spørgsmål, under to minutter. Vil I hellere tale med et menneske, så book et afklarende møde på 30 minutter.
 
 **Button**
-Book et afklarende møde →
+Tag cloud-tjekket →
 
 **Button**
-Læs om Cloud Deliberate
+Book et afklarende møde
 
 ---
 

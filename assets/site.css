@@ -167,7 +167,7 @@ button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
 .brand__mark{height:22px;width:auto;display:block;transition:filter var(--d-fast) var(--ease-out)}
 .brand__sub{font-family:var(--font-mono);font-size:var(--t-micro);color:var(--stone);letter-spacing:.03em;padding-left:var(--s-3);border-left:1px solid var(--hairline);transition:color var(--d-fast) var(--ease-out),border-color var(--d-fast) var(--ease-out)}
 .nav__links{display:flex;gap:var(--s-5);margin-left:auto;align-items:center}
-.nav__link{text-decoration:none;font-size:var(--t-small);color:var(--graphite);transition:color var(--d-fast) var(--ease-out)}
+.nav__link{text-decoration:none;font-size:var(--t-small);color:var(--graphite);white-space:nowrap;transition:color var(--d-fast) var(--ease-out)}
 .nav__link:hover{color:var(--ink-800)}
 .nav .btn{padding:.7rem 1.2rem}
 /* Below 900px the section anchors go, but Ydelser stays: it is the only
@@ -281,6 +281,10 @@ button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
   text-transform:uppercase;color:rgba(255,255,255,.7);margin-bottom:var(--s-6);
   transition:color var(--d-fast) var(--ease-out)}
 .backlink:hover{color:#fff}
+/* The base .backlink is white, for the plum Ydelse header. On a light
+   page it needs ink, or it reads as a stray arrow. */
+.backlink--light{color:var(--graphite)}
+.backlink--light:hover{color:var(--ink-800)}
 .backlink .arw{transition:transform var(--d-base) var(--ease-spring)}
 .backlink:hover .arw{transform:translateX(-5px)}
 .ydelse__meta{display:flex;gap:var(--s-6);flex-wrap:wrap;align-items:center;
@@ -737,6 +741,106 @@ button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
 }
 #lf-status.is-in{opacity:1;transform:none}
 @media (prefers-reduced-motion:reduce){.leadform,#lf-status{transition:none}}
+
+/* CLOUD-TJEKKET ------------------------------------------ */
+/* The lead qualifier at /cloud-tjek/. Four stages live in the page at
+   once and only one is shown, so a visitor never waits for a load
+   between questions. Sibling-site parallel: Directed Agentic Delivery's
+   niveau-tjek keeps its styles inline in the page; this site keeps one
+   copy of everything here, per its own file-layout rule. */
+.wrap--narrow{max-width:58rem}
+.tjek-stage{display:none;margin-top:var(--s-7)}
+.tjek-stage.is-active{display:block}
+.tjek-stage.is-swap{animation:tjekSwap var(--d-base) var(--ease-out)}
+@keyframes tjekSwap{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+.tjek-actions{display:flex;flex-wrap:wrap;gap:var(--s-3);margin-top:var(--s-6)}
+.tjek-note{margin-top:var(--s-5);color:var(--graphite);font-size:var(--t-small);line-height:1.6;max-width:60ch}
+
+/* Progress + question */
+.tjek__head{display:flex;align-items:center;justify-content:space-between;gap:var(--s-4)}
+.tjek__head .mono{color:var(--stone)}
+.tjek__back{font-family:var(--font-mono);font-size:var(--t-micro);letter-spacing:.09em;
+  text-transform:uppercase;color:var(--graphite);padding:.5rem 0}
+.tjek__back:hover{color:var(--ink-800)}
+.tjek__bar{height:3px;background:var(--sand);border-radius:var(--r-pill);margin-top:var(--s-4);overflow:hidden}
+.tjek__bar span{display:block;height:100%;width:16.6%;background:var(--crimson);
+  transition:width var(--d-base) var(--ease-out)}
+.tjek__q{font-size:clamp(1.35rem,2.6vw,2rem);letter-spacing:-.03em;font-weight:500;
+  margin-top:var(--s-6);max-width:26ch}
+.tjek__q:focus-visible{outline:none}
+.tjek__opts{display:flex;flex-direction:column;gap:var(--s-3);margin-top:var(--s-6)}
+.tjek__opt{display:flex;gap:var(--s-4);align-items:flex-start;text-align:left;width:100%;
+  background:var(--surface);border:1px solid var(--hairline);border-radius:var(--r-md);
+  padding:clamp(1rem,2.2vw,1.35rem) clamp(1.1rem,2.4vw,1.6rem);
+  font-size:var(--t-small);line-height:1.55;color:var(--ink-700);
+  transition:border-color var(--d-fast) var(--ease-out),background-color var(--d-fast) var(--ease-out),
+             transform var(--d-fast) var(--ease-out)}
+.tjek__opt:hover{border-color:var(--crimson);transform:translateY(-2px)}
+.tjek__opt.is-selected{background:var(--blush);border-color:var(--crimson)}
+.tjek__opt__lab{flex:none;font-family:var(--font-mono);font-size:var(--t-micro);letter-spacing:.09em;
+  color:var(--crimson);padding-top:.15em}
+
+/* The 2x2. Deliberateness rises up the page, exposure grows to the
+   right, so the cell a visitor lands in explains itself. */
+.tjek-quad{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:var(--s-3);
+  margin-top:var(--s-6)}
+.tjek-quad--intro{margin-top:var(--s-6)}
+.tjek-quad__cell{background:var(--surface);border:1px solid var(--hairline);border-radius:var(--r-md);
+  padding:clamp(.9rem,2vw,1.25rem);transition:background-color var(--d-base) var(--ease-out),
+  border-color var(--d-base) var(--ease-out)}
+.tjek-quad__cell .mono{display:block;color:var(--stone)}
+.tjek-quad__cell p{margin-top:var(--s-2);font-size:var(--t-micro);line-height:1.5;color:var(--graphite)}
+.tjek-quad__cell.is-you{background:var(--plum);border-color:var(--plum)}
+.tjek-quad__cell.is-you .mono{color:var(--coral)}
+.tjek-quad__cell.is-you p{color:rgba(255,255,255,.78)}
+
+/* Result */
+.tjek-result__quad{color:var(--stone);margin-bottom:var(--s-3)}
+.tjek-result__title{font-size:clamp(1.5rem,3.2vw,2.4rem);letter-spacing:-.034em;font-weight:700;
+  line-height:1.08;max-width:22ch}
+.tjek-result__title:focus-visible{outline:none}
+.tjek-axes{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:var(--s-4);margin-top:var(--s-6)}
+.tjek-axis{background:var(--sand);border-radius:var(--r-md);padding:clamp(1rem,2.4vw,1.5rem);min-width:0}
+.tjek-axis .mono{color:var(--stone)}
+.tjek-axis p{font-size:clamp(1.3rem,2.4vw,1.8rem);font-weight:700;letter-spacing:-.03em;
+  color:var(--crimson);margin-top:var(--s-2)}
+.tjek-axis__d{display:block;margin-top:var(--s-2);font-size:var(--t-micro);line-height:1.5;color:var(--graphite)}
+.tjek-limit{margin-top:var(--s-5);font-size:var(--t-small);line-height:1.6;color:var(--graphite)}
+.tjek-limit strong{color:var(--ink-800)}
+.tjek-limit a{color:var(--crimson);text-decoration:none;white-space:nowrap}
+.tjek-ydelse{margin-top:var(--s-6);background:var(--blush);border-radius:var(--r-lg);
+  padding:clamp(1.4rem,3vw,2.2rem)}
+.tjek-ydelse .mono{color:var(--wine)}
+.tjek-ydelse h3{display:flex;flex-wrap:wrap;align-items:center;gap:var(--s-3);
+  font-size:clamp(1.2rem,2.2vw,1.6rem);letter-spacing:-.03em;margin-top:var(--s-3)}
+.tjek-ydelse .btn{margin-top:var(--s-5)}
+
+/* Form. Its own rules rather than .leadform's, which are written for
+   white text on the plum CTA card. */
+.tjekform{margin-top:var(--s-6)}
+.tjekform__grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:var(--s-4)}
+.tjekform .field{display:flex;flex-direction:column;gap:.4rem;min-width:0}
+.tjekform .field--full{grid-column:1/-1}
+.tjekform label{font-family:var(--font-mono);font-size:var(--t-micro);letter-spacing:.09em;
+  text-transform:uppercase;color:var(--graphite)}
+.tjekform abbr{text-decoration:none;color:var(--crimson);padding-left:.25em}
+.tjekform input,.tjekform select,.tjekform textarea{
+  font:inherit;font-size:var(--t-small);color:var(--ink-800);background:var(--surface);
+  border:1px solid var(--hairline);border-radius:var(--r-sm);padding:.8rem 1rem;width:100%}
+.tjekform textarea{resize:vertical;min-height:4.5rem;line-height:1.55}
+.tjekform input[aria-invalid="true"]{border-color:var(--crimson)}
+.tjekform__hp{position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden}
+.tjekform__error{margin-top:var(--s-4);color:var(--crimson);font-size:var(--t-small)}
+.tjekform__privacy{margin-top:var(--s-4);font-size:var(--t-micro);color:var(--stone);line-height:1.6}
+.tjekform__done{font-size:var(--t-lead);line-height:1.5;color:var(--ink-700);max-width:52ch}
+.tjekform__done:focus-visible{outline:none}
+.tjekform__done a{color:var(--crimson)}
+#tjek-submit[disabled]{opacity:.6;cursor:progress}
+@media (max-width:640px){
+  .tjekform__grid{grid-template-columns:1fr}
+  .tjek-axes{grid-template-columns:1fr}
+  .tjek-quad__cell p{font-size:11px}
+}
 
 @media (prefers-reduced-motion:reduce){
   html{scroll-behavior:auto}

@@ -16,6 +16,18 @@
       "priority": "1.0"
     },
     {
+      "file": "cloud-tjek/index.html",
+      "path": "/cloud-tjek/",
+      "slug": "cloud-tjek",
+      "headline": "Hvor bevidst styrer I jeres cloud?",
+      "kicker": "Cloud-tjekket · 6 spørgsmål",
+      "title": "Cloud-tjekket — Cloud Deliberate — Consid",
+      "description": "Seks spørgsmål om jeres cloud-landskab og jeres beslutninger. Få at vide hvor I står, hvilket princip der begrænser jer, og hvilket forløb der giver mening. Under to minutter.",
+      "ogImageAlt": "Cloud-tjekket — Cloud Deliberate — Consid",
+      "changefreq": "monthly",
+      "priority": "0.9"
+    },
+    {
       "file": "ydelser/index.html",
       "path": "/ydelser/",
       "slug": "ydelser",

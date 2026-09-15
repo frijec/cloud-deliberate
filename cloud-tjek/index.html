@@ -1,0 +1,185 @@
+<!doctype html>
+<html lang="da">
+<head>
+<meta charset="utf-8">
+<title>Cloud-tjekket — Cloud Deliberate — Consid</title>
+<meta name="description" content="Seks spørgsmål om jeres cloud-landskab og jeres beslutninger. Få at vide hvor I står, hvilket princip der begrænser jer, og hvilket forløb der giver mening. Under to minutter.">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<link rel="canonical" href="https://frijec.github.io/cloud-deliberate/cloud-tjek/">
+<link rel="icon" type="image/png" href="../assets/favicon.png">
+<meta name="theme-color" content="#492A34">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Consid">
+<meta property="og:title" content="Cloud-tjekket — Cloud Deliberate — Consid">
+<meta property="og:description" content="Seks spørgsmål om jeres cloud-landskab og jeres beslutninger. Få at vide hvor I står, hvilket princip der begrænser jer, og hvilket forløb der giver mening. Under to minutter.">
+<meta property="og:url" content="https://frijec.github.io/cloud-deliberate/cloud-tjek/">
+<meta property="og:image" content="https://frijec.github.io/cloud-deliberate/assets/og/cloud-tjek.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Cloud-tjekket — Cloud Deliberate — Consid">
+<meta property="og:locale" content="da_DK">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Cloud-tjekket — Cloud Deliberate — Consid">
+<meta name="twitter:description" content="Seks spørgsmål om jeres cloud-landskab og jeres beslutninger. Få at vide hvor I står, hvilket princip der begrænser jer, og hvilket forløb der giver mening. Under to minutter.">
+<meta name="twitter:image" content="https://frijec.github.io/cloud-deliberate/assets/og/cloud-tjek.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Onest:wght@400;500;600;700;900&family=EB+Garamond:wght@500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/site.css">
+</head>
+<body>
+<a class="skip-link" href="#main">Spring til indhold</a>
+<nav class="nav" id="nav">
+  <div class="nav__in">
+    <a class="brand" href="../#top"><img class="brand__mark" src="../assets/brand-mark.png" alt="Consid" width="88" height="22"><span class="brand__sub">Cloud Deliberate</span></a>
+    <div class="nav__links">
+      <a class="nav__link" href="../#principper">Principper</a>
+      <a class="nav__link" href="../#vaerktoejskasse">Værktøjskasse</a>
+      <a class="nav__link" href="../#framework">Framework</a>
+      <a class="nav__link" href="./">Cloud-tjek</a>
+      <a class="nav__link nav__link--stay" href="../ydelser/">Ydelser</a>
+      <a class="btn btn--primary" href="../?ask=moede#kontakt">Book en session <span class="arw">→</span></a>
+    </div>
+  </div>
+</nav>
+<main id="main">
+
+<section class="stack">
+  <div class="wrap wrap--narrow">
+    <a class="backlink backlink--light reveal" href="../#top"><span class="arw">←</span> Forsiden</a>
+    <h1 class="reveal" style="font-size:var(--t-h2);max-width:20ch;margin-top:var(--s-5)">Hvor bevidst styrer I jeres cloud?</h1>
+    <p class="lead reveal" style="margin-top:var(--s-5)">Seks spørgsmål om jeres landskab og jeres beslutninger. I får at vide, hvad der begrænser jer lige nu, og hvilket forløb der giver mening. Det tager under to minutter.</p>
+
+    <div id="tjek">
+
+      <!-- 1. INTRO -->
+      <section class="tjek-stage is-active" data-stage="intro">
+        <div class="tjek-quad tjek-quad--intro" aria-hidden="true">
+          <div class="tjek-quad__cell" data-cell="ingen"><span class="mono">Ingen ydelse</span><p>Begrænset eksponering, bevidste valg</p></div>
+          <div class="tjek-quad__cell" data-cell="enablement"><span class="mono">Enablement</span><p>Stor eksponering, bevidste valg</p></div>
+          <div class="tjek-quad__cell" data-cell="workshop"><span class="mono">Workshop</span><p>Begrænset eksponering, få bevidste valg</p></div>
+          <div class="tjek-quad__cell" data-cell="assessment"><span class="mono">Assessment</span><p>Stor eksponering, få bevidste valg</p></div>
+        </div>
+        <p class="tjek-note">Vi placerer jer på to akser: hvor meget cloud fylder hos jer, og hvor bevidst beslutningerne bliver truffet. Ét af felterne betyder, at I ikke har brug for os lige nu. Det siger vi også.</p>
+        <div class="tjek-actions">
+          <button class="btn btn--primary" type="button" id="tjek-start">Start tjekket <span class="arw">→</span></button>
+          <a class="btn btn--soft" href="../?ask=moede#kontakt">Spring over, book direkte</a>
+        </div>
+      </section>
+
+      <!-- 2. QUIZ -->
+      <!-- No aria-live here: focus moves to the question on every step,
+           which announces it once. A live region as well would read the
+           whole stage a second time. -->
+      <section class="tjek-stage" data-stage="quiz">
+        <div class="tjek__head">
+          <span class="mono" id="tjek-progress">Spørgsmål 1 af 6</span>
+          <button class="tjek__back" type="button" id="tjek-back" hidden><span class="arw">←</span> Tilbage</button>
+        </div>
+        <div class="tjek__bar" role="progressbar" aria-valuemin="1" aria-valuemax="6" aria-valuenow="1" aria-label="Fremdrift"><span id="tjek-bar"></span></div>
+        <h2 class="tjek__q" id="tjek-question" data-focus tabindex="-1"></h2>
+        <div class="tjek__opts" id="tjek-options"></div>
+      </section>
+
+      <!-- 3. RESULT -->
+      <section class="tjek-stage" data-stage="result">
+        <p class="mono tjek-result__quad" data-quad></p>
+        <h2 class="tjek-result__title" data-result-title data-focus tabindex="-1"></h2>
+        <p class="lead" data-result-body style="margin-top:var(--s-4)"></p>
+
+        <div class="tjek-axes">
+          <div class="tjek-axis">
+            <span class="mono">Eksponering</span>
+            <p data-axis-eksponering></p>
+            <span class="tjek-axis__d">Hvor meget cloud fylder, og hvor hurtigt regningen flytter sig</span>
+          </div>
+          <div class="tjek-axis">
+            <span class="mono">Bevidsthed</span>
+            <p data-axis-bevidsthed></p>
+            <span class="tjek-axis__d">Hvor systematisk beslutningerne bliver truffet og skrevet ned</span>
+          </div>
+        </div>
+
+        <p class="tjek-limit" data-limiting hidden>Det, der begrænser jer lige nu: <strong data-limiting-name></strong>. <a href="../#principper">Læs princippet <span class="arw">→</span></a></p>
+
+        <div class="tjek-quad" aria-hidden="true">
+          <div class="tjek-quad__cell" data-cell="ingen"><span class="mono">Ingen ydelse</span><p>Begrænset eksponering, bevidste valg</p></div>
+          <div class="tjek-quad__cell" data-cell="enablement"><span class="mono">Enablement</span><p>Stor eksponering, bevidste valg</p></div>
+          <div class="tjek-quad__cell" data-cell="workshop"><span class="mono">Workshop</span><p>Begrænset eksponering, få bevidste valg</p></div>
+          <div class="tjek-quad__cell" data-cell="assessment"><span class="mono">Assessment</span><p>Stor eksponering, få bevidste valg</p></div>
+        </div>
+
+        <div class="tjek-ydelse" data-ydelse hidden>
+          <span class="mono">Det forløb der passer</span>
+          <h3><span data-ydelse-navn></span> <span class="hours" data-ydelse-timer></span></h3>
+          <a class="btn btn--soft" data-ydelse-link href="#">Læs hvad det indeholder <span class="arw">→</span></a>
+        </div>
+
+        <div class="tjek-ydelse" data-ingen hidden>
+          <span class="mono">Ingen ydelse lige nu</span>
+          <h3>Tag whitepaperet i stedet</h3>
+          <a class="btn btn--soft" href="../?ask=whitepaper#kontakt">Få whitepaperet <span class="arw">→</span></a>
+        </div>
+
+        <div class="tjek-actions">
+          <button class="btn btn--primary" type="button" data-to-form>Få en gennemgang af jeres svar <span class="arw">→</span></button>
+          <button class="btn btn--soft" type="button" data-restart>Tag tjekket forfra</button>
+        </div>
+      </section>
+
+      <!-- 4. LEAD FORM -->
+      <section class="tjek-stage" data-stage="form">
+        <h2 class="tjek-result__title" data-focus tabindex="-1" style="font-size:var(--t-h3)">En gennemgang af jeres svar</h2>
+        <p class="lead" style="margin-top:var(--s-4)">Vi læser jeres svar igennem og vender tilbage med, hvad vi ser, og hvad vi ville gøre først. Inden for to arbejdsdage.</p>
+
+        <form id="tjek-form" class="tjekform" novalidate>
+          <div class="tjekform__grid">
+            <div class="field"><label for="tj-company">Virksomhed</label><input id="tj-company" name="company" type="text" maxlength="150" autocomplete="organization"></div>
+            <div class="field"><label for="tj-role">Rolle</label><input id="tj-role" name="role" type="text" maxlength="120" autocomplete="organization-title"></div>
+            <div class="field field--full">
+              <label for="tj-spend">Omtrentligt årligt cloud-forbrug</label>
+              <select id="tj-spend" name="cloud_spend">
+                <option value="Ved ikke">Ved ikke</option>
+                <option value="Under 1 mio. kr.">Under 1 mio. kr.</option>
+                <option value="1-5 mio. kr.">1-5 mio. kr.</option>
+                <option value="5-20 mio. kr.">5-20 mio. kr.</option>
+                <option value="Over 20 mio. kr.">Over 20 mio. kr.</option>
+              </select>
+            </div>
+            <div class="field field--full"><label for="tj-platforms">Hvilke cloud-platforme bruger I i dag?</label><textarea id="tj-platforms" name="platforms" rows="2" maxlength="2000"></textarea></div>
+            <div class="field field--full"><label for="tj-challenge">Største cloud-udfordring lige nu</label><textarea id="tj-challenge" name="biggest_challenge" rows="3" maxlength="2000"></textarea></div>
+            <div class="field field--full"><label for="tj-value">Hvad ville gøre en samtale værdifuld for jer?</label><textarea id="tj-value" name="conversation_value" rows="3" maxlength="2000"></textarea></div>
+            <div class="field field--full"><label for="tj-email">Arbejds-e-mail<abbr title="påkrævet">*</abbr></label><input id="tj-email" name="email" type="email" autocomplete="email" maxlength="255" required></div>
+          </div>
+          <div class="tjekform__hp" aria-hidden="true">
+            <label for="tj-website">Lad dette felt stå tomt</label>
+            <input id="tj-website" name="company_website" type="text" tabindex="-1" autocomplete="off">
+          </div>
+          <p class="tjekform__error" id="tjek-error" role="alert" hidden></p>
+          <div class="tjek-actions">
+            <button class="btn btn--primary" type="submit" id="tjek-submit">Send og få en gennemgang <span class="arw">→</span></button>
+          </div>
+          <p class="tjekform__privacy">Vi bruger kun dine oplysninger til opfølgning. Intet nyhedsbrev, ingen tredjeparter.</p>
+        </form>
+
+        <p class="tjekform__done" id="tjek-done" tabindex="-1" hidden>Tak. Vi har åbnet en mail med dine svar. Tryk send, så vender vi tilbage inden for to arbejdsdage. Åbnede der ikke en mail? Skriv direkte til <a href="mailto:anders.bendtsen@consid.com">anders.bendtsen@consid.com</a>.</p>
+      </section>
+
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer class="footer">
+  <div class="wrap footer__in">
+    <div>© 2026 Consid København · Cloud Deliberate</div>
+    <div class="footer__links"><a href="../ydelser/">Ydelser</a><a href="../?ask=whitepaper#kontakt">Whitepaper</a><a href="mailto:kenneth.jensen@consid.com">Kontakt</a></div>
+  </div>
+</footer>
+
+<script src="../assets/site.js"></script>
+<script src="../assets/tjek.js"></script>
+</body>
+</html>
