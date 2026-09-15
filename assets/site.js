@@ -126,7 +126,13 @@ document.querySelectorAll('.journey').forEach(journey => {
     active = i;
     stations.forEach((s, k) => { s.classList.toggle('is-active', k === i); s.classList.toggle('is-done', k < i) });
     const st = stations[i];
-    if (fill && st) fill.style.height = (st.offsetTop + st.offsetHeight / 2) + 'px';
+    // scaleY of the full-height fill rather than a pixel height, so the
+    // rail never reflows. Track height is 0 while the rail is hidden
+    // below 900px, which would make the fraction NaN.
+    const track = fill && fill.parentElement;
+    if (fill && st && track && track.clientHeight) {
+      fill.style.transform = 'scaleY(' + ((st.offsetTop + st.offsetHeight / 2) / track.clientHeight) + ')';
+    }
     if (hoursEl) tweenHours(hours.slice(0, i + 1).reduce((a, b) => a + b, 0));
   };
 

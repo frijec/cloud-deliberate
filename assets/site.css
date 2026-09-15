@@ -50,7 +50,10 @@
   --s-1:.25rem;--s-2:.5rem;--s-3:.75rem;--s-4:1rem;--s-5:1.5rem;
   --s-6:2rem;--s-7:3rem;--s-8:4rem;--s-9:6rem;--s-10:8rem;
 
-  --r-xs:10px; --r-sm:16px; --r-md:24px; --r-lg:36px; --r-xl:48px; --r-pill:999px;
+  /* --r-2xs is the control tier: focus rings, checkboxes and the small
+     media boxes sit below the card scale, and without a step for them
+     three literal values had crept in. */
+  --r-2xs:8px; --r-xs:10px; --r-sm:16px; --r-md:24px; --r-lg:36px; --r-xl:48px; --r-pill:999px;
 
   --lift-1:0 1px 2px rgba(20,20,22,.03), 0 6px 18px -10px rgba(20,20,22,.10);
   --lift-2:0 2px 5px rgba(20,20,22,.04), 0 22px 48px -22px rgba(20,20,22,.20);
@@ -65,7 +68,11 @@
 }
 
 *,*::before,*::after{box-sizing:border-box}
-html{-webkit-text-size-adjust:100%;scroll-behavior:smooth}
+/* This palette is a single warm light theme by design. Declaring it
+   stops the browser rendering its own parts — scrollbars, the select
+   popup, autofill backgrounds — in dark when the OS is, which is the
+   one way an undeclared scheme actually breaks a light-only design. */
+html{-webkit-text-size-adjust:100%;scroll-behavior:smooth;color-scheme:light}
 body{
   margin:0;background:var(--air);color:var(--ink-800);
   font-family:var(--font-body);font-size:var(--t-body);line-height:1.6;
@@ -79,7 +86,7 @@ p{margin:0}
 a{color:inherit}
 img,svg{display:block;max-width:100%}
 button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
-:focus-visible{outline:2px solid var(--crimson);outline-offset:3px;border-radius:6px}
+:focus-visible{outline:2px solid var(--crimson);outline-offset:3px;border-radius:var(--r-2xs)}
 
 /* Visually hidden but still announced — used for the hours badge's
    unit word and the hours table's caption. clip-path (not the old
@@ -369,7 +376,7 @@ button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
    shows it. Dropped under 640px, where the card is a single narrow
    column and the mark would push the title down. */
 .phase__illus{position:absolute;top:clamp(1.1rem,2.4vw,1.8rem);right:clamp(1.1rem,2.4vw,1.8rem);
-  width:clamp(96px,10vw,124px);height:clamp(96px,10vw,124px);border-radius:8px;overflow:hidden}
+  width:clamp(96px,10vw,124px);height:clamp(96px,10vw,124px);border-radius:var(--r-2xs);overflow:hidden}
 .phase__illus canvas{display:block;width:100%;height:100%}
 .phase h3,.phase__meta{max-width:calc(100% - clamp(96px,10vw,124px) - var(--s-4))}
 @media (max-width:640px){.phase__illus{display:none} .phase h3,.phase__meta{max-width:none}}
@@ -391,9 +398,12 @@ button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
 .journey__track{position:relative;height:clamp(200px,34vh,340px);padding-left:1.6rem;margin-left:var(--s-2)}
 .journey__track::before{content:"";position:absolute;left:0;top:0;bottom:0;width:6px;
   background-image:radial-gradient(var(--stone) 55%,transparent 62%);background-size:3px 3px;opacity:.3}
-.journey__fill{position:absolute;left:0;top:0;width:6px;height:0;
+/* Scaled, not resized: animating height reflows the rail on every step.
+   transform-origin keeps it growing downward from the first station. */
+.journey__fill{position:absolute;left:0;top:0;width:6px;height:100%;
   background-image:radial-gradient(var(--crimson) 65%,transparent 70%);background-size:3px 3px;
-  transition:height var(--d-slow) var(--ease-out)}
+  transform:scaleY(0);transform-origin:top;
+  transition:transform var(--d-slow) var(--ease-out)}
 .journey__stations{list-style:none;margin:0;padding:0;height:100%;
   display:flex;flex-direction:column;justify-content:space-between}
 .journey__stations li{position:relative;font-family:var(--font-mono);font-size:var(--t-micro);
@@ -548,7 +558,7 @@ button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
 .sechead{display:grid;grid-template-columns:1fr clamp(96px,12vw,148px);gap:var(--s-6);align-items:center}
 .sechead__text{display:flex;flex-direction:column;gap:var(--s-4);min-width:0}
 .sechead__text h2{max-width:20ch}
-.sechead__illus{width:100%;aspect-ratio:1;border-radius:8px;overflow:hidden}
+.sechead__illus{width:100%;aspect-ratio:1;border-radius:var(--r-2xs);overflow:hidden}
 .sechead__illus canvas{display:block;width:100%;height:100%}
 @media (max-width:760px){.sechead{grid-template-columns:1fr} .sechead__illus{display:none}}
 
@@ -568,7 +578,7 @@ button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
 .tcard--b h3{color:var(--wine)}
 .tcard p{margin-top:var(--s-4);color:var(--graphite);font-size:var(--t-small);line-height:1.6}
 .thesis__intro{max-width:34ch}
-.card-illus{width:clamp(112px,13vw,152px);height:clamp(112px,13vw,152px);flex:none;border-radius:8px;overflow:hidden}
+.card-illus{width:clamp(112px,13vw,152px);height:clamp(112px,13vw,152px);flex:none;border-radius:var(--r-2xs);overflow:hidden}
 .card-illus canvas{display:block;width:100%;height:100%}
 
 /* PRINCIPPER — sticky stack ------------------------------ */
@@ -783,8 +793,9 @@ button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
 .tjek-skipline a{color:var(--crimson);text-decoration:none}
 .tjek-skipline a:hover{text-decoration:underline}
 .tjek__bar{height:3px;background:var(--sand);border-radius:var(--r-pill);margin-top:var(--s-4);overflow:hidden}
-.tjek__bar span{display:block;height:100%;width:16.6%;background:var(--crimson);
-  transition:width var(--d-base) var(--ease-out)}
+.tjek__bar span{display:block;height:100%;width:100%;background:var(--crimson);
+  transform:scaleX(.143);transform-origin:left;
+  transition:transform var(--d-base) var(--ease-out)}
 .tjek__q{font-size:clamp(1.35rem,2.6vw,2rem);letter-spacing:-.03em;font-weight:500;
   margin-top:var(--s-6);max-width:26ch}
 .tjek__q:focus-visible{outline:none}
@@ -809,7 +820,7 @@ button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
   outline:2px solid var(--crimson);outline-offset:3px}
 .tjek__opt--multi input[type="checkbox"]{
   appearance:none;-webkit-appearance:none;flex:none;margin:0;width:20px;height:20px;
-  border:1.5px solid var(--stone);border-radius:6px;background:var(--surface);
+  border:1.5px solid var(--stone);border-radius:var(--r-2xs);background:var(--surface);
   display:grid;place-content:center;cursor:pointer;
   transition:border-color var(--d-fast) var(--ease-out)}
 .tjek__opt--multi input[type="checkbox"]::before{

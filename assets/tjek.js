@@ -241,7 +241,7 @@
     const q = QUESTIONS[i];
     const multi = q.type === 'multi';
     progressLab.textContent = 'Spørgsmål ' + (i + 1) + ' af ' + QUESTIONS.length;
-    barFill.style.width = ((i + 1) / QUESTIONS.length * 100) + '%';
+    barFill.style.transform = 'scaleX(' + ((i + 1) / QUESTIONS.length) + ')';
     barFill.parentElement.setAttribute('aria-valuenow', String(i + 1));
     backBtn.hidden = i === 0;
     questionEl.textContent = q.text;
