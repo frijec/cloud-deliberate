@@ -345,7 +345,7 @@ Vi bruger kun dine oplysninger til opfølgning. Intet nyhedsbrev, ingen tredjepa
 Cloud-tjekket — Cloud Deliberate — Consid
 
 **Meta description**
-Seks spørgsmål om jeres cloud-landskab og jeres beslutninger. Få at vide hvor I står, hvilket princip der begrænser jer, og hvilket forløb der giver mening. Under to minutter.
+Syv spørgsmål om jeres cloud-landskab og jeres beslutninger. Få at vide hvor I står, hvilket princip der begrænser jer, og hvilket forløb der giver mening. Under to minutter.
 
 ### Hvor bevidst styrer I jeres cloud?
 
@@ -356,7 +356,7 @@ Seks spørgsmål om jeres cloud-landskab og jeres beslutninger. Få at vide hvor
 Hvor bevidst styrer I jeres cloud?
 
 **Lead**
-Seks spørgsmål om jeres landskab og jeres beslutninger. I får at vide, hvad der begrænser jer lige nu, og hvilket forløb der giver mening. Det tager under to minutter.
+Syv spørgsmål om jeres landskab og jeres beslutninger. I får at vide, hvad der begrænser jer lige nu, og hvilket forløb der giver mening. Det tager under to minutter.
 
 **Kicker**
 Ingen ydelse
@@ -389,7 +389,7 @@ Vi placerer jer på to akser: hvor meget cloud fylder hos jer, og hvor bevidst b
 Spring over, book direkte
 
 **Kicker**
-Spørgsmål 1 af 6
+Spørgsmål 1 af 7
 
 **Kicker**
 Eksponering
@@ -520,7 +520,7 @@ Læs mere →
 Ikke sikker på hvilket forløb der passer?
 
 **Lead**
-Tag cloud-tjekket, så peger vi på det forløb der passer til jeres landskab. Seks spørgsmål, under to minutter. Vil I hellere tale med et menneske, så book et afklarende møde på 30 minutter.
+Tag cloud-tjekket, så peger vi på det forløb der passer til jeres landskab. Syv spørgsmål, under to minutter. Vil I hellere tale med et menneske, så book et afklarende møde på 30 minutter.
 
 **Button**
 Tag cloud-tjekket →

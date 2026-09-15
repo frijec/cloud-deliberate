@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <title>Cloud-tjekket — Cloud Deliberate — Consid</title>
-<meta name="description" content="Seks spørgsmål om jeres cloud-landskab og jeres beslutninger. Få at vide hvor I står, hvilket princip der begrænser jer, og hvilket forløb der giver mening. Under to minutter.">
+<meta name="description" content="Syv spørgsmål om jeres cloud-landskab og jeres beslutninger. Få at vide hvor I står, hvilket princip der begrænser jer, og hvilket forløb der giver mening. Under to minutter.">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="robots" content="noindex,nofollow">
 <link rel="canonical" href="https://frijec.github.io/cloud-deliberate/cloud-tjek/">
@@ -12,7 +12,7 @@
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Consid">
 <meta property="og:title" content="Cloud-tjekket — Cloud Deliberate — Consid">
-<meta property="og:description" content="Seks spørgsmål om jeres cloud-landskab og jeres beslutninger. Få at vide hvor I står, hvilket princip der begrænser jer, og hvilket forløb der giver mening. Under to minutter.">
+<meta property="og:description" content="Syv spørgsmål om jeres cloud-landskab og jeres beslutninger. Få at vide hvor I står, hvilket princip der begrænser jer, og hvilket forløb der giver mening. Under to minutter.">
 <meta property="og:url" content="https://frijec.github.io/cloud-deliberate/cloud-tjek/">
 <meta property="og:image" content="https://frijec.github.io/cloud-deliberate/assets/og/cloud-tjek.png">
 <meta property="og:image:width" content="1200">
@@ -21,7 +21,7 @@
 <meta property="og:locale" content="da_DK">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Cloud-tjekket — Cloud Deliberate — Consid">
-<meta name="twitter:description" content="Seks spørgsmål om jeres cloud-landskab og jeres beslutninger. Få at vide hvor I står, hvilket princip der begrænser jer, og hvilket forløb der giver mening. Under to minutter.">
+<meta name="twitter:description" content="Syv spørgsmål om jeres cloud-landskab og jeres beslutninger. Få at vide hvor I står, hvilket princip der begrænser jer, og hvilket forløb der giver mening. Under to minutter.">
 <meta name="twitter:image" content="https://frijec.github.io/cloud-deliberate/assets/og/cloud-tjek.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -49,7 +49,7 @@
   <div class="wrap wrap--narrow">
     <a class="backlink backlink--light reveal" href="../#top"><span class="arw">←</span> Forsiden</a>
     <h1 class="reveal" style="font-size:var(--t-h2);max-width:20ch;margin-top:var(--s-5)">Hvor bevidst styrer I jeres cloud?</h1>
-    <p class="lead reveal" style="margin-top:var(--s-5)">Seks spørgsmål om jeres landskab og jeres beslutninger. I får at vide, hvad der begrænser jer lige nu, og hvilket forløb der giver mening. Det tager under to minutter.</p>
+    <p class="lead reveal" style="margin-top:var(--s-5)">Syv spørgsmål om jeres landskab og jeres beslutninger. I får at vide, hvad der begrænser jer lige nu, og hvilket forløb der giver mening. Det tager under to minutter.</p>
 
     <div id="tjek">
 
@@ -74,12 +74,16 @@
            whole stage a second time. -->
       <section class="tjek-stage" data-stage="quiz">
         <div class="tjek__head">
-          <span class="mono" id="tjek-progress">Spørgsmål 1 af 6</span>
+          <span class="mono" id="tjek-progress">Spørgsmål 1 af 7</span>
           <button class="tjek__back" type="button" id="tjek-back" hidden><span class="arw">←</span> Tilbage</button>
         </div>
-        <div class="tjek__bar" role="progressbar" aria-valuemin="1" aria-valuemax="6" aria-valuenow="1" aria-label="Fremdrift"><span id="tjek-bar"></span></div>
+        <div class="tjek__bar" role="progressbar" aria-valuemin="1" aria-valuemax="7" aria-valuenow="1" aria-label="Fremdrift"><span id="tjek-bar"></span></div>
         <h2 class="tjek__q" id="tjek-question" data-focus tabindex="-1"></h2>
+        <p class="tjek__hint" id="tjek-hint" hidden></p>
         <div class="tjek__opts" id="tjek-options"></div>
+        <div class="tjek-actions">
+          <button class="btn btn--primary" type="button" id="tjek-next" hidden>Videre <span class="arw">→</span></button>
+        </div>
       </section>
 
       <!-- 3. RESULT -->
@@ -147,7 +151,6 @@
                 <option value="Over 20 mio. kr.">Over 20 mio. kr.</option>
               </select>
             </div>
-            <div class="field field--full"><label for="tj-platforms">Hvilke cloud-platforme bruger I i dag?</label><textarea id="tj-platforms" name="platforms" rows="2" maxlength="2000"></textarea></div>
             <div class="field field--full"><label for="tj-challenge">Største cloud-udfordring lige nu</label><textarea id="tj-challenge" name="biggest_challenge" rows="3" maxlength="2000"></textarea></div>
             <div class="field field--full"><label for="tj-value">Hvad ville gøre en samtale værdifuld for jer?</label><textarea id="tj-value" name="conversation_value" rows="3" maxlength="2000"></textarea></div>
             <div class="field field--full"><label for="tj-email">Arbejds-e-mail<abbr title="påkrævet">*</abbr></label><input id="tj-email" name="email" type="email" autocomplete="email" maxlength="255" required></div>

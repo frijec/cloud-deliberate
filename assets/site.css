@@ -768,6 +768,7 @@ button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
 .tjek__q{font-size:clamp(1.35rem,2.6vw,2rem);letter-spacing:-.03em;font-weight:500;
   margin-top:var(--s-6);max-width:26ch}
 .tjek__q:focus-visible{outline:none}
+.tjek__hint{margin-top:var(--s-3);font-size:var(--t-small);color:var(--graphite)}
 .tjek__opts{display:flex;flex-direction:column;gap:var(--s-3);margin-top:var(--s-6)}
 .tjek__opt{display:flex;gap:var(--s-4);align-items:flex-start;text-align:left;width:100%;
   background:var(--surface);border:1px solid var(--hairline);border-radius:var(--r-md);
@@ -779,6 +780,23 @@ button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
 .tjek__opt.is-selected{background:var(--blush);border-color:var(--crimson)}
 .tjek__opt__lab{flex:none;font-family:var(--font-mono);font-size:var(--t-micro);letter-spacing:.09em;
   color:var(--crimson);padding-top:.15em}
+/* Multi-select uses a real checkbox rather than a button with
+   aria-pressed, so keyboard and screen readers get the semantics free.
+   appearance:none keeps it focusable while letting it be drawn to
+   match the rest of the card. */
+.tjek__opt--multi{cursor:pointer;align-items:center}
+.tjek__opt--multi:focus-within{border-color:var(--crimson);
+  outline:2px solid var(--crimson);outline-offset:3px}
+.tjek__opt--multi input[type="checkbox"]{
+  appearance:none;-webkit-appearance:none;flex:none;margin:0;width:20px;height:20px;
+  border:1.5px solid var(--stone);border-radius:6px;background:var(--surface);
+  display:grid;place-content:center;cursor:pointer;
+  transition:border-color var(--d-fast) var(--ease-out)}
+.tjek__opt--multi input[type="checkbox"]::before{
+  content:"";width:10px;height:10px;border-radius:3px;background:var(--crimson);
+  transform:scale(0);transition:transform var(--d-fast) var(--ease-spring)}
+.tjek__opt--multi input[type="checkbox"]:checked{border-color:var(--crimson)}
+.tjek__opt--multi input[type="checkbox"]:checked::before{transform:scale(1)}
 
 /* The 2x2. Deliberateness rises up the page, exposure grows to the
    right, so the cell a visitor lands in explains itself. */
