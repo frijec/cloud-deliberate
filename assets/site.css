@@ -759,9 +759,17 @@ button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
 /* Progress + question */
 .tjek__head{display:flex;align-items:center;justify-content:space-between;gap:var(--s-4)}
 .tjek__head .mono{color:var(--stone)}
-.tjek__back{font-family:var(--font-mono);font-size:var(--t-micro);letter-spacing:.09em;
-  text-transform:uppercase;color:var(--graphite);padding:.5rem 0}
-.tjek__back:hover{color:var(--ink-800)}
+.tjek__head-actions{display:flex;align-items:center;gap:var(--s-5)}
+.tjek__back,.tjek__skip{font-family:var(--font-mono);font-size:var(--t-micro);letter-spacing:.09em;
+  text-transform:uppercase;color:var(--graphite);padding:.5rem 0;text-decoration:none;white-space:nowrap}
+.tjek__back:hover,.tjek__skip:hover{color:var(--ink-800)}
+/* The escape hatch stays available at every step, but as a quiet link.
+   As a full button beside "Start tjekket" it competed with starting at
+   the one moment nothing had been invested yet. */
+.tjek__skip{color:var(--stone)}
+.tjek-skipline{margin-top:var(--s-5);font-size:var(--t-small);color:var(--graphite)}
+.tjek-skipline a{color:var(--crimson);text-decoration:none}
+.tjek-skipline a:hover{text-decoration:underline}
 .tjek__bar{height:3px;background:var(--sand);border-radius:var(--r-pill);margin-top:var(--s-4);overflow:hidden}
 .tjek__bar span{display:block;height:100%;width:16.6%;background:var(--crimson);
   transition:width var(--d-base) var(--ease-out)}
@@ -835,7 +843,9 @@ button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
 
 /* Form. Its own rules rather than .leadform's, which are written for
    white text on the plum CTA card. */
+.tjekform__only{margin-top:var(--s-4);font-size:var(--t-small);color:var(--stone)}
 .tjekform{margin-top:var(--s-6)}
+.field__hint{font-size:var(--t-micro);line-height:1.5;color:var(--stone)}
 .tjekform__grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:var(--s-4)}
 .tjekform .field{display:flex;flex-direction:column;gap:.4rem;min-width:0}
 .tjekform .field--full{grid-column:1/-1}

@@ -385,11 +385,14 @@ Stor eksponering, få bevidste valg
 **Paragraph**
 Vi placerer jer på to akser: hvor meget cloud fylder hos jer, og hvor bevidst beslutningerne bliver truffet. Ét af felterne betyder, at I ikke har brug for os lige nu. Det siger vi også.
 
-**Button**
-Spring over, book direkte
+**Link**
+Spring over og book et møde direkte →
 
 **Kicker**
 Spørgsmål 1 af 7
+
+**Link**
+Spring over
 
 **Kicker**
 Eksponering
@@ -439,11 +442,14 @@ Tag whitepaperet i stedet
 **Button**
 Få whitepaperet →
 
+**Link**
+Få whitepaperet i stedet →
+
 **H2**
 En gennemgang af jeres svar
 
-**Lead**
-Vi læser jeres svar igennem og vender tilbage med, hvad vi ser, og hvad vi ville gøre først. Inden for to arbejdsdage.
+**Paragraph**
+Kun e-mailen er påkrævet. Resten hjælper os med at gøre gennemgangen konkret.
 
 **Paragraph**
 Vi bruger kun dine oplysninger til opfølgning. Intet nyhedsbrev, ingen tredjeparter.

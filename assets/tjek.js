@@ -131,18 +131,31 @@
     'Robust, klar til at justere'
   ];
 
+  /* The visitor has just spent two minutes telling us what is wrong. The
+     form then used to ask them to type it out again from scratch. These
+     are the same finding in their own words, dropped into the field as
+     an editable starting point. */
+  const PRINCIPLE_CHALLENGE = {
+    'Cloud-native overalt': 'Meget af vores infrastruktur bliver stadig oprettet og ændret manuelt.',
+    'Klarhed før handling': 'Vi kan ikke gøre rede for, hvorfor hver større arbejdslast ligger, hvor den gør.',
+    'Robust, klar til at justere': 'Vi ved ikke, hvad der skulle til, hvis vi skulle flytte en driftskritisk arbejdslast.',
+    'Gør det rigtige valg let': 'Teams vælger forskelligt, og der er ingen fælles standarder at læne sig op ad.'
+  };
+
   const RESULTS = {
     assessment: {
       quadrant: 'Stor eksponering, få bevidste valg',
       title: 'I kører på autopilot i en skala, hvor det koster',
       body: 'Jeres cloud fylder nok til, at beslutningerne betyder penge, og de bliver i vid udstrækning truffet uden et fælles grundlag. Det første skridt er at få tallene og beslutningerne på bordet, så I ved hvad der rent faktisk er valgt.',
-      ydelse: { navn: 'Cloud Deliberate Assessment', timer: '32 timer', href: '../ydelser/assessment.html' }
+      ydelse: { navn: 'Cloud Deliberate Assessment', timer: '32 timer', href: '../ydelser/assessment.html' },
+      formIntro: 'Vi læser jeres svar igennem og vender tilbage med, hvad vi ser, og hvordan et Assessment ville gribe det an. Inden for to arbejdsdage.'
     },
     enablement: {
       quadrant: 'Stor eksponering, bevidste valg',
       title: 'I ved hvad godt ser ud. Det skalerer bare ikke endnu',
       body: 'I træffer bevidste cloud-beslutninger, og landskabet er stort nok til, at det skal kunne køre uden at I holder hånden under det hver dag. Det der mangler, er maskineriet til at gøre praksis til hverdag.',
-      ydelse: { navn: 'Cloud Deliberate Enablement', timer: '64 timer', href: '../ydelser/enablement.html' }
+      ydelse: { navn: 'Cloud Deliberate Enablement', timer: '64 timer', href: '../ydelser/enablement.html' },
+      formIntro: 'Vi læser jeres svar igennem og vender tilbage med, hvad vi ser, og hvordan et Enablement-forløb ville gribe det an. Inden for to arbejdsdage.'
     },
     workshop: {
       quadrant: 'Begrænset eksponering, få bevidste valg',
@@ -151,13 +164,15 @@
       // Someone who has not started at all has no landscape to overskue,
       // so the same recommendation needs different words.
       bodyUdenCloud: 'I er ikke begyndt endnu, og det er den billigste plads at træffe beslutningerne fra. I kan nå at blive enige om, hvad der skal i cloud, hvad der ikke skal, og hvordan I vil afgøre det, før der ligger noget I skal flytte igen.',
-      ydelse: { navn: 'Cloud Deliberate Arkitektur-workshop', timer: '14 timer', href: '../ydelser/arkitektur-workshop.html' }
+      ydelse: { navn: 'Cloud Deliberate Arkitektur-workshop', timer: '14 timer', href: '../ydelser/arkitektur-workshop.html' },
+      formIntro: 'Vi læser jeres svar igennem og vender tilbage med, hvad vi ser, og hvordan en arkitektur-workshop ville gribe det an. Inden for to arbejdsdage.'
     },
     ingen: {
       quadrant: 'Begrænset eksponering, bevidste valg',
       title: 'I har fat i det, der skal til',
       body: 'Beslutningerne er bevidste, og landskabet er ikke stort nok til, at et forløb ville tjene sig hjem lige nu. Tag whitepaperet, og kom tilbage når cloud fylder mere hos jer, eller når I står med en beslutning I ikke kan blive enige om.',
-      ydelse: null
+      ydelse: null,
+      formIntro: 'Vi læser jeres svar igennem og vender tilbage med, hvad vi ser. Inden for to arbejdsdage.'
     }
   };
 
@@ -347,8 +362,30 @@
     }
 
     // The fourth quadrant is told plainly that a forløb would not pay for
-    // itself yet, so it is not asked to fill in a qualification form.
+    // itself yet, so it is not asked to fill in a qualification form. It
+    // already has a whitepaper button of its own, so the softer second
+    // ask below the form CTA is for the other three.
     root.querySelector('[data-to-form]').hidden = !r.ydelse;
+    root.querySelector('[data-secondary]').hidden = !r.ydelse;
+
+    root.querySelector('[data-form-intro]').textContent = r.formIntro;
+    const challenge = document.getElementById('tj-challenge');
+    const hint = root.querySelector('[data-challenge-hint]');
+    const suggested = scores.limiting && scores.bevidsthed < 3 ? PRINCIPLE_CHALLENGE[scores.limiting] : null;
+    // Refills on a retake, but only while the field is still ours: the
+    // data-auto flag is dropped the moment the visitor types, so their
+    // own words are never overwritten.
+    const untouched = !challenge.value.trim() || challenge.dataset.auto === '1';
+    if (suggested && untouched) {
+      challenge.value = suggested;
+      challenge.dataset.auto = '1';
+      hint.textContent = 'Vi har udfyldt feltet ud fra jeres svar. Ret det gerne.';
+      hint.hidden = false;
+    } else if (!suggested && untouched) {
+      challenge.value = '';
+      hint.hidden = true;
+    }
+
     showStage('result');
   }
 
@@ -365,6 +402,14 @@
   const form = document.getElementById('tjek-form');
   const errEl = document.getElementById('tjek-error');
   const submitBtn = document.getElementById('tjek-submit');
+
+  // Once the visitor edits the pre-filled challenge it stops being ours
+  // to replace, and the hint claiming we filled it stops being true.
+  const challengeEl = document.getElementById('tj-challenge');
+  challengeEl.addEventListener('input', () => {
+    delete challengeEl.dataset.auto;
+    root.querySelector('[data-challenge-hint]').hidden = true;
+  });
 
   const answerText = (q, a) => {
     if (q.type === 'multi') return a.length ? a.map(idx => q.options[idx]).join(', ') : '(ingen valgt)';

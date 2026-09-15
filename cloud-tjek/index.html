@@ -64,8 +64,8 @@
         <p class="tjek-note">Vi placerer jer på to akser: hvor meget cloud fylder hos jer, og hvor bevidst beslutningerne bliver truffet. Ét af felterne betyder, at I ikke har brug for os lige nu. Det siger vi også.</p>
         <div class="tjek-actions">
           <button class="btn btn--primary" type="button" id="tjek-start">Start tjekket <span class="arw">→</span></button>
-          <a class="btn btn--soft" href="../?ask=moede#kontakt">Spring over, book direkte</a>
         </div>
+        <p class="tjek-skipline"><a href="../?ask=moede#kontakt">Spring over og book et møde direkte <span class="arw">→</span></a></p>
       </section>
 
       <!-- 2. QUIZ -->
@@ -75,7 +75,10 @@
       <section class="tjek-stage" data-stage="quiz">
         <div class="tjek__head">
           <span class="mono" id="tjek-progress">Spørgsmål 1 af 7</span>
-          <button class="tjek__back" type="button" id="tjek-back" hidden><span class="arw">←</span> Tilbage</button>
+          <span class="tjek__head-actions">
+            <button class="tjek__back" type="button" id="tjek-back" hidden><span class="arw">←</span> Tilbage</button>
+            <a class="tjek__skip" href="../?ask=moede#kontakt">Spring over</a>
+          </span>
         </div>
         <div class="tjek__bar" role="progressbar" aria-valuemin="1" aria-valuemax="7" aria-valuenow="1" aria-label="Fremdrift"><span id="tjek-bar"></span></div>
         <h2 class="tjek__q" id="tjek-question" data-focus tabindex="-1"></h2>
@@ -130,12 +133,14 @@
           <button class="btn btn--primary" type="button" data-to-form>Få en gennemgang af jeres svar <span class="arw">→</span></button>
           <button class="btn btn--soft" type="button" data-restart>Tag tjekket forfra</button>
         </div>
+        <p class="tjek-skipline" data-secondary hidden>Ikke klar til en samtale? <a href="../?ask=whitepaper#kontakt">Få whitepaperet i stedet <span class="arw">→</span></a></p>
       </section>
 
       <!-- 4. LEAD FORM -->
       <section class="tjek-stage" data-stage="form">
         <h2 class="tjek-result__title" data-focus tabindex="-1" style="font-size:var(--t-h3)">En gennemgang af jeres svar</h2>
-        <p class="lead" style="margin-top:var(--s-4)">Vi læser jeres svar igennem og vender tilbage med, hvad vi ser, og hvad vi ville gøre først. Inden for to arbejdsdage.</p>
+        <p class="lead" data-form-intro style="margin-top:var(--s-4)"></p>
+        <p class="tjekform__only">Kun e-mailen er påkrævet. Resten hjælper os med at gøre gennemgangen konkret.</p>
 
         <form id="tjek-form" class="tjekform" novalidate>
           <div class="tjekform__grid">
@@ -151,9 +156,15 @@
                 <option value="Over 20 mio. kr.">Over 20 mio. kr.</option>
               </select>
             </div>
-            <div class="field field--full"><label for="tj-challenge">Største cloud-udfordring lige nu</label><textarea id="tj-challenge" name="biggest_challenge" rows="3" maxlength="2000"></textarea></div>
-            <div class="field field--full"><label for="tj-value">Hvad ville gøre en samtale værdifuld for jer?</label><textarea id="tj-value" name="conversation_value" rows="3" maxlength="2000"></textarea></div>
+            <!-- Pre-filled from the fase they scored lowest on, so the
+                 visitor edits a sentence instead of composing one. -->
+            <div class="field field--full">
+              <label for="tj-challenge">Største cloud-udfordring lige nu</label>
+              <textarea id="tj-challenge" name="biggest_challenge" rows="3" maxlength="2000" aria-describedby="tj-challenge-hint"></textarea>
+              <span class="field__hint" id="tj-challenge-hint" data-challenge-hint hidden></span>
+            </div>
             <div class="field field--full"><label for="tj-email">Arbejds-e-mail<abbr title="påkrævet">*</abbr></label><input id="tj-email" name="email" type="email" autocomplete="email" maxlength="255" required></div>
+            <div class="field field--full"><label for="tj-value">Hvad ville gøre en samtale værdifuld for jer?</label><input id="tj-value" name="conversation_value" type="text" maxlength="300"></div>
           </div>
           <div class="tjekform__hp" aria-hidden="true">
             <label for="tj-website">Lad dette felt stå tomt</label>
