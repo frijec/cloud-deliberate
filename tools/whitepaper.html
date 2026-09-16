@@ -4,84 +4,125 @@
 <meta charset="utf-8">
 <title>Cloud Deliberate — whitepaper</title>
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Onest:wght@400;500;600;700;900&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@500;600;700&family=Nunito:wght@400;700;800&display=swap" rel="stylesheet">
 <style>
-  /* Print sheet for the Danish whitepaper. Same tokens as the site so
-     the PDF and the pages read as one piece of work. Rendered by
-     tools/whitepaper.mjs through headless Chrome --print-to-pdf. */
+  /* ============================================================
+     Print sheet for the Danish whitepaper — a visual duplicate of
+     the original English PDF, not of the site's own design system.
+
+     Where this came from: the English PDF (pdf-lib, no editable
+     source) was rendered to images and measured directly —
+     RGB-sampled ink and card colours, the left margin and heading
+     block height in points, and the two source photographs
+     extracted losslessly with pdfimages (tools/whitepaper-assets/).
+     Fonts could not be read from the PDF (pdf-lib subsets and
+     renames them), so Quicksand + Nunito are a judgement call from
+     the letterforms — single-story a/g, rounded terminals — not a
+     confirmed match.
+
+     One deliberate deviation: the original's pagination is an
+     artifact of pdf-lib filling each page to a fixed height and
+     hard-breaking mid-section (page 2 opens mid-principle-list with
+     no heading repeated; two Background subsections each start an
+     almost-empty page). That is a generator bug, not a design
+     choice, so this sheet lets Danish text — which reliably runs
+     longer than English — reflow naturally instead of reproducing
+     specific break points that were never intentional.
+
+     Rendered by tools/whitepaper.mjs through headless Chrome
+     --print-to-pdf, the same path the OG images use.
+     ============================================================ */
   :root{
-    --ink-800:#1B1B1D; --ink-700:#2C2C31; --graphite:#636166; --stone:#726C66;
-    --air:#F5F3F1; --surface:#FDFCFB; --sand:#EDE8E3; --blush:#FDF0ED;
-    --crimson:#90263B; --plum:#492A34; --wine:#701132; --coral:#F49E88;
-    --hairline:rgba(27,27,29,.10);
+    --wine:#701130;      /* h1/h2/h3 ink — sampled from the PDF, ≈ site --wine */
+    --ink:#492A34;       /* body/label/numeral ink — sampled, = site --plum exactly */
+    --pink:#F9D2DC;      /* card fill — sampled, no equivalent in the site palette */
+    --pink-b:#DFB8C2;    /* card border — sampled */
+    --accent:#B51641;    /* left-bar accent on the Tool 2 cards — sampled */
   }
-  @page{ size:A4; margin:18mm 16mm 16mm; }
+  @page{ size:A4; margin:38pt; }
   *,*::before,*::after{box-sizing:border-box}
   html{-webkit-print-color-adjust:exact;print-color-adjust:exact}
   body{
-    margin:0;font-family:"Onest",system-ui,sans-serif;font-size:9.6pt;line-height:1.55;
-    color:var(--ink-700);background:#fff;
+    margin:0;font-family:"Nunito",system-ui,sans-serif;font-weight:700;
+    font-size:9.6pt;line-height:1.45;color:var(--ink);background:#fff;
   }
-  h1,h2,h3,h4{font-family:"Onest",sans-serif;margin:0;letter-spacing:-.028em;color:var(--ink-800)}
-  p{margin:0 0 .62em}
-  strong{color:var(--ink-800);font-weight:600}
-  .mono{font-family:"IBM Plex Mono",monospace;font-size:7pt;letter-spacing:.11em;text-transform:uppercase}
+  h1,h2,h3{font-family:"Quicksand",sans-serif;margin:0;color:var(--wine);font-weight:700}
+  h1{font-size:25pt;line-height:1.14;max-width:22ch}
+  h2{font-size:17pt;line-height:1.2;margin:14pt 0 6pt}
+  h2:first-child{margin-top:0}
+  h3{font-size:13pt;font-weight:600;margin:9pt 0 1pt}
+  p{margin:0 0 7pt}
+  em{font-style:italic}
+  strong{font-weight:800}
+  ul{margin:2pt 0 7pt;padding-left:13pt}
+  li{margin-bottom:2pt}
 
-  /* Cover ------------------------------------------------- */
-  .cover{background:var(--plum);color:#fff;margin:-18mm -16mm 10mm;padding:26mm 16mm 16mm;break-after:avoid}
-  .cover .mono{color:var(--coral)}
-  .cover h1{color:#fff;font-size:27pt;font-weight:700;line-height:1.08;letter-spacing:-.034em;margin-top:5mm;max-width:20ch}
-  .cover .sub{color:rgba(255,255,255,.76);font-size:11pt;line-height:1.5;margin-top:5mm;max-width:52ch}
-  .cover .foot{margin-top:14mm;color:rgba(255,255,255,.5)}
+  /* Tool sections: h3 title, then an italic caption naming the
+     principle it supports — the only place the original uses italic. */
+  .supports{font-style:italic;font-weight:700;margin:0 0 5pt}
 
-  /* Structure --------------------------------------------- */
+  /* Triad — "Principper / Værktøjskasse / Beslutningsframework".
+     Solid pink fill, no border, no left-bar: this is the plainest of
+     the three card types in the source. */
+  .triad{display:flex;gap:8pt;margin:8pt 0 4pt}
+  .triad > div{flex:1;background:var(--pink);border-radius:8pt;padding:10pt 12pt}
+  .triad b{display:block;font-family:"Quicksand";font-weight:600;font-size:12.5pt;color:var(--ink)}
+  .triad span{display:block;margin-top:2pt;font-weight:400}
+
+  /* Tool 2's three-column card: white fill, thin pink border, plus a
+     heavier red-accent left edge — the one component in the source
+     that uses the accent red at all. */
+  .redcards{display:flex;gap:8pt;margin:6pt 0 8pt}
+  .redcards > div{flex:1;background:#fff;border:1pt solid var(--pink-b);
+    border-left:3pt solid var(--accent);border-radius:6pt;padding:9pt 11pt}
+  .redcards h4{font-family:"Quicksand";font-weight:600;font-size:11.5pt;margin:0 0 4pt;color:var(--ink)}
+  .redcards p{margin:0;font-size:9.2pt}
+
+  /* Decision framework rows — the only numbered-badge component in
+     the source; nothing else on the page uses this pattern. */
+  .rows{margin:8pt 0}
+  .row{display:flex;background:#fff;border:1pt solid var(--pink-b);border-radius:8pt;
+    overflow:hidden;margin-bottom:7pt;break-inside:avoid}
+  .row .num{flex:none;width:40pt;background:var(--pink);display:flex;
+    align-items:center;justify-content:center;font-family:"Quicksand";
+    font-weight:600;font-size:20pt;color:var(--ink)}
+  .row .body{flex:1;padding:9pt 12pt}
+  .row h4{font-family:"Quicksand";font-weight:600;font-size:12pt;margin:0 0 2pt;color:var(--ink)}
+  .row p{margin:0;font-size:9.2pt}
+  .row ul{margin:3pt 0;font-size:9.2pt}
+
   section{break-inside:auto}
-  h2{font-size:16pt;font-weight:700;line-height:1.12;margin:9mm 0 3mm;color:var(--ink-800)}
-  h2:first-of-type{margin-top:0}
-  h3{font-size:11pt;font-weight:600;line-height:1.25;margin:5mm 0 1.5mm}
-  .lede{font-size:10.5pt;line-height:1.5;color:var(--graphite);max-width:62ch;margin-bottom:4mm}
-  .rule{height:2px;background:var(--crimson);width:46px;margin:0 0 4mm}
+  section + section{margin-top:2pt}
+  h1,h2,h3{break-after:avoid}
 
-  .triad{display:flex;gap:4mm;margin:5mm 0 7mm}
-  .triad div{flex:1;background:var(--sand);border-radius:4mm;padding:4mm}
-  .triad .mono{color:var(--wine)}
-  .triad b{display:block;font-size:11pt;font-weight:700;margin-top:1.5mm;color:var(--ink-800)}
-  .triad span{display:block;font-size:8.6pt;color:var(--graphite);margin-top:1mm}
+  /* Page 1: full-bleed hero photo behind the opening section, washed
+     with white at the opacity measured against the source PDF
+     (raw pixel · 0.15 + white · 0.85 reproduces the sampled colour
+     to within rounding). Bled via negative margin against the @page
+     box, the same technique used for the closing photo column. */
+  .hero{position:relative;margin:-38pt -38pt 16pt;padding:38pt}
+  .hero::before{content:"";position:absolute;inset:0;z-index:0;
+    background-image:url('whitepaper-assets/hero-datacenter.jpg');
+    background-size:cover;background-position:center}
+  .hero::after{content:"";position:absolute;inset:0;z-index:1;background:rgba(255,255,255,.85)}
+  .hero > *{position:relative;z-index:2}
 
-  .item{break-inside:avoid;margin:0 0 4.5mm;padding-left:11mm;position:relative}
-  .item .n{position:absolute;left:0;top:.1mm;font-family:"IBM Plex Mono",monospace;font-size:9pt;
-    font-weight:500;color:var(--crimson)}
-  .item h3{margin:0 0 1mm}
-  .item .supports{font-family:"IBM Plex Mono",monospace;font-size:7pt;letter-spacing:.09em;
-    text-transform:uppercase;color:var(--stone);margin:0 0 1.5mm}
-
-  ul{margin:.4em 0 .7em;padding-left:4.5mm}
-  li{margin-bottom:.28em}
-
-  .cols{column-count:2;column-gap:7mm}
-  .cols .item{break-inside:avoid}
-
-  .box{background:var(--blush);border-radius:4mm;padding:5mm;break-inside:avoid;margin:4mm 0}
-  .box h3{margin-top:0}
-  .sandbox{background:var(--sand);border-radius:4mm;padding:5mm;break-inside:avoid;margin:4mm 0}
+  /* Closing page: a full-bleed photo column at the image's own
+     aspect ratio, text beside it at the normal page margin. */
+  .closing{display:flex;margin:-38pt -38pt -38pt -38pt;min-height:841.92pt}
+  .closing__photo{flex:none;width:224pt;background-image:url('whitepaper-assets/closing-notebook.jpg');
+    background-size:cover;background-position:center}
+  .closing__text{flex:1;padding:38pt}
+  .closing__text p:last-child{margin-bottom:0}
 
   .pagebreak{break-before:page}
-  footer{margin-top:9mm;padding-top:3mm;border-top:1px solid var(--hairline);
-    color:var(--stone);font-family:"IBM Plex Mono",monospace;font-size:7pt;letter-spacing:.09em;text-transform:uppercase}
 </style>
 </head>
 <body>
 
-<div class="cover">
-  <div class="mono">Consid København · Cloud Deliberate</div>
-  <h1>Lad være med at køre på autopilot og altid vælge cloud-first.</h1>
-  <p class="sub">At være cloud deliberate handler ikke om at være for eller imod cloud. Det handler om beslutninger workload for workload, der bevarer fordelene ved cloud og giver jer kontrollen tilbage.</p>
-  <div class="mono foot">Whitepaper</div>
-</div>
+<section class="hero">
+  <h1>Lad være med at køre på autopilot og altid vælge cloud-first</h1>
 
-<section>
-  <h2>I mere end et årti har cloud-first været det selvfølgelige valg</h2>
-  <div class="rule"></div>
   <p>I mere end et årti har cloud-first været det selvfølgelige valg, når det gjaldt hastighed, fleksibilitet og skalerbarhed. Cloud løser mange af de begrænsninger, on-premises hosting har, især når det kommer til at skalere. Hvor udvidet kapacitet on-prem afhænger af hardwareindkøb og leveringstider, kan cloud skalere horisontalt med det samme. I dag er brugen af public cloud moden, og virksomheder har adgang til et hidtil uset udvalg af services, optimeringsmuligheder og deployment-modeller. Landskabet fortsætter med at flytte sig hurtigt og skaber hele tiden nye muligheder for at tilpasse infrastrukturbeslutninger til konkrete forretningsmæssige og tekniske behov.</p>
 
   <p>Samtidig er det blevet tydeligt, at det at fastholde kontrollen i public cloud har sine udfordringer. Fleksibiliteten kommer med trade-offs: fejlkonfigurerede ressourcer og uheldige prisbeslutninger trækker omkostningerne højere op end forventet. Dertil kommer, at det brede udvalg af services, værktøjer og konfigurationsmuligheder kombineret med forandringstempoet gør cloud-styring kompleks. Det kræver konstant opmærksomhed og opdateret viden at træffe de rigtige sikkerheds- og økonomivalg. De udfordringer, virksomheder selv peger på, er beskrevet i sidste afsnit.</p>
@@ -93,137 +134,128 @@
   <p>Der findes en million forskellige services og konfigurationsmuligheder, og ingen løsning passer til alle. Men vi ville gerne stille nogle fornuftige principper og konkrete værktøjer til rådighed, som kan guide jeres valg og give jer en fornemmelse af kontrol i stedet for en følelse af at følge den seneste hype.</p>
 
   <p>Her giver vi jer principperne og værktøjerne. Derefter gennemgår vi kort de vigtigste grunde til, at virksomheder har svært ved at holde kontrollen i cloud, og slutter af med, hvordan I kan komme i gang.</p>
-</section>
 
-<section>
   <h2>Hvordan bliver man (cloud) deliberate?</h2>
-  <div class="rule"></div>
-  <p class="lede">Cloud-udfordringerne er præcis derfor, en cloud deliberate-tilgang betyder noget. Den giver jer mulighed for at handle med hensigt. For at gøre det praktisk foreslår vi en enkel struktur.</p>
+  <p>Cloud-udfordringerne er præcis derfor, en cloud deliberate-tilgang betyder noget. Den giver jer mulighed for at handle med hensigt. For at gøre det praktisk foreslår vi en enkel struktur:</p>
 
   <div class="triad">
-    <div><span class="mono">01</span><b>Principper</b><span>Hvordan I tænker</span></div>
-    <div><span class="mono">02</span><b>Værktøjskasse</b><span>Hvordan I handler</span></div>
-    <div><span class="mono">03</span><b>Beslutningsframework</b><span>Hvordan I beslutter</span></div>
+    <div><b>Principper</b><span>Hvordan I tænker</span></div>
+    <div><b>Værktøjskasse</b><span>Hvordan I handler</span></div>
+    <div><b>Beslutningsframework</b><span>Hvordan I beslutter</span></div>
   </div>
 
   <h2>Principper: hvordan man tænker i et landskab i bevægelse</h2>
-  <div class="rule"></div>
-  <p class="lede">Principperne sætter retning og giver et fælles arkitektonisk mindset i et landskab, hvor services, prismodeller og lovkrav ændrer sig løbende. De fungerer som pejlemærker, der dæmper støj, samler teams og holder cloud-beslutninger forankret i organisationens prioriteter frem for kortsigtede trends.</p>
+  <p>Principperne sætter retning og giver et fælles arkitektonisk mindset i et landskab, hvor services, prismodeller og lovkrav ændrer sig løbende. De fungerer som pejlemærker, der dæmper støj, samler teams og holder cloud-beslutninger forankret i organisationens prioriteter frem for kortsigtede trends.</p>
 
-  <div class="item"><span class="n">01</span>
-    <h3>Cloud-native overalt</h3>
-    <p>Automatisering, infrastructure as code, selvbetjeningsplatforme og løst koblede arkitekturer, uanset hvor arbejdslasten kører. Den praksis giver hastighed, robusthed og skalerbarhed, og den bør styre, hvordan I designer og driver systemer, uanset om arbejdslasten ligger i public cloud, private cloud eller on-premises.</p>
-  </div>
-  <div class="item"><span class="n">02</span>
-    <h3>Klarhed før handling</h3>
-    <p>Beslutninger forankret i en eksplicit læsning af jeres landskab, rammer og mål, frem for vane eller hype. Gør alt, hvad I kan, for at teams kan beslutte ud fra en faktisk forståelse af udgangspunktet i stedet for antagelser.</p>
-  </div>
-  <div class="item"><span class="n">03</span>
-    <h3>Robust, klar til at justere</h3>
-    <p>Arkitekturer der tåler forandring. Beslutninger der kan genbesøges, når omkostninger, regler eller krav ændrer sig.</p>
-  </div>
-  <div class="item"><span class="n">04</span>
-    <h3>Gør det rigtige valg let</h3>
-    <p>Reducér kognitiv belastning ved at fjerne unødvendig kompleksitet. Klare standarder og veldefinerede paved roads peger teams mod den foretrukne vej uden at fjerne autonomien, så afvigelser stadig er mulige når de er begrundede.</p>
-  </div>
+  <p><strong>1. Anvend cloud-native principper, uanset hvor arbejdslasten kører:</strong> Automatisering, infrastructure as code, selvbetjeningsplatforme og løst koblede arkitekturer. Den praksis giver hastighed, robusthed og skalerbarhed, og den bør styre, hvordan I designer og driver systemer, uanset om arbejdslasten ligger i public cloud, private cloud eller on-premises.</p>
+
+  <p><strong>2. Skab klarhed før handling:</strong> Gør alt, hvad I kan, for at teams kan beslutte ud fra en eksplicit forståelse af jeres landskab, rammer og ønskede tilstand, frem for antagelser, vane eller den seneste hype.</p>
+
+  <p><strong>3. Stræb efter robusthed, og vær klar til at justere:</strong> Design arkitekturer der tåler forandring, og foretræk beslutninger der kan genbesøges, når omkostninger, regler eller krav ændrer sig.</p>
+
+  <p><strong>4. Gør det let at træffe det rigtige valg:</strong> Reducér kognitiv belastning ved at fjerne unødvendig kompleksitet. Klare standarder og paved roads peger teams mod den foretrukne løsning, uden at fjerne muligheden for at afvige, når det er begrundet.</p>
 </section>
 
-<section class="pagebreak">
+<section>
   <h2>Værktøjskasse: hvordan man handler bevidst i praksis</h2>
-  <div class="rule"></div>
-  <p class="lede">Værktøjskassen gør principperne til daglig praksis. Hvert element understøtter et eller flere af principperne og hjælper teams med at træffe bevidste valg uden at sinke leverancen.</p>
+  <p>Værktøjskassen gør principperne til daglig praksis. Hvert element understøtter et eller flere af principperne og hjælper teams med at træffe bevidste valg uden at sinke leverancen.</p>
 
-  <div class="item"><span class="n">01</span>
-    <p class="supports">Understøtter princip 01 · Cloud-native overalt</p>
-    <h3>Automatisering frem for manuel drift</h3>
-    <p>Bevidst cloud-styring bygger på gentagelige og forudsigelige operationer. Manuel konfiguration og ad hoc-ændringer gør miljøer sværere at forstå, sværere at gengive og sværere at kontrollere over tid.</p>
-    <p>Automatisering flytter driftsarbejdet fra individuelle handlinger til fælles definitioner. Infrastruktur, miljøer og politikker beskrives som kode, versioneres, reviewes og deployes kontrolleret. Det gør ændringer synlige, auditerbare og reversible.</p>
-    <p>Ved at automatisere rutineopgaver som provisionering, skalering, patching og oprydning reducerer I risikoen for konfigurationsdrift og menneskelige fejl. Automatisering letter samtidig driftsbyrden og frigør tid til det arbejde, der kræver dømmekraft frem for gentagelse. Det handler ikke kun om hastighed: det er en forudsætning for konsistens på tværs af miljøer.</p>
-  </div>
+  <h3>Værktøj 1: Automatisering frem for manuel drift</h3>
+  <p class="supports">Understøtter princip 1: Vær cloud-native, uanset hvor I er</p>
+  <p>Bevidst cloud-styring bygger på gentagelige og forudsigelige operationer. Manuel konfiguration og ad hoc-ændringer gør miljøer sværere at forstå, sværere at gengive og sværere at kontrollere over tid.</p>
+  <p>Automatisering flytter driftsarbejdet fra individuelle handlinger til fælles definitioner. Infrastruktur, miljøer og politikker beskrives som kode, versioneres, reviewes og deployes kontrolleret. Det gør ændringer synlige, auditerbare og reversible.</p>
+  <p>Ved at automatisere rutineopgaver som provisionering, skalering, patching og oprydning reducerer organisationer risikoen for konfigurationsdrift og menneskelige fejl. Automatisering letter samtidig driftsbyrden og frigør tid til det arbejde, der kræver dømmekraft frem for gentagelse.</p>
+  <p>Automatisering handler ikke kun om hastighed. Det er en forudsætning for konsistens på tværs af miljøer, uanset om arbejdslasten kører i public cloud, private cloud eller on-premises.</p>
 
-  <div class="item"><span class="n">02</span>
-    <p class="supports">Understøtter princip 02 · Klarhed før handling</p>
-    <h3>Klarhed om udgangspunkt, rammer og ønsket tilstand</h3>
-    <p>Bevidste beslutninger kræver en fælles forståelse af, hvor I starter fra, hvilke grænser I skal respektere, og hvad I prøver at opnå. Uden den klarhed falder teams tilbage på velkendte løsninger eller følger den eksisterende bevægelse i stedet for at vælge bevidst.</p>
-    <div class="sandbox">
-      <p><strong>Hvor I starter fra.</strong> Før I vælger hosting-modeller, services eller arkitekturmønstre, bør I gøre jeres nuværende landskab synligt. Det inkluderer en komplet opgørelse af eksisterende systemer, kompetencer, driftspraksis og teknisk gæld, der påvirker hvad der er realistisk og holdbart.</p>
-      <p><strong>Hvilke rammer I skal respektere.</strong> Rammerne skal være eksplicitte. Lovkrav, regler om dataplacering, sikkerhedsstandarder, budgetgrænser og kontraktuelle forpligtelser afgør tilsammen, hvilke muligheder der overhovedet er i spil. At gøre dem synlige tidligt reducerer omarbejde og sene overraskelser.</p>
-      <p style="margin-bottom:0"><strong>Hvad I vil opnå.</strong> En klar ønsket tilstand rækker ud over tekniske mål. Den rummer også, hvordan teams forventes at arbejde, deploye og drive systemer. Når resultaterne er defineret på forhånd, bliver trade-offs lettere at ræsonnere om og beslutninger lettere at forklare.</p>
+  <h3>Værktøj 2: Klarhed om udgangspunkt, rammer og ønsket tilstand</h3>
+  <p class="supports">Understøtter princip 2: Skab klarhed før handling</p>
+  <p>Bevidste beslutninger kræver en fælles forståelse af, hvor I starter fra, hvilke grænser I skal respektere, og hvad I prøver at opnå. Uden den klarhed falder teams tilbage på velkendte løsninger eller følger den eksisterende bevægelse i stedet for at vælge bevidst.</p>
+
+  <div class="redcards">
+    <div>
+      <h4>Hvor I starter fra</h4>
+      <p>Før I vælger hosting-modeller, services eller arkitekturmønstre, bør I gøre jeres nuværende landskab synligt. Det inkluderer en komplet opgørelse af eksisterende systemer, kompetencer, driftspraksis og teknisk gæld, der påvirker hvad der er realistisk og holdbart.</p>
+    </div>
+    <div>
+      <h4>Hvilke rammer I skal respektere</h4>
+      <p>Rammerne skal være eksplicitte. Lovkrav, regler om dataplacering, sikkerhedsstandarder, budgetgrænser og kontraktuelle forpligtelser afgør tilsammen, hvilke muligheder der er i spil. At gøre dem synlige tidligt reducerer omarbejde og sene overraskelser.</p>
+    </div>
+    <div>
+      <h4>Hvad I vil opnå</h4>
+      <p>En klar ønsket tilstand rækker ud over tekniske mål. Den rummer også, hvordan teams forventes at arbejde, deploye og drive systemer. Når resultaterne er defineret på forhånd, bliver trade-offs lettere at ræsonnere om og beslutninger lettere at forklare.</p>
     </div>
   </div>
 
-  <div class="item"><span class="n">03</span>
-    <p class="supports">Understøtter princip 03 · Robust, klar til at justere</p>
-    <h3>Arkitekturmønstre til hybrid og multi-cloud</h3>
-    <p>Arkitekturmønstre til hybrid og multi-cloud hjælper med at undgå, at arbejdslaster bliver tæt koblet til ét miljø. Målet er ikke at køre alt overalt, men at sikre, at kritiske systemer ikke bygger på antagelser, der er svære at ændre senere.</p>
-    <p>En cloud deliberate-tilgang regner med hybride muligheder fra starten. Forskellige arbejdslaster kan ligge der, hvor de passer bedst. Compliance-følsomme eller latency-kritiske systemer kan køre i private miljøer, mens elastiske eller kundevendte arbejdslaster får gavn af public cloud. En klar adskillelse forbedrer robustheden og gør driften mere overskuelig.</p>
-    <p>Bevægelsesfrihed er det centrale udbytte. At designe for portabilitet gør det muligt at tilpasse sig ændringer i pris, regulering, performance eller udbyderens strategi uden store, forstyrrende migreringer. Det kræver ofte trade-offs og bevidste valg på forhånd. I praksis betyder det:</p>
-    <ul>
-      <li>Vælg teknologier, der kan køre på tværs af miljøer, hvad enten det er public cloud, private cloud eller on-premises</li>
-      <li>Foretræk åbne standarder som SQL, S3-kompatible API'er eller OAuth og OIDC</li>
-      <li>Hold data portable ved at undgå unødvendig afhængighed af proprietære formater eller services</li>
-      <li>Design for reversibilitet ved at foretrække udskiftelige komponenter frem for tæt integrerede løsninger</li>
-      <li>Understøt udvikler-portabilitet ved at gøre lokal udvikling og test mulig uden for det primære cloud-miljø</li>
-    </ul>
-    <p>Brugt selektivt og bevidst giver hybride og multi-cloud-mønstre robusthed og bevarer samtidig muligheden for at justere, når vilkårene ændrer sig.</p>
-  </div>
+  <h3>Værktøj 3: Arkitekturmønstre til hybrid og multi-cloud</h3>
+  <p class="supports">Understøtter princip 3: Stræb efter robusthed, og vær klar til at justere</p>
+  <p>Arkitekturmønstre til hybrid og multi-cloud hjælper med at undgå, at arbejdslaster bliver tæt koblet til ét miljø. Målet er ikke at køre alt overalt, men at sikre, at kritiske systemer ikke bygger på antagelser, der er svære at ændre senere.</p>
+  <p>En cloud deliberate-tilgang regner med hybride muligheder fra starten. Forskellige arbejdslaster kan ligge der, hvor de passer bedst. Compliance-følsomme eller latency-kritiske systemer kan køre i private miljøer, mens elastiske eller kundevendte arbejdslaster får gavn af public cloud. En klar adskillelse forbedrer robustheden og gør driften mere overskuelig.</p>
+  <p>Bevægelsesfrihed er det centrale udbytte. At designe for portabilitet gør det muligt at tilpasse sig ændringer i pris, regulering, performance eller udbyderens strategi uden store, forstyrrende migreringer. Det kræver ofte trade-offs og bevidste valg på forhånd. I praksis betyder det:</p>
+  <ul>
+    <li>Vælg teknologier, der kan køre på tværs af miljøer, hvad enten det er public cloud, private cloud eller on-premises</li>
+    <li>Foretræk åbne standarder som SQL, S3-kompatible API'er eller OAuth og OIDC</li>
+    <li>Hold data portable ved at undgå unødvendig afhængighed af proprietære formater eller services</li>
+    <li>Design for reversibilitet ved at foretrække udskiftelige komponenter frem for tæt integrerede løsninger</li>
+    <li>Understøt udvikler-portabilitet ved at gøre lokal udvikling og test mulig uden for det primære cloud-miljø</li>
+  </ul>
+  <p>Brugt selektivt og bevidst giver hybride og multi-cloud-mønstre robusthed og bevarer samtidig muligheden for at justere, når vilkårene ændrer sig.</p>
 
-  <div class="item"><span class="n">04</span>
-    <p class="supports">Understøtter princip 03 · Robust, klar til at justere</p>
-    <h3>Løbende optimering og review</h3>
-    <p>Bevidste cloud-beslutninger er ikke engangshandlinger. Omkostninger, forbrugsmønstre, lovkrav og forretningsprioriteter ændrer sig over tid, og beslutninger der var rigtige på ét tidspunkt kan blive suboptimale senere.</p>
-    <p>Løbende optimering etablerer en fast rytme for at gennemgå arbejdslaster, arkitekturer og driftspraksis. Det dækker omkostningseffektivitet, performance, sikkerhedsposture og compliance på tværs af alle miljøer, ikke kun public cloud.</p>
-    <p>Praksis som FinOps gør omkostninger og forbrug synlige og fælles på tværs af teams. Når optimering behandles som vedvarende arbejde frem for periodisk oprydning, reducerer I spild og undgår pludselige korrigerende indgreb. Regelmæssige reviews understøtter samtidig reversibilitet: ved at genbesøge antagelser og resultater kan teams se, hvornår en ændring i placering, servicevalg eller driftsmodel er på sin plads, og handle før rammerne sætter sig fast.</p>
-  </div>
+  <h3>Værktøj 4: Løbende optimering og review</h3>
+  <p class="supports">Understøtter princip 3: Stræb efter robusthed, og vær klar til at justere</p>
+  <p>Bevidste cloud-beslutninger er ikke engangshandlinger. Omkostninger, forbrugsmønstre, lovkrav og forretningsprioriteter ændrer sig over tid, og beslutninger der var rigtige på ét tidspunkt kan blive suboptimale senere.</p>
+  <p>Løbende optimering etablerer en fast rytme for at gennemgå arbejdslaster, arkitekturer og driftspraksis. Det dækker omkostningseffektivitet, performance, sikkerhedsposture og compliance på tværs af alle miljøer, ikke kun public cloud.</p>
+  <p>Praksis som FinOps gør omkostninger og forbrug synlige og fælles på tværs af teams. Når optimering behandles som vedvarende arbejde frem for periodisk oprydning, reducerer organisationer spild og undgår pludselige korrigerende indgreb. Regelmæssige reviews understøtter samtidig reversibilitet: ved at genbesøge antagelser og resultater kan teams se, hvornår en ændring i placering, servicevalg eller driftsmodel er på sin plads, og handle før rammerne sætter sig fast.</p>
 
-  <div class="item"><span class="n">05</span>
-    <p class="supports">Understøtter princip 04 · Gør det rigtige valg let</p>
-    <h3>Paved roads og klare standarder</h3>
-    <p>Paved roads betyder, at I giver jeres teams understøttede, velkendte måder at bygge, deploye og drive systemer på. En paved road er en tydeligt kommunikeret foretrukken vej for de fleste anvendelser, og den afspejler organisationens arkitekturprincipper, standarder og rammer.</p>
-    <p>Klare standarder reducerer kognitiv belastning. Når teams ved, hvad der anbefales og hvorfor, bruger de mindre tid på at vurdere basale valg og mere tid på at løse rigtige problemer. Standarder giver samtidig konsistens på tværs af teams og systemer uden tung governance.</p>
-    <p>En paved road fjerner ikke autonomien. Teams kan afvige, når der er et begrundet behov, men afvigelser bliver eksplicitte og bevidste frem for tilfældige. Den balance understøtter både hastighed og kontrol.</p>
-  </div>
+  <h3>Værktøj 5: Paved roads og klare standarder</h3>
+  <p class="supports">Understøtter princip 4: Gør det let at træffe det rigtige valg</p>
+  <p>Paved roads betyder, at I giver jeres teams understøttede, velkendte måder at bygge, deploye og drive systemer på. En paved road er en tydeligt kommunikeret foretrukken vej for de fleste anvendelser, og den afspejler organisationens arkitekturprincipper, standarder og rammer.</p>
+  <p>Klare standarder reducerer kognitiv belastning. Når teams ved, hvad der anbefales og hvorfor, bruger de mindre tid på at vurdere basale valg og mere tid på at løse rigtige problemer. Standarder giver samtidig konsistens på tværs af teams og systemer uden tung governance.</p>
+  <p>En paved road fjerner ikke autonomien. Teams kan afvige, når der er et begrundet behov, men afvigelser bliver eksplicitte og bevidste frem for tilfældige. Den balance understøtter både hastighed og kontrol.</p>
 </section>
 
-<section class="pagebreak">
+<section>
   <h2>Hvordan træffer man beslutningerne?</h2>
-  <div class="rule"></div>
-  <p class="lede">Beslutninger træffes på alle niveauer, fra produktteams til drift. Bred beslutningskraft er nødvendig, men inkonsistens og manglende synlighed skaber problemer. Centralisering reducerer autonomien, mens fuld uafhængighed fører til fragmentering. En balanceret, kollektiv tilgang inspireret af Andrew Harmel-Laws arbejde med at facilitere softwarearkitektur, med lette tilføjelser, understøtter både hastighed og alignment.</p>
-  <p>Bemyndig, Konsultér, Mål, Vejled, Dokumentér. Frameworket giver alle myndighed, fremmer samarbejde med eksperter, vejer effekt og reversibilitet, anvender principperne som rammer og fastholder de vigtige beslutninger i Architecture Decision Records.</p>
+  <p>Beslutninger træffes på alle niveauer, fra produktteams til drift. Bred beslutningskraft er nødvendig, men inkonsistens og manglende synlighed skaber problemer. Centralisering reducerer autonomien, mens fuld uafhængighed fører til fragmentering. En balanceret, kollektiv tilgang inspireret af Andrew Harmel-Laws arbejde med at facilitere softwarearkitektur, med lette tilføjelser, understøtter både hastighed og alignment.</p>
+  <p>Bemyndig, Konsultér, Mål, Vejled, Dokumentér: Frameworket giver alle myndighed, fremmer samarbejde med eksperter, vejer effekt og reversibilitet, anvender principperne som rammer og fastholder de vigtige beslutninger i Architecture Decision Records.</p>
 
-  <div class="item"><span class="n">01</span>
-    <h3>Bemyndig</h3>
-    <p>Beslutningsmyndighed placeres tættest på det punkt, hvor den får effekt, så beslutningen træffes af dem, der skal leve med udfaldet. Teams skal bemyndiges for at kunne bevæge sig hurtigt, men med omtanke, for beslutningerne træffes ikke i isolation.</p>
-  </div>
-  <div class="item"><span class="n">02</span>
-    <h3>Konsultér</h3>
-    <p>Beslutninger har konsekvenser. Den, der beslutter, skal konsultere dem, der bliver berørt, og de relevante fageksperter. Hav en proces for at hente input fra berørte og eksperter, så konsultationen sker før valget låses.</p>
-  </div>
-  <div class="item"><span class="n">03</span>
-    <h3>Mål</h3>
-    <p>Teams bør måle deres beslutninger gennem to linser: effekt og reversibilitet. <strong>Effekt</strong> vil sige, om beslutningen berører flere teams eller domæner, eller har langvarige konsekvenser. <strong>Reversibilitet</strong> vil sige, om der er tale om en two-way door, der er let at rulle tilbage, eller en one-way door, der er svær at ændre. One-way-beslutninger med stor effekt kræver mere konsultation og er sjældent noget, et enkelt team kan afgøre alene. I den anden ende står two-way-beslutninger med lokal effekt, som teamet trygt kan træffe selv.</p>
-  </div>
-  <div class="item"><span class="n">04</span>
-    <h3>Vejled</h3>
-    <p>Principper, standarder, best practices og tech radar er guardrails og pejlemærker for beslutningerne. De sætter retning, fjerner tvetydighed og gør det tydeligt, hvad der er foretrukket, hvad der er på vej frem, og hvad der bør undgås.</p>
-  </div>
-  <div class="item"><span class="n">05</span>
-    <h3>Dokumentér</h3>
-    <p>Et Architecture Decision Record fastholder beslutningen, konteksten, mulighederne, jeres trade-offs og ræsonnementet. ADRs skaber gennemsigtighed og fælles viden, hjælper teams med at forstå arkitekturlandskabet og gør distribueret beslutningstagning sikker.</p>
+  <div class="rows">
+    <div class="row"><div class="num">1</div><div class="body">
+      <h4>Bemyndig</h4>
+      <p>Beslutningsmyndighed placeres tættest på det punkt, hvor den får effekt, så beslutningen træffes af dem, der skal leve med udfaldet. Teams skal bemyndiges for at kunne bevæge sig hurtigt, men med omtanke, for beslutningerne træffes ikke i isolation.</p>
+    </div></div>
+    <div class="row"><div class="num">2</div><div class="body">
+      <h4>Konsultér</h4>
+      <p>Beslutninger har konsekvenser. Den, der beslutter, skal konsultere dem, der bliver berørt, og de relevante fageksperter. Hav en proces for at hente input fra berørte og eksperter, så konsultationen sker før valget låses.</p>
+    </div></div>
+    <div class="row"><div class="num">3</div><div class="body">
+      <h4>Mål</h4>
+      <p>Teams bør måle deres beslutninger gennem to linser:</p>
+      <ul>
+        <li><strong>Effekt:</strong> berører beslutningen flere teams eller domæner, eller har den langvarige konsekvenser?</li>
+        <li><strong>Reversibilitet:</strong> er det en two-way door, der er let at rulle tilbage, eller en one-way door, der er svær at ændre?</li>
+      </ul>
+      <p>One-way-beslutninger med stor effekt kræver mere konsultation og er sjældent noget, et enkelt team kan afgøre alene. Two-way-beslutninger med lokal effekt kan teamet trygt træffe selv.</p>
+    </div></div>
+    <div class="row"><div class="num">4</div><div class="body">
+      <h4>Vejled</h4>
+      <p>Principper, standarder, best practices og tech radar er guardrails og pejlemærker for beslutningerne. De sætter retning, fjerner tvetydighed og gør det tydeligt, hvad der er foretrukket, hvad der er på vej frem, og hvad der bør undgås.</p>
+    </div></div>
+    <div class="row"><div class="num">5</div><div class="body">
+      <h4>Dokumentér</h4>
+      <p>Et Architecture Decision Record fastholder beslutningen, konteksten, mulighederne, jeres trade-offs og ræsonnementet. ADR'er skaber gennemsigtighed og fælles viden, hjælper teams med at forstå arkitekturlandskabet og gør distribueret beslutningstagning sikker.</p>
+    </div></div>
   </div>
 </section>
 
-<section class="pagebreak">
+<section>
   <h2>Baggrund: hvorfor kontrol bliver svær i det offentlige cloud</h2>
-  <div class="rule"></div>
-  <p class="lede">De grunde, virksomheder selv peger på, når de mister kontrollen. Hver enkelt kan løses, når den først er navngivet.</p>
 
   <h3>Eskalerende, uforudsigelige omkostninger</h3>
   <p>Elasticiteten i public cloud løser et problem, on-premises infrastruktur ikke kan: når I har brug for mere kapacitet, får I den med det samme, uden indkøbscyklusser der tager uger eller måneder. Fordelen er stor, og pay-per-use kan være omkostningseffektivt for elastiske arbejdslaster. Men når driften skalerer, følger også en risiko for eskalerende omkostninger, der er lette at overse og svære at forudsige.</p>
   <p>Fejlkonfigureret autoskalering kan få egress- og netværksgebyrer til at hobe sig stille op eller efterlade idle ressourcer kørende over tid. Andre kilder til unødvendige omkostninger er suboptimale prisvalg, der ikke udnytter reserved instances eller spot-priser. De omkostninger kan i vid udstrækning undgås ved at konfigurere og styre systemet korrekt, men det kræver grundig monitorering og et højt vidensniveau om systemet.</p>
-  <p>I bør også overveje de langsigtede konsekvenser af, hvor arbejdslaster og data placeres. Applikationer og containere er forholdsvis lette at flytte mellem miljøer, mens data er væsentligt sværere og dyrere at overføre. Egress-gebyrer kan blive en stor barriere for at repatriere arbejdslaster eller flytte dem mellem udbydere. Efterhånden som datasæt vokser, skaber det en form for driftsmæssig lock-in, der begrænser fleksibiliteten. Selv når organisationer indfører FinOps-praksis og dedikerede teams, ligger omkostningsstyring og forudsigelighed konsekvent øverst på listen over cloud-udfordringer.</p>
+  <p>Organisationer bør også overveje de langsigtede konsekvenser af, hvor arbejdslaster og data placeres. Applikationer og containere er forholdsvis lette at flytte mellem miljøer, mens data er væsentligt sværere og dyrere at overføre. Egress-gebyrer kan blive en stor barriere for at repatriere arbejdslaster eller flytte dem mellem udbydere. Efterhånden som datasæt vokser, skaber det en form for driftsmæssig lock-in, der begrænser fleksibiliteten. Selv når organisationer indfører FinOps-praksis og dedikerede teams, ligger omkostningsstyring og forudsigelighed konsekvent øverst på listen over cloud-udfordringer.</p>
 
-  <h3>Sikkerhed og delt ansvar</h3>
+  <h3>Sikkerhedsudfordringer</h3>
   <p>Udbyderne investerer massivt i sikkerhed og leverer avancerede funktioner som DDoS-beskyttelse, Identity and Access Management og kryptering som standard. Det er langt mere granulære og automatiserede kontroller, end det ville være realistisk at bygge selv.</p>
   <p>Cloud-platforme kommer med en delt ansvarsmodel: udbyderen sikrer den underliggende infrastruktur, mens kunden er ansvarlig for data, IAM og konfiguration. Selvom kontrollerne er avancerede og robuste, introducerer den delte ansvarsmodel også risiko. Fejlkonfigurationer og misforstået ejerskab kan føre til sikkerhedshuller, for eksempel utilsigtet dataeksponering. At holde en opdateret viden om ansvarsgrænserne og konfigurationsmulighederne er afgørende for at fastholde en stærk sikkerhedsposture.</p>
 
@@ -247,17 +279,14 @@
   <p>Spørgsmålet er derfor ikke, om kompleksitet eksisterer, men hvor den ligger, og om organisationen er rustet til at håndtere den, både teknisk og organisatorisk.</p>
 </section>
 
-<section class="pagebreak">
-  <h2>Din tur</h2>
-  <div class="rule"></div>
-  <p class="lede">Frem for at jagte hver eneste cloud-trend kan I fokusere på små, bevidste handlinger og komme videre derfra.</p>
-  <p>Start med at anvende et eller to af principperne på reelle beslutninger, for eksempel ved at gøre optimering til noget løbende eller vælge automatisering frem for manuelle opgaver. Byg videre derfra: sæt klare standarder, brug værktøjer som Tech Radar til at holde styr på, hvor I står, og dokumentér de vigtige beslutninger med Architecture Decision Records, så I står samlet om dem.</p>
-  <div class="box">
-    <h3>Hvis I vil have hjælp</h3>
-    <p style="margin-bottom:0">Vi tilbyder to uforpligtende muligheder: en uformel frokost, hvor vi vender jeres udfordringer, eller en halvdagsworkshop, hvor vi finder mulighederne og skitserer de næste skridt. Begge dele hjælper jer med at bevæge jer bevidst mod en cloud-strategi, der holder.</p>
+<div class="closing pagebreak">
+  <div class="closing__photo"></div>
+  <div class="closing__text">
+    <h1>Din tur</h1>
+    <p>Frem for at jagte hver eneste cloud-trend kan I fokusere på små, bevidste handlinger og komme videre derfra. Start med at anvende et eller to af principperne på reelle beslutninger, for eksempel ved at gøre optimering til noget løbende eller vælge automatisering frem for manuelle opgaver. Byg videre derfra: sæt klare standarder, brug værktøjer som Tech Radar til at holde styr på, hvor I står, og dokumentér de vigtige beslutninger med Architecture Decision Records for bedre alignment.</p>
+    <p>Hvis I vil have hjælp, tilbyder vi uforpligtende muligheder: en uformel frokost, hvor vi vender jeres udfordringer, eller en halvdagsworkshop, hvor vi finder mulighederne og skitserer de næste skridt, og hjælper jer med at bevæge jer bevidst mod en cloud-strategi, der holder.</p>
   </div>
-  <footer>Consid København · Cloud Deliberate · cloud-deliberate.consid.engineering</footer>
-</section>
+</div>
 
 </body>
 </html>
