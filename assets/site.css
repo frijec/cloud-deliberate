@@ -204,63 +204,89 @@ button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
 .btn--onDark:hover{background:rgba(255,255,255,.18)}
 .btn:disabled,.btn[aria-disabled="true"]{opacity:.5;cursor:default;pointer-events:none}
 
-/* NAV ---------------------------------------------------- */
-.nav{position:sticky;top:0;z-index:50}
+/* NAV -----------------------------------------------------
+   Matches consid.com's own real header, ported from the same swap in
+   agentic-futures (frijec/agentic-futures@964a4fa), which measured it
+   directly off consid.com's live computed styles and DOM:
+   - Nav links are plain text, Dark by default, no fill on the CTA at
+     all — "Book en session" is just red text with an outline.
+   - --nav-fg drives regular link + logo colour; --nav-cta drives just
+     the CTA, since on consid.com the CTA is red whenever content is
+     light but turns white (matching the other links) over a dark hero.
+   - .nav--onDark (per-page, unchanged) sets both to white at rest.
+   - [data-stuck="true"] (site.js, on scroll) slides a white/blurred
+     bar down from behind the nav via `transform`, exactly as
+     consid.com does it, and both variants converge on the Dark/red
+     scheme once it's in. */
+.nav{position:sticky;top:0;z-index:50;font-family:var(--font-body);
+  --nav-fg:var(--consid-dark);--nav-cta:var(--consid-red)}
 .nav::before{
-  content:"";position:absolute;inset:-1px 0 0;
-  backdrop-filter:blur(16px) saturate(1.4);-webkit-backdrop-filter:blur(16px) saturate(1.4);
-  background-image:linear-gradient(to bottom, rgba(245,243,241,.8) 0%, rgba(245,243,241,0) 100%);
-  mask-image:linear-gradient(to bottom, #000 0%, #000 45%, transparent 100%);
-  -webkit-mask-image:linear-gradient(to bottom, #000 0%, #000 45%, transparent 100%);
-  pointer-events:none;opacity:0;transition:opacity var(--d-base) var(--ease-out);
+  content:"";position:absolute;inset:0;
+  background:rgba(255,255,255,.8);
+  backdrop-filter:saturate(1.8) blur(5px);-webkit-backdrop-filter:saturate(1.8) blur(5px);
+  transform:translateY(-100%);
+  transition:transform var(--d-base) var(--ease-out);
+  pointer-events:none;
 }
-.nav[data-stuck="true"]::before{opacity:1}
+.nav[data-stuck="true"]::before{transform:translateY(0)}
+.nav--onDark:not([data-stuck="true"]){--nav-fg:#fff;--nav-cta:#fff}
 .nav__in{
   position:relative;z-index:1;
   display:flex;align-items:center;gap:var(--s-5);
   padding:1.15rem var(--gutter);
 }
-.brand{display:flex;align-items:center;gap:var(--s-3);text-decoration:none;flex:none}
-.brand__mark{height:22px;width:auto;display:block;transition:filter var(--d-fast) var(--ease-out)}
-.brand__sub{font-family:var(--font-mono);font-size:var(--t-micro);color:var(--stone);letter-spacing:.03em;padding-left:var(--s-3);border-left:1px solid var(--hairline);transition:color var(--d-fast) var(--ease-out),border-color var(--d-fast) var(--ease-out)}
-.nav__links{display:flex;gap:var(--s-5);margin-left:auto;align-items:center}
-.nav__link{text-decoration:none;font-size:var(--t-small);color:var(--graphite);white-space:nowrap;transition:color var(--d-fast) var(--ease-out)}
-.nav__link:hover{color:var(--ink-800)}
-.nav .btn{padding:.7rem 1.2rem}
+.brand{display:flex;align-items:center;text-decoration:none;flex:none;position:relative}
+.brand__mark{height:22px;width:auto;display:block;transition:opacity var(--d-fast) var(--ease-out)}
+.brand__mark--light{position:absolute;left:0;top:0;opacity:0}
+.nav--onDark:not([data-stuck="true"]) .brand__mark--dark{opacity:0}
+.nav--onDark:not([data-stuck="true"]) .brand__mark--light{opacity:1}
+/* Links sit right after the logo; the CTA is the one pushed to the
+   end, via its own margin-left:auto — .nav__links needs flex:1 so
+   that auto-margin has real space to push into. */
+.nav__links{display:flex;gap:var(--s-5);align-items:center;flex:1}
+.nav__link,.nav__cta{text-decoration:none;font-size:var(--t-small);font-weight:600;
+  white-space:nowrap;padding:.5rem .75rem;border-radius:var(--r-pill);
+  transition:color var(--d-fast) var(--ease-out),background-color var(--d-fast) var(--ease-out)}
+.nav__link{color:var(--nav-fg)}
+.nav__link:hover{background:rgba(255,255,255,.2)}
+.nav__cta{color:var(--nav-cta);margin-left:auto;padding:.5rem 1.25rem;border:2px solid var(--nav-cta);position:relative}
+/* CTA outline draw — consid.com's own .btn-outline-anim interaction.
+   The visible outline is not a CSS border at all: it's an SVG <rect>
+   stroked with currentColor, whose dash pattern animates on hover so
+   the outline redraws itself around the pill. The dash lengths depend
+   on the button's measured size, so site.js injects the SVG and sets
+   these custom properties; the CSS border above stays as the no-JS
+   fallback and, once the SVG is in, goes transparent while still
+   holding its 2px of layout. */
+.nav__cta.has-outline-anim{border-color:transparent}
+.nav__cta .cta-outline{
+  position:absolute;inset:0;overflow:visible;pointer-events:none;
+  stroke:currentColor;stroke-width:2;fill:none;
+  stroke-dasharray:var(--button-animation-perimeter),0;
+  stroke-dashoffset:calc(var(--button-animation-offset) + 20);
+  transform:rotateX(180deg);
+  transition:stroke-dasharray .9s var(--ease-out),stroke-dashoffset .9s var(--ease-out),
+             stroke var(--d-fast) var(--ease-out);
+}
+.nav__cta:hover .cta-outline{
+  stroke-dasharray:var(--button-animation-perimeter),var(--button-animation-perimeter);
+  stroke-dashoffset:var(--button-animation-offset);
+}
+@media (prefers-reduced-motion:reduce){.nav__cta .cta-outline{transition:none}}
 /* Below 900px the section anchors go, but Ydelser stays: it is the only
    real destination on the site, and without it a phone visitor can only
    reach the offerings by scrolling to the footer. */
-/* Five nav links plus the button need 1021px, but the links only
-   collapse at 900px — which left the button clipped and the page
-   scrolling sideways between roughly 900 and 990. The wordmark suffix
-   is the cheapest 146px to give back, so it goes first and the links
-   survive down to the real breakpoint. */
-@media (max-width:1100px){.brand__sub{display:none}}
 @media (max-width:900px){.nav__links .nav__link:not(.nav__link--stay){display:none}}
-/* Brand + Ydelser + button have to share one row on a phone. */
-@media (max-width:640px){.nav__links{gap:var(--s-4)} .nav .btn{padding:.75rem 1.1rem}}
+/* Brand + Ydelser + CTA have to share one row on a phone. */
+@media (max-width:640px){.nav__links{gap:var(--s-4)} .nav__cta{padding:.5rem 1rem}}
 /* 320px is the reflow floor (WCAG 1.4.10), and the row has to fit there
-   without the button being clipped. Tightening the gaps and padding
-   buys the ~17px needed, so the label keeps --t-small rather than
-   dropping to a one-off size. */
+   without the CTA being clipped. */
 @media (max-width:420px){
   .nav__in{padding-inline:var(--s-3)}
   .nav__links{gap:var(--s-2)}
-  .nav .btn{padding:.75rem .9rem}
-  .nav .btn .arw{display:none}
+  .nav__cta{padding:.5rem .8rem}
   .brand__mark{width:76px;height:auto}
 }
-
-/* Nav-on-dark variant — for pages whose top section is a plum band
-   (the Ydelse pages): the nav overlays that band as a transparent bar
-   with a white logo/label, then reverts to the standard in-flow blurred
-   nav the moment the page scrolls past it. site.js drives the toggle by
-   measuring .ydelse__head, so that class name must not be renamed. */
-.nav--onDark{position:fixed;top:0;left:0;right:0}
-.nav--onDark:not([data-stuck="true"]) .brand__mark{filter:brightness(0) invert(1)}
-.nav--onDark:not([data-stuck="true"]) .brand__sub{color:rgba(255,255,255,.65);border-left-color:rgba(255,255,255,.3)}
-.nav--onDark:not([data-stuck="true"]) .nav__link{color:rgba(255,255,255,.85)}
-.nav--onDark:not([data-stuck="true"]) .nav__link:hover{color:#fff}
 
 /* CARD system -------------------------------------------- */
 /* No horizontal rail here: three offerings and no article archive means
@@ -329,12 +355,36 @@ button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
 /* nowrap so the arrow never orphans onto a line of its own. */
 .ctacard__alt a{color:var(--coral);text-decoration:none;white-space:nowrap}
 .ctacard__alt a:hover{text-decoration:underline}
-.footer{padding-block:var(--s-7)}
-.footer__in{display:flex;flex-wrap:wrap;gap:var(--s-5);justify-content:space-between;align-items:center;font-size:var(--t-small);color:var(--stone)}
-.footer__links{display:flex;gap:var(--s-5)}
-.footer__links a{text-decoration:none;display:inline-block;padding-block:.65rem;
-  transition:color var(--d-fast) var(--ease-out)}
-.footer__links a:hover{color:var(--ink-800)}
+/* FOOTER ----------------------------------------------------
+   Matches consid.com's own real footer, ported from the same swap in
+   agentic-futures (frijec/agentic-futures@964a4fa) — measured directly
+   off its live DOM/computed styles: solid Dark, three plain link
+   columns (no separate header — the first link in each column is
+   styled exactly like the rest, just first), a row of 30px white
+   circular social icons pinned to the end of that row, and a bottom
+   row with the logo and two legal links — no copyright line, no
+   divider border. */
+.footer{background:var(--consid-dark);color:#fff;font-family:var(--font-body);
+  padding-top:var(--s-8);padding-bottom:var(--s-6)}
+.footer__grid{display:flex;flex-wrap:wrap;gap:var(--s-6) var(--s-5)}
+.footer__col{display:flex;flex-direction:column;gap:var(--s-3);flex:1 1 200px;min-width:0}
+.footer__col a{color:#fff;font-size:1.125rem;font-weight:600;text-decoration:underline;
+  text-underline-offset:.15em;text-decoration-color:rgba(255,255,255,.35);
+  transition:text-decoration-color var(--d-fast) var(--ease-out)}
+.footer__col a:hover{text-decoration-color:#fff}
+.footer__social{display:flex;gap:var(--s-3);align-items:flex-start;margin-left:auto;flex:0 0 auto}
+.footer__social a{display:flex;align-items:center;justify-content:center;width:30px;height:30px;
+  border-radius:999px;background:#fff;color:var(--consid-dark);transition:opacity var(--d-fast) var(--ease-out)}
+.footer__social a:hover{opacity:.8}
+.footer__social svg{width:16px;height:16px}
+.footer__bottom{margin-top:var(--s-6);
+  display:flex;flex-wrap:wrap;gap:var(--s-4);align-items:center;justify-content:space-between}
+.footer__logo{display:block;height:28px}
+.footer__logo img{height:100%;width:auto;display:block}
+.footer__legal{display:flex;flex-wrap:wrap;gap:var(--s-5);align-items:center;font-size:1.125rem;color:#fff}
+.footer__legal a{color:#fff;text-decoration:none;transition:opacity var(--d-fast) var(--ease-out)}
+.footer__legal a:hover{opacity:.7}
+@media (max-width:640px){.footer__social{margin-left:0;flex:1 1 100%}}
 
 /* REVEAL --------------------------------------------------- */
 /* Transition lives on .is-in, not on .reveal — so the hidden state is
@@ -349,10 +399,17 @@ button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
    ============================================================ */
 
 /* The plum band the nav overlays. site.js measures THIS element to flip
-   .nav--onDark back to the light nav, so the class name is load-bearing. */
+   .nav--onDark back to the light nav, so the class name is load-bearing.
+   .nav is sticky, not fixed, so without this the band would start
+   below the nav's own flow height, leaving the page's light background
+   showing through the transparent nav instead of plum. Pulling the head
+   up by exactly --nav-h and adding that back as padding — same trick
+   the homepage .hero already uses — keeps the h1/lead sitting where
+   they did while the plum itself extends up behind the nav. */
 .ydelse__head{position:relative;z-index:0;overflow:hidden;background:var(--plum);
   border-radius:0 0 var(--r-xl) var(--r-xl);
-  padding-top:clamp(6.5rem,12vw,8.5rem);padding-bottom:clamp(2.5rem,6vw,4rem)}
+  margin-top:calc(-1 * var(--nav-h, 76px));
+  padding-top:calc(var(--nav-h, 76px) + clamp(3.5rem,8vw,7rem));padding-bottom:clamp(2.5rem,6vw,4rem)}
 .ydelse__head h1{color:#fff}
 .ydelse__head .lead{color:rgba(255,255,255,.78)}
 .backlink{display:inline-flex;align-items:center;gap:var(--s-2);text-decoration:none;

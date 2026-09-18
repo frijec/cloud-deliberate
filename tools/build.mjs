@@ -143,7 +143,7 @@ writeFileSync(join(ROOT, 'robots.txt'), M.noindex
 console.log(`✓ robots.txt${M.noindex ? ' (Disallow: /)' : ''}`);
 
 /* ---------- 3. OG images ---------------------------------- */
-const mark = pathToFileURL(join(ROOT, 'assets/brand-mark.png')).href;
+const mark = pathToFileURL(join(ROOT, 'assets/consid-logo-white.svg')).href;
 const fontUrl = name => pathToFileURL(join(ROOT, `assets/fonts/ConsidSans-${name}.woff2`)).href;
 const card = p => `<!doctype html><html lang="da"><head><meta charset="utf-8">
 <style>
@@ -154,7 +154,7 @@ const card = p => `<!doctype html><html lang="da"><head><meta charset="utf-8">
   body{width:1200px;height:630px;background:#492A34;color:#fff;
     font-family:"ConsidSans",sans-serif;padding:64px 72px;display:flex;flex-direction:column}
   .top{display:flex;align-items:center;gap:18px}
-  .top img{height:26px;width:auto;filter:brightness(0) invert(1)}
+  .top img{height:26px;width:auto}
   .sub{font-family:"ConsidSans",monospace;font-size:15px;letter-spacing:.06em;
     color:rgba(255,255,255,.62);padding-left:18px;border-left:1px solid rgba(255,255,255,.24)}
   .mid{margin-top:auto}

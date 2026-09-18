@@ -69,6 +69,47 @@ if (navEl) {
   if (document.fonts && document.fonts.ready) document.fonts.ready.then(setNavH);
 }
 
+/* Nav CTA outline — consid.com's .btn-outline-anim interaction, ported
+   from agentic-futures. Its outline is an SVG <rect> stroke rather than
+   a CSS border, so that on hover the dash pattern can animate and
+   "redraw" the outline around the pill. Both dash lengths are derived
+   from the button's own measured size (it's a stadium: two straight
+   runs of w-h plus a circle of diameter h), so this re-measures
+   whenever that size can change. */
+const initCtaOutline = el => {
+  const w = el.offsetWidth, h = el.offsetHeight;
+  if (!w || !h) return;
+  const straight = w - h;
+  const perimeter = 2 * straight + Math.PI * h;
+  let svg = el.querySelector('.cta-outline');
+  if (!svg) {
+    const NS = 'http://www.w3.org/2000/svg';
+    svg = document.createElementNS(NS, 'svg');
+    svg.setAttribute('class', 'cta-outline');
+    svg.setAttribute('aria-hidden', 'true');
+    svg.appendChild(document.createElementNS(NS, 'rect'));
+    el.appendChild(svg);
+    el.classList.add('has-outline-anim');
+  }
+  const rect = svg.firstChild;
+  svg.setAttribute('viewBox', `0 0 ${w} ${h}`);
+  rect.setAttribute('width', '100%');
+  rect.setAttribute('height', '100%');
+  rect.setAttribute('rx', h / 2);
+  rect.setAttribute('ry', h / 2);
+  svg.style.setProperty('--button-animation-perimeter', perimeter);
+  svg.style.setProperty('--button-animation-offset', perimeter - straight);
+};
+const ctas = document.querySelectorAll('.nav__cta');
+if (ctas.length) {
+  const sizeCtas = () => ctas.forEach(initCtaOutline);
+  sizeCtas();
+  addEventListener('resize', sizeCtas, { passive: true });
+  /* ConsidSans loading in can change the label's width, and with it
+     the perimeter the dashes are cut to. */
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(sizeCtas);
+}
+
 /* Headline word-split — wraps each word of [data-split] so they can
    rise in one after another. The coral .pill chip is treated as a
    single word rather than descended into, so its rotation and
