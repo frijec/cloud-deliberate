@@ -104,6 +104,7 @@
   --measure:64ch;
   --gutter:clamp(1.1rem,4.5vw,4rem);
   --maxw:1300px;
+  --nav-height:85px;
 }
 
 /* ConsidSans — Consid's brand typeface, self-hosted. Replaces the Google
@@ -233,19 +234,19 @@ button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
 .nav__in{
   position:relative;z-index:1;
   display:flex;align-items:center;gap:var(--s-5);
-  padding:1.15rem var(--gutter);
+  height:var(--nav-height);padding-inline:40px;
 }
 .brand{display:flex;align-items:center;text-decoration:none;flex:none;position:relative}
-.brand__mark{height:22px;width:auto;display:block;transition:opacity var(--d-fast) var(--ease-out)}
+.brand__mark{height:32px;width:auto;display:block;transition:opacity var(--d-fast) var(--ease-out)}
 .brand__mark--light{position:absolute;left:0;top:0;opacity:0}
 .nav--onDark:not([data-stuck="true"]) .brand__mark--dark{opacity:0}
 .nav--onDark:not([data-stuck="true"]) .brand__mark--light{opacity:1}
 /* Links sit right after the logo; the CTA is the one pushed to the
    end, via its own margin-left:auto — .nav__links needs flex:1 so
    that auto-margin has real space to push into. */
-.nav__links{display:flex;gap:var(--s-5);align-items:center;flex:1}
-.nav__link,.nav__cta{text-decoration:none;font-size:var(--t-small);font-weight:600;
-  white-space:nowrap;padding:.5rem .75rem;border-radius:var(--r-pill);
+.nav__links{display:flex;gap:var(--s-1);align-items:center;flex:1}
+.nav__link,.nav__cta{text-decoration:none;font-size:16px;font-weight:600;
+  padding:.5rem .75rem;border-radius:var(--r-pill);
   transition:color var(--d-fast) var(--ease-out),background-color var(--d-fast) var(--ease-out)}
 .nav__link{color:var(--nav-fg)}
 .nav__link:hover{background:rgba(255,255,255,.2)}
@@ -275,18 +276,11 @@ button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
 @media (prefers-reduced-motion:reduce){.nav__cta .cta-outline{transition:none}}
 /* Below 900px the section anchors go, but Ydelser stays: it is the only
    real destination on the site, and without it a phone visitor can only
-   reach the offerings by scrolling to the footer. */
+   reach the offerings by scrolling to the footer. Otherwise identical to
+   agentic-futures' own single nav breakpoint — no extra narrow-viewport
+   tightening here anymore, to keep the two navs pixel-for-pixel the same
+   at every width both sites actually support. */
 @media (max-width:900px){.nav__links .nav__link:not(.nav__link--stay){display:none}}
-/* Brand + Ydelser + CTA have to share one row on a phone. */
-@media (max-width:640px){.nav__links{gap:var(--s-4)} .nav__cta{padding:.5rem 1rem}}
-/* 320px is the reflow floor (WCAG 1.4.10), and the row has to fit there
-   without the CTA being clipped. */
-@media (max-width:420px){
-  .nav__in{padding-inline:var(--s-3)}
-  .nav__links{gap:var(--s-2)}
-  .nav__cta{padding:.5rem .8rem}
-  .brand__mark{width:76px;height:auto}
-}
 
 /* CARD system -------------------------------------------- */
 /* No horizontal rail here: three offerings and no article archive means
@@ -403,13 +397,13 @@ button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
    .nav is sticky, not fixed, so without this the band would start
    below the nav's own flow height, leaving the page's light background
    showing through the transparent nav instead of plum. Pulling the head
-   up by exactly --nav-h and adding that back as padding — same trick
-   the homepage .hero already uses — keeps the h1/lead sitting where
+   up by exactly --nav-height and adding that back as padding — same
+   trick the homepage .hero already uses — keeps the h1/lead sitting where
    they did while the plum itself extends up behind the nav. */
 .ydelse__head{position:relative;z-index:0;overflow:hidden;background:var(--plum);
   border-radius:0 0 var(--r-xl) var(--r-xl);
-  margin-top:calc(-1 * var(--nav-h, 76px));
-  padding-top:calc(var(--nav-h, 76px) + clamp(3.5rem,8vw,7rem));padding-bottom:clamp(2.5rem,6vw,4rem)}
+  margin-top:calc(-1 * var(--nav-height));
+  padding-top:calc(var(--nav-height) + clamp(3.5rem,8vw,7rem));padding-bottom:clamp(2.5rem,6vw,4rem)}
 .ydelse__head h1{color:#fff}
 .ydelse__head .lead{color:rgba(255,255,255,.78)}
 .backlink{display:inline-flex;align-items:center;gap:var(--s-2);text-decoration:none;
@@ -510,7 +504,7 @@ button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
 .journey{display:grid;grid-template-columns:minmax(140px,180px) minmax(0,1fr);
   gap:clamp(2rem,5vw,5rem);align-items:start;margin-top:clamp(2rem,4vw,3rem)}
 .journey .phases{margin-top:0}
-.journey__rail{position:sticky;top:calc(var(--nav-h,76px) + 2rem);
+.journey__rail{position:sticky;top:calc(var(--nav-height) + 2rem);
   display:flex;flex-direction:column;gap:var(--s-6)}
 .journey__track{position:relative;height:clamp(200px,34vh,340px);padding-left:1.6rem;margin-left:var(--s-2)}
 .journey__track::before{content:"";position:absolute;left:0;top:0;bottom:0;width:6px;
@@ -630,7 +624,7 @@ button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
 /* HERO --------------------------------------------------- */
 .hero{
   padding-block:clamp(3rem,8vw,6rem) 0;position:relative;overflow:hidden;
-  min-height:100vh;margin-top:calc(-1 * var(--nav-h, 76px));
+  min-height:100vh;margin-top:calc(-1 * var(--nav-height));
   display:flex;flex-direction:column;gap:var(--s-6);
 }
 /* A field of dithered clouds drifting behind the headline — this

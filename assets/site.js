@@ -1,20 +1,17 @@
 /* ============================================================
    CONSID · CLOUD DELIBERATE — shared chrome JS.
 
-   Reveal-on-scroll, nav-stuck state, the --nav-h measurement the
-   hero depends on, the headline word-split, the enquiry form, and
-   the CTA card's noise hover shader. Loaded by every page.
+   Reveal-on-scroll, nav-stuck state, the nav CTA's outline animation,
+   the headline word-split, the enquiry form, and the CTA card's noise
+   hover shader. Loaded by every page.
 
    No third-party services: no form backend, no booking widget, no
    analytics. The only network requests a page makes are for its own
-   assets and the Google Fonts stylesheet.
+   assets.
 
    No rail/filter factory here: three offerings and no article
    archive means there is nothing to filter or scroll horizontally,
    so the cards are plain static markup instead.
-
-   Classic script, not a module — nothing here needs to be, and a
-   module would defer past the point where --nav-h must be set.
    ============================================================ */
 const REDUCED = matchMedia('(prefers-reduced-motion: reduce)').matches;
 
@@ -58,15 +55,6 @@ if (navEl) {
     onScroll();
     addEventListener('scroll', onScroll, { passive: true });
   }
-
-  /* The hero sits at true y=0 behind the sticky, transparent nav —
-     pulled up by exactly the nav's own height so it fills the viewport
-     top to bottom. Re-measured once webfonts land, because the nav's
-     height depends on the rendered label. */
-  const setNavH = () => document.documentElement.style.setProperty('--nav-h', navEl.offsetHeight + 'px');
-  setNavH();
-  addEventListener('resize', setNavH, { passive: true });
-  if (document.fonts && document.fonts.ready) document.fonts.ready.then(setNavH);
 }
 
 /* Nav CTA outline — consid.com's .btn-outline-anim interaction, ported
