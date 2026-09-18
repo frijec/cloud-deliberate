@@ -355,8 +355,12 @@ button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
    circular social icons pinned to the end of that row, and a bottom
    row with the logo and two legal links — no copyright line, no
    divider border. */
+/* padding-top matches .stack's own — the footer isn't a .stack, but it
+   directly follows one (the CTA card's section) on every page, so it
+   needs the same top gap every other section-to-section transition
+   gets, not the flatter --s-8 this used to be pinned to. */
 .footer{background:var(--consid-dark);color:#fff;font-family:var(--font-body);
-  padding-top:var(--s-8);padding-bottom:var(--s-6)}
+  padding-top:clamp(3.5rem,8vw,7rem);padding-bottom:var(--s-6)}
 .footer__grid{display:flex;flex-wrap:wrap;gap:var(--s-6) var(--s-5)}
 .footer__col{display:flex;flex-direction:column;gap:var(--s-3);flex:1 1 200px}
 .footer__col a{color:#fff;font-size:1.125rem;font-weight:600;text-decoration:underline;
