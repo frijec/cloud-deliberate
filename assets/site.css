@@ -162,6 +162,13 @@ button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
 .stack{padding-top:clamp(3.5rem,8vw,7rem);padding-bottom:clamp(1rem,2vw,1.5rem)}
 /* A section continuing the one above it, rather than opening the page. */
 .stack--cont{padding-top:clamp(2.25rem,4.5vw,3.75rem)}
+/* The CTA card is the visual close of the page, not just another
+   section — .stack's own padding-bottom (max 24px) reads as a gap
+   between two adjacent sections, not the pause before the footer
+   starts a new, dark block. Whichever section holds the card, on
+   every page, gets the same clamp .stack already uses for its
+   padding-top instead. */
+.stack:has(> .wrap > .ctacard){padding-bottom:clamp(3.5rem,8vw,7rem)}
 .lead{font-size:var(--t-lead);line-height:1.5;color:var(--graphite);max-width:var(--measure)}
 .mono{font-family:var(--font-mono);font-size:var(--t-micro);letter-spacing:.13em;text-transform:uppercase}
 
@@ -355,12 +362,14 @@ button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
    circular social icons pinned to the end of that row, and a bottom
    row with the logo and two legal links — no copyright line, no
    divider border. */
-/* padding-top matches .stack's own — the footer isn't a .stack, but it
-   directly follows one (the CTA card's section) on every page, so it
-   needs the same top gap every other section-to-section transition
-   gets, not the flatter --s-8 this used to be pinned to. */
+/* padding-top matches .stack's own small padding-bottom, not its big
+   padding-top — the section above (whichever one holds the CTA card)
+   now carries the large half of the gap on its own padding-bottom
+   (see .stack:has(> .wrap > .ctacard) above), the same way any two
+   ordinary .stack sections split their gap: small bottom + big top.
+   Giving the footer the big half too would double it. */
 .footer{background:var(--consid-dark);color:#fff;font-family:var(--font-body);
-  padding-top:clamp(3.5rem,8vw,7rem);padding-bottom:var(--s-6)}
+  padding-top:clamp(1rem,2vw,1.5rem);padding-bottom:var(--s-6)}
 .footer__grid{display:flex;flex-wrap:wrap;gap:var(--s-6) var(--s-5)}
 .footer__col{display:flex;flex-direction:column;gap:var(--s-3);flex:1 1 200px}
 .footer__col a{color:#fff;font-size:1.125rem;font-weight:600;text-decoration:underline;
