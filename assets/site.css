@@ -274,13 +274,10 @@ button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
   stroke-dashoffset:var(--button-animation-offset);
 }
 @media (prefers-reduced-motion:reduce){.nav__cta .cta-outline{transition:none}}
-/* Below 900px the section anchors go, but Ydelser stays: it is the only
-   real destination on the site, and without it a phone visitor can only
-   reach the offerings by scrolling to the footer. Otherwise identical to
-   agentic-futures' own single nav breakpoint — no extra narrow-viewport
-   tightening here anymore, to keep the two navs pixel-for-pixel the same
-   at every width both sites actually support. */
-@media (max-width:900px){.nav__links .nav__link:not(.nav__link--stay){display:none}}
+/* Below 900px only the logo and CTA stay — same single breakpoint as
+   agentic-futures, and now the same rule too: every .nav__link goes,
+   with no exception. */
+@media (max-width:900px){.nav__links .nav__link{display:none}}
 
 /* CARD system -------------------------------------------- */
 /* No horizontal rail here: three offerings and no article archive means
@@ -361,7 +358,7 @@ button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
 .footer{background:var(--consid-dark);color:#fff;font-family:var(--font-body);
   padding-top:var(--s-8);padding-bottom:var(--s-6)}
 .footer__grid{display:flex;flex-wrap:wrap;gap:var(--s-6) var(--s-5)}
-.footer__col{display:flex;flex-direction:column;gap:var(--s-3);flex:1 1 200px;min-width:0}
+.footer__col{display:flex;flex-direction:column;gap:var(--s-3);flex:1 1 200px}
 .footer__col a{color:#fff;font-size:1.125rem;font-weight:600;text-decoration:underline;
   text-underline-offset:.15em;text-decoration-color:rgba(255,255,255,.35);
   transition:text-decoration-color var(--d-fast) var(--ease-out)}
@@ -373,12 +370,11 @@ button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
 .footer__social svg{width:16px;height:16px}
 .footer__bottom{margin-top:var(--s-6);
   display:flex;flex-wrap:wrap;gap:var(--s-4);align-items:center;justify-content:space-between}
-.footer__logo{display:block;height:28px}
+.footer__logo{display:block;height:32px}
 .footer__logo img{height:100%;width:auto;display:block}
 .footer__legal{display:flex;flex-wrap:wrap;gap:var(--s-5);align-items:center;font-size:1.125rem;color:#fff}
 .footer__legal a{color:#fff;text-decoration:none;transition:opacity var(--d-fast) var(--ease-out)}
 .footer__legal a:hover{opacity:.7}
-@media (max-width:640px){.footer__social{margin-left:0;flex:1 1 100%}}
 
 /* REVEAL --------------------------------------------------- */
 /* Transition lives on .is-in, not on .reveal — so the hidden state is
