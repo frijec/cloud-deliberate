@@ -650,7 +650,9 @@ button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
 .hero__cards{position:relative;z-index:1;padding-bottom:10vh}
 /* On a phone the full-viewport hero left a screen's worth of air above
    the headline; let content set the height there instead. */
-@media (max-width:640px){.hero{min-height:0} .hero__headline{padding-block:var(--s-7) var(--s-6)} .hero__cards{padding-bottom:var(--s-7)}}
+@media (max-width:640px){.hero{min-height:0} .hero__headline{padding-block:var(--s-9) var(--s-6)} .hero__cards{padding-bottom:var(--s-7)}
+  #heroClouds{mask-image:radial-gradient(ellipse 55% 30% at 30% 14%, transparent 0%, rgba(0,0,0,.6) 55%, #000 85%);
+    -webkit-mask-image:radial-gradient(ellipse 55% 30% at 30% 14%, transparent 0%, rgba(0,0,0,.6) 55%, #000 85%)}}
 .hero__leadcard{display:flex;flex-direction:column;justify-content:center;gap:var(--s-5);
   max-width:52rem;margin-inline:auto}
 .hero__leadcard .lead{color:rgba(255,255,255,.78);max-width:none;font-size:var(--t-body)}

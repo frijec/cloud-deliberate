@@ -126,11 +126,14 @@ const REDUCED_HERO = matchMedia('(prefers-reduced-motion: reduce)').matches;
     // deep that top clear zone reaches is tied to uAspect rather than a
     // fixed fraction — a narrow/tall hero (mobile) wraps the headline
     // across more lines and needs a deeper clear zone; a wide desktop
-    // hero needs only a little.
+    // hero needs only a little. The mobile extremes (was 0.64/0.30) were
+    // pulling that clear zone deep enough to swallow the gap above the
+    // card too, so the clouds only ever read as a sliver behind it —
+    // pulled back to leave clouds visible through most of that gap.
     float topFrac=1.0-uv.y;
     float wideT=clamp((uAspect-0.5)/1.2,0.0,1.0);
-    float fullStart=mix(0.64,0.30,wideT);
-    float rampWidth=mix(0.30,0.20,wideT);
+    float fullStart=mix(0.48,0.30,wideT);
+    float rampWidth=mix(0.24,0.20,wideT);
     float envelope=smoothstep(fullStart-rampWidth,fullStart,topFrac)*(1.0-smoothstep(0.90,0.99,topFrac));
 
     // Threshold bands picked by sampling each field's real value
