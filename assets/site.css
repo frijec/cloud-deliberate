@@ -14,30 +14,58 @@
    are deliberately the same house.
    ============================================================ */
 :root{
-  --ink-900:#141416;
-  --ink-800:#1B1B1D;
-  --ink-700:#2C2C31;
-  --ink-600:#414147;
-  --graphite:#636166;
-  --stone:#726C66;
+  /* Consid's official brand palette — ui.consid.dev/?path=/docs/design-colors--docs.
+     Every colour below is one of these swatches, or a color-mix() tint of
+     one; nothing off-palette. Ported from the same swap in agentic-futures
+     (frijec/agentic-futures@964a4fa), which measured these directly off
+     consid.com's live DOM rather than off a screenshot. */
+  --c-burgundy:#701131;      /* Primary Dark / Burgundy */
+  --c-raspberry:#B5223F;     /* Primary / Raspberry */
+  --c-light-orange:#F49E88;  /* Secondary / Light Orange */
+  --c-dark-purple:#492A34;   /* Complementary / Dark purple */
+  --c-beige:#EFE6DD;         /* Beige */
+  --c-greige-15:#F2F0EF;     /* Greige 15 */
+  --c-light-orange-15:#FDF0ED; /* Light Orange 15 */
+  --c-white:#FFFFFF;
+  --c-dark:#1C1C1C;
+  --c-muted:#4C4C4C;
 
-  --air:#F5F3F1;
-  --surface:#FDFCFB;
-  --sand:#EDE8E3;
-  --blush:#FDF0ED;
+  --ink-900:var(--c-dark);
+  --ink-800:var(--c-dark);
+  --ink-700:color-mix(in srgb, var(--c-dark), white 15%);
+  --ink-600:color-mix(in srgb, var(--c-dark), white 30%);
+  --graphite:var(--c-muted);
+  --stone:var(--c-muted);
 
-  --crimson:#90263B;
-  --crimson-700:#75182C;
-  --plum:#492A34;
+  --air:var(--c-greige-15);
+  --surface:var(--c-white);
+  --sand:var(--c-beige);
+  --blush:var(--c-light-orange-15);
+
+  --crimson:var(--c-raspberry);
+  --crimson-700:var(--c-burgundy);
+  --plum:var(--c-dark-purple);
   --plum-tint:color-mix(in srgb, var(--plum), white 22%);
-  --wine:#701132;
-  --coral:#F49E88;
-  --hairline:rgba(27,27,29,.08);
+  --wine:var(--c-burgundy);
+  --coral:var(--c-light-orange);
+  --hairline:rgba(28,28,28,.08);
 
-  --font-display:"Onest","Helvetica Neue",Helvetica,Arial,sans-serif;
-  --font-body:"Onest","Helvetica Neue",Helvetica,Arial,sans-serif;
-  --font-mono:"IBM Plex Mono",ui-monospace,"SF Mono",Menlo,monospace;
-  --font-wordmark:"EB Garamond","Times New Roman",serif;
+  /* ConsidSans is the site's one and only typeface now, matching
+     agentic-futures/consid.com's own type system. It only ships
+     Regular/Medium/SemiBold (400/500/600) — nothing heavier — so
+     anything that asked for 700/900 is capped at 600 below. */
+  --font-considsans:"ConsidSans",-apple-system,"Segoe UI","Helvetica Neue",Helvetica,Arial,sans-serif;
+  --font-display:var(--font-considsans);
+  --font-body:var(--font-considsans);
+  --font-mono:var(--font-considsans);
+  --font-wordmark:var(--font-considsans);
+
+  /* consid.com's nav/footer chrome — Dark background, Raspberry link
+     colour. Same swatches as --ink-900/--crimson above; kept as their
+     own tokens since the nav/footer rules reference them by these names. */
+  --consid-dark:var(--c-dark);
+  --consid-dark-700:color-mix(in srgb, var(--c-dark), black 15%);
+  --consid-red:var(--c-raspberry);
 
   /* The scale used to jump from --t-h3 (max 24px) straight to --t-h2
      (max 57.6px), so every component that needed something in between
@@ -78,6 +106,16 @@
   --maxw:1300px;
 }
 
+/* ConsidSans — Consid's brand typeface, self-hosted. Replaces the Google
+   Fonts Onest/EB Garamond/IBM Plex Mono link that used to sit in every
+   page's <head>. */
+@font-face{font-family:"ConsidSans";src:url("fonts/ConsidSans-Regular.woff2") format("woff2");font-weight:400;font-style:normal;font-display:swap}
+@font-face{font-family:"ConsidSans";src:url("fonts/ConsidSans-Italic.woff2") format("woff2");font-weight:400;font-style:italic;font-display:swap}
+@font-face{font-family:"ConsidSans";src:url("fonts/ConsidSans-Medium.woff2") format("woff2");font-weight:500;font-style:normal;font-display:swap}
+@font-face{font-family:"ConsidSans";src:url("fonts/ConsidSans-MediumItalic.woff2") format("woff2");font-weight:500;font-style:italic;font-display:swap}
+@font-face{font-family:"ConsidSans";src:url("fonts/ConsidSans-SemiBold.woff2") format("woff2");font-weight:600;font-style:normal;font-display:swap}
+@font-face{font-family:"ConsidSans";src:url("fonts/ConsidSans-SemiBoldItalic.woff2") format("woff2");font-weight:600;font-style:italic;font-display:swap}
+
 *,*::before,*::after{box-sizing:border-box}
 /* This palette is a single warm light theme by design. Declaring it
    stops the browser rendering its own parts — scrollbars, the select
@@ -90,10 +128,11 @@ body{
   -webkit-font-smoothing:antialiased;font-synthesis-weight:none;overflow-x:hidden;
 }
 h1,h2,h3,h4{font-family:var(--font-display);margin:0;font-weight:600;letter-spacing:-.026em}
-h1{font-size:var(--t-display);line-height:.99;letter-spacing:-.042em;font-weight:500}
-h2{font-size:var(--t-h2);line-height:1.04;letter-spacing:-.034em;font-weight:700}
-h3{font-size:var(--t-h3);line-height:1.25;font-weight:500}
+h1{font-size:var(--t-display);line-height:.99;letter-spacing:-.042em}
+h2{font-size:var(--t-h2);line-height:1.04;letter-spacing:-.034em}
+h3{font-size:var(--t-h3);line-height:1.25}
 p{margin:0}
+strong,b{font-weight:600}
 a{color:inherit}
 img,svg{display:block;max-width:100%}
 button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
@@ -240,7 +279,7 @@ button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
 .ocard:nth-child(5n+4){background:var(--blush)}
 .ocard__tag{display:flex;align-items:center;gap:.4em;font-family:var(--font-mono);font-size:var(--t-micro);letter-spacing:.09em;text-transform:uppercase;color:var(--graphite)}
 .oicon{width:15px;height:15px;flex:none;stroke:currentColor}
-.ocard :is(h2,h3){font-size:var(--t-h3);letter-spacing:-.028em;font-weight:700;line-height:1.25;transition:color var(--d-fast) var(--ease-out)}
+.ocard :is(h2,h3){font-size:var(--t-h3);letter-spacing:-.028em;font-weight:600;line-height:1.25;transition:color var(--d-fast) var(--ease-out)}
 .ocard:hover :is(h2,h3){color:var(--wine)}
 .ocard p{font-size:var(--t-small);color:var(--graphite);line-height:1.6}
 .ocard__foot{margin-top:auto;display:flex;align-items:center;gap:var(--s-3);font-size:var(--t-small);font-weight:600;padding-top:var(--s-4)}
@@ -440,7 +479,7 @@ button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
 .journey__stations li.is-active::before{transform:translateY(-50%) rotate(45deg) scale(1.35)}
 .journey__hours{font-family:var(--font-mono);font-size:var(--t-micro);letter-spacing:.09em;
   text-transform:uppercase;color:var(--graphite);margin-left:var(--s-2)}
-.journey__hours b{color:var(--crimson);font-weight:700;font-variant-numeric:tabular-nums}
+.journey__hours b{color:var(--crimson);font-weight:600;font-variant-numeric:tabular-nums}
 /* The story's two bookends: where you stand on day 0 and what you hold
    at the end. No card and no background, so they read as narration
    around the chapters rather than as two more chapters — but set with
@@ -451,7 +490,7 @@ button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
 .journey__bookend{display:block;padding-inline:clamp(1.6rem,3.4vw,2.75rem);
   color:var(--graphite);font-size:var(--t-lead);line-height:1.5;max-width:44ch}
 .journey__bookend .mono{display:flex;align-items:center;gap:.55em;margin-bottom:var(--s-3);
-  font-family:var(--font-display);font-size:var(--t-title-sm);font-weight:700;
+  font-family:var(--font-display);font-size:var(--t-title-sm);font-weight:600;
   letter-spacing:-.03em;text-transform:none;color:var(--crimson);font-variant-numeric:tabular-nums}
 .journey__bookend .mono::before{content:"";flex:none;width:11px;height:11px;
   transform:rotate(45deg);background:var(--crimson)}
@@ -467,7 +506,7 @@ button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
    the <h3> rather than a separate oversized display digit in its own
    column, so it reads as part of the heading, not a competing element. */
 .phase h3{font-size:var(--t-title-sm);letter-spacing:-.03em;font-weight:500;margin-top:var(--s-2)}
-.phase__n{font-weight:900;color:var(--crimson);font-variant-numeric:tabular-nums}
+.phase__n{font-weight:600;color:var(--crimson);font-variant-numeric:tabular-nums}
 .phase__points{margin-top:var(--s-4);padding-left:1.1em;display:flex;flex-direction:column;gap:var(--s-2)}
 .phase__points li{color:var(--graphite);font-size:var(--t-small);line-height:1.6;max-width:56ch}
 
@@ -626,7 +665,7 @@ button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
    out-specify this (0,1,0), rendering it as body text. Same reason
    .phase__n is a <div>. */
 .pcard__n{
-  font-family:var(--font-display);font-weight:900;font-size:var(--t-numeral);
+  font-family:var(--font-display);font-weight:600;font-size:var(--t-numeral);
   line-height:.9;letter-spacing:-.02em;color:var(--crimson);font-variant-numeric:tabular-nums;
 }
 .pcard h3{font-size:var(--t-title-sm);letter-spacing:-.03em;font-weight:500}
@@ -866,7 +905,7 @@ button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
 
 /* Result */
 .tjek-result__quad{color:var(--stone);margin-bottom:var(--s-3)}
-.tjek-result__title{font-size:var(--t-title-lg);letter-spacing:-.034em;font-weight:700;
+.tjek-result__title{font-size:var(--t-title-lg);letter-spacing:-.034em;font-weight:600;
   line-height:1.08;max-width:22ch}
 .tjek-result__title:focus-visible{outline:none}
 .tjek-axes{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:var(--s-4);margin-top:var(--s-6)}
@@ -874,7 +913,7 @@ button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
 /* --graphite, not --stone: on the sand card at 12px, stone measures
    4.26:1 and AA wants 4.5. */
 .tjek-axis .mono{color:var(--graphite)}
-.tjek-axis p{font-size:var(--t-title-sm);font-weight:700;letter-spacing:-.03em;
+.tjek-axis p{font-size:var(--t-title-sm);font-weight:600;letter-spacing:-.03em;
   color:var(--crimson);margin-top:var(--s-2)}
 .tjek-axis__d{display:block;margin-top:var(--s-2);font-size:var(--t-micro);line-height:1.5;color:var(--graphite)}
 .tjek-limit{margin-top:var(--s-5);font-size:var(--t-small);line-height:1.6;color:var(--graphite)}

@@ -144,25 +144,27 @@ console.log(`✓ robots.txt${M.noindex ? ' (Disallow: /)' : ''}`);
 
 /* ---------- 3. OG images ---------------------------------- */
 const mark = pathToFileURL(join(ROOT, 'assets/brand-mark.png')).href;
+const fontUrl = name => pathToFileURL(join(ROOT, `assets/fonts/ConsidSans-${name}.woff2`)).href;
 const card = p => `<!doctype html><html lang="da"><head><meta charset="utf-8">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Onest:wght@400;500;700;900&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
+  @font-face{font-family:"ConsidSans";src:url("${fontUrl('Regular')}") format("woff2");font-weight:400;font-style:normal}
+  @font-face{font-family:"ConsidSans";src:url("${fontUrl('Medium')}") format("woff2");font-weight:500;font-style:normal}
+  @font-face{font-family:"ConsidSans";src:url("${fontUrl('SemiBold')}") format("woff2");font-weight:600;font-style:normal}
   *{box-sizing:border-box;margin:0}
   body{width:1200px;height:630px;background:#492A34;color:#fff;
-    font-family:Onest,sans-serif;padding:64px 72px;display:flex;flex-direction:column}
+    font-family:"ConsidSans",sans-serif;padding:64px 72px;display:flex;flex-direction:column}
   .top{display:flex;align-items:center;gap:18px}
   .top img{height:26px;width:auto;filter:brightness(0) invert(1)}
-  .sub{font-family:"IBM Plex Mono",monospace;font-size:15px;letter-spacing:.06em;
+  .sub{font-family:"ConsidSans",monospace;font-size:15px;letter-spacing:.06em;
     color:rgba(255,255,255,.62);padding-left:18px;border-left:1px solid rgba(255,255,255,.24)}
   .mid{margin-top:auto}
-  .kicker{font-family:"IBM Plex Mono",monospace;font-size:16px;letter-spacing:.11em;
+  .kicker{font-family:"ConsidSans",monospace;font-size:16px;letter-spacing:.11em;
     text-transform:uppercase;color:#F49E88}
-  h1{font-size:${p.headline.length > 34 ? 60 : 76}px;font-weight:700;letter-spacing:-.035em;
+  h1{font-size:${p.headline.length > 34 ? 60 : 76}px;font-weight:600;letter-spacing:-.035em;
     line-height:1.03;margin-top:22px;max-width:19ch}
   p{margin-top:22px;font-size:22px;line-height:1.45;color:rgba(255,255,255,.66);max-width:52ch;
     display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
-  .foot{margin-top:auto;font-family:"IBM Plex Mono",monospace;font-size:14px;letter-spacing:.11em;
+  .foot{margin-top:auto;font-family:"ConsidSans",monospace;font-size:14px;letter-spacing:.11em;
     text-transform:uppercase;color:rgba(255,255,255,.45)}
 </style></head><body>
   <div class="top"><img src="${mark}" alt=""><span class="sub">${esc(M.brand)}</span></div>
@@ -187,26 +189,25 @@ writeFileSync(join(ROOT, '404.html'), `<!doctype html>
 <title>Siden findes ikke — Cloud Deliberate</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="robots" content="noindex">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Onest:wght@400;500;700;900&family=EB+Garamond:wght@600&family=IBM+Plex+Mono:wght@400&display=swap" rel="stylesheet">
 <style>
+  @font-face{font-family:"ConsidSans";src:url("assets/fonts/ConsidSans-Regular.woff2") format("woff2");font-weight:400;font-style:normal;font-display:swap}
+  @font-face{font-family:"ConsidSans";src:url("assets/fonts/ConsidSans-SemiBold.woff2") format("woff2");font-weight:600;font-style:normal;font-display:swap}
   *{box-sizing:border-box;margin:0}
   body{min-height:100vh;display:flex;flex-direction:column;justify-content:center;
-    gap:2rem;padding:clamp(1.1rem,4.5vw,4rem);background:#F5F3F1;color:#1B1B1D;
-    font-family:Onest,"Helvetica Neue",Helvetica,Arial,sans-serif;font-size:1.0625rem;line-height:1.6}
-  .mark{font-family:"EB Garamond",Georgia,serif;font-size:clamp(1.1rem,2vw,1.5rem);font-weight:600;letter-spacing:.02em}
-  .code{font-family:"IBM Plex Mono",ui-monospace,Menlo,monospace;font-size:.75rem;
-    letter-spacing:.13em;text-transform:uppercase;color:#726C66}
-  h1{font-size:clamp(2rem,4.2vw,3.6rem);line-height:1.04;letter-spacing:-.034em;font-weight:700;max-width:16ch}
-  p{color:#636166;max-width:52ch}
+    gap:2rem;padding:clamp(1.1rem,4.5vw,4rem);background:#F2F0EF;color:#1C1C1C;
+    font-family:"ConsidSans","Helvetica Neue",Helvetica,Arial,sans-serif;font-size:1.0625rem;line-height:1.6}
+  .mark{font-family:"ConsidSans",sans-serif;font-size:clamp(1.1rem,2vw,1.5rem);font-weight:600;letter-spacing:.02em}
+  .code{font-family:"ConsidSans",ui-monospace,Menlo,monospace;font-size:.75rem;
+    letter-spacing:.13em;text-transform:uppercase;color:#4C4C4C}
+  h1{font-size:clamp(2rem,4.2vw,3.6rem);line-height:1.04;letter-spacing:-.034em;font-weight:600;max-width:16ch}
+  p{color:#4C4C4C;max-width:52ch}
   .row{display:flex;flex-wrap:wrap;gap:.75rem;margin-top:1rem}
   a.btn{display:inline-flex;align-items:center;gap:.75rem;padding:.95rem 1.6rem;border-radius:999px;
     font-size:.9375rem;font-weight:600;text-decoration:none;
     box-shadow:0 1px 2px rgba(20,20,22,.03),0 6px 18px -10px rgba(20,20,22,.10)}
-  .primary{background:#90263B;color:#fff}
-  .soft{background:#FDFCFB;color:#1B1B1D}
-  a:focus-visible{outline:2px solid #90263B;outline-offset:3px}
+  .primary{background:#B5223F;color:#fff}
+  .soft{background:#FFFFFF;color:#1C1C1C}
+  a:focus-visible{outline:2px solid #B5223F;outline-offset:3px}
 </style>
 </head>
 <body>

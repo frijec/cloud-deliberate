@@ -129,7 +129,7 @@ function resolveInk(inkVar) {
     base.getHSL(hsl);
     return new THREE.Color().setHSL(hsl.h, Math.min(1, hsl.s + 0.1), Math.min(1, hsl.l + 0.3));
   }
-  return new THREE.Color(illusTok(inkVar || '--crimson') || '#90263B');
+  return new THREE.Color(illusTok(inkVar || '--crimson') || '#B5223F');
 }
 
 function makeIllusScene(container, build, zoom, inkVar) {
